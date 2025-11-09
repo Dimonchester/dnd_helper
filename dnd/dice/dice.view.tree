@@ -1,0 +1,25 @@
+	$my_dnd_dice $mol_view
+		sides 20
+		sub /
+			<= Count_field $mol_form_field
+				name @ \Кол-во
+				content /
+					<= Count_input $mol_number
+						value? <=> count? 1
+			<= Mod_field $mol_form_field
+				name @ \Модиф.
+				content /
+					<= Mod_input $mol_number
+						value? <=> modifier? 0
+			<= Roll $mol_button_major
+				enabled true
+				click? <=> roll? null
+				sub /
+					<= Button_content $mol_view
+						sub /
+							<= Result $mol_labeler
+								sub / 
+									<= dice_type
+									<= result_badge $mol_view
+										sub /
+											<= result_title

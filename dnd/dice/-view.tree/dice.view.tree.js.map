@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"sources": [
+		"my/dnd/dice/dice.view.tree",
+		"localized_string"
+	],
+	"sourcesContent": [
+		"$my_dnd_dice $mol_view\n\tsides 20\n\tsub /\n\t\t<= Count_field $mol_form_field\n\t\t\tname @ \\Кол-во\n\t\t\tcontent /\n\t\t\t\t<= Count_input $mol_number\n\t\t\t\t\tvalue? <=> count? 1\n\t\t<= Mod_field $mol_form_field\n\t\t\tname @ \\Модиф.\n\t\t\tcontent /\n\t\t\t\t<= Mod_input $mol_number\n\t\t\t\t\tvalue? <=> modifier? 0\n\t\t<= Roll $mol_button_major\n\t\t\tenabled true\n\t\t\tclick? <=> roll? null\n\t\t\tsub /\n\t\t\t\t<= Button_content $mol_view\n\t\t\t\t\tsub /\n\t\t\t\t\t\t<= Result $mol_labeler\n\t\t\t\t\t\t\tsub / \n\t\t\t\t\t\t\t\t<= dice_type\n\t\t\t\t\t\t\t\t<= result_badge $mol_view\n\t\t\t\t\t\t\t\t\tsub /\n\t\t\t\t\t\t\t\t\t\t<= result_title\n",
+		"\n\t\t()\n\t\t\tthis\n\t\t\t[] \\$\n\t\t\t[] \\$mol_locale\n\t\t\t[] \\text\n\t\t\t(,) #key\n\t"
+	],
+	"mappings": "AAAA,AAAA,uCAAa,sBAAb;AAAA,AAOgB;AAAA,AAAA;AAAA,UAAO,CAAP;AAAA;AADT;AAAA,AAAY,uCAAZ;AACF,4BAAO,KAAI,YAAJ,CAAP,CADE;AAAA,UAAY,GAAZ;AAAA;AAHF;AAAA,AAAY,2CAAZ;AACF,uBCHD,CACC,IACA,EACA,YACA,KACA,CDFK,+BCEL,CALD,CDGC,CADE;AAEF,0BAAQ,CACP,KAAG,cAAH,CADO,CAAR,CAFE;AAAA,UAAY,GAAZ;AAAA;AASW;AAAA,AAAA;AAAA,UAAU,CAAV;AAAA;AADT;AAAA,AAAU,uCAAV;AACF,4BAAO,KAAI,eAAJ,CAAP,CADE;AAAA,UAAU,GAAV;AAAA;AAHF;AAAA,AAAU,2CAAV;AACF,uBCRD,CACC,IACA,EACA,YACA,KACA,CDGK,6BCHL,CALD,CDQC,CADE;AAEF,0BAAQ,CACP,KAAG,YAAH,CADO,CAAR,CAFE;AAAA,UAAU,GAAV;AAAA;AAOS;AAAA,AAAA;AAAA,UAAM,IAAN;AAAA;AAOH;AAAA,AAAa,qCAAb;AACF,sBAAI,CACH,KAAG,eAAH,CADG,CAAJ,CADE;AAAA,UAAa,GAAb;AAAA;AAHF;AAAA,AAAO,wCAAP;AACF,sBAAI,CACH,KAAG,YAAH,CADG,EAEH,KAAG,eAAH,CAFG,CAAJ,CADE;AAAA,UAAO,GAAP;AAAA;AAFF;AAAA,AAAe,qCAAf;AACF,sBAAI,CACH,KAAG,SAAH,CADG,CAAJ,CADE;AAAA,UAAe,GAAf;AAAA;AAJF;AAAA,AAAK,6CAAL;AACF,0BAAQ,IAAR,CADE;AAEF,4BAAO,KAAI,WAAJ,CAAP,CAFE;AAGF,sBAAI,CACH,KAAG,iBAAH,CADG,CAAJ,CAHE;AAAA,UAAK,GAAL;AAAA;AAZJ;AAAA,AAAA,UAAM,EAAN;AAAA;AACA;AAAA,AAAA,UAAI;AAAA,AACH,SAAG,cAAH,CADG;AAMH,SAAG,YAAH,CANG;AAWH,SAAG,OAAH;AAXG,CAAJ;AAAA;AAFD,CAAA;AAOgB,YAPhB,CAOgB,mCAPhB;AAMO,YANP,CAMO,yCANP;AAGK,YAHL,CAGK,yCAHL;AAYgB,YAZhB,CAYgB,sCAZhB;AAWO,YAXP,CAWO,uCAXP;AAQK,YARL,CAQK,uCARL;AAec,YAfd,CAec,kCAfd;AAsBW,YAtBX,CAsBW,0CAtBX;AAmBS,YAnBT,CAmBS,oCAnBT;AAiBO,YAjBP,CAiBO,4CAjBP;AAaK,YAbL,CAaK,kCAbL;"
+}
