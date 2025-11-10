@@ -1,14 +1,4 @@
 	($.$my_dnd_notes) = class $my_dnd_notes extends ($.$mol_page) {
-		Close_icon(){
-			const obj = new this.$.$mol_icon_close();
-			return obj;
-		}
-		Close(){
-			const obj = new this.$.$mol_link();
-			(obj.arg) = () => ({"page": null});
-			(obj.sub) = () => ([(this.Close_icon())]);
-			return obj;
-		}
 		new_note_text(next){
 			if(next !== undefined) return next;
 			return "";
@@ -70,18 +60,10 @@
 			(obj.sub) = () => ([(this.Note_list())]);
 			return obj;
 		}
-		title(){
-			return (this.$.$mol_locale.text("$my_dnd_notes_title"));
-		}
-		tools(){
-			return [(this.Close())];
-		}
 		body(){
 			return [(this.Add_form()), (this.List_section())];
 		}
 	};
-	($mol_mem(($.$my_dnd_notes.prototype), "Close_icon"));
-	($mol_mem(($.$my_dnd_notes.prototype), "Close"));
 	($mol_mem(($.$my_dnd_notes.prototype), "new_note_text"));
 	($mol_mem(($.$my_dnd_notes.prototype), "New_note_text"));
 	($mol_mem(($.$my_dnd_notes.prototype), "add_note"));

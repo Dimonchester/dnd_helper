@@ -1,11 +1,4 @@
 $my_dnd_notes $mol_page
-	title @ \Notes and To-Do
-	tools /
-		<= Close $mol_link
-			arg *
-				page null
-			sub /
-				<= Close_icon $mol_icon_close
 	body /
 		<= Add_form $mol_form
 			sub /

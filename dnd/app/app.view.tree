@@ -25,4 +25,9 @@ $my_dnd_app $mol_view
 									sides 20
 								<= Dice_d100 $my_dnd_dice
 									sides 100
-				notes <= Notes_page $my_dnd_notes
+				notes <= Notes_page $mol_page
+					title @ \Notes and To-Do
+					tools / <= Dise_spread_close
+					body /
+						<= Notes $my_dnd_notes
+						<= Weapon $my_dnd_notes

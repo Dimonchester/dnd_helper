@@ -1,70 +1,56 @@
 declare namespace $ {
 
-	type $mol_link__arg_my_dnd_notes_1 = $mol_type_enforce<
-		({ 
-			'page': any,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_my_dnd_notes_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_string__hint_my_dnd_notes_3 = $mol_type_enforce<
+	type $mol_string__hint_my_dnd_notes_1 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_my_dnd_notes_4 = $mol_type_enforce<
+	type $mol_string__value_my_dnd_notes_2 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['new_note_text'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_my_dnd_notes_5 = $mol_type_enforce<
+	type $mol_button_major__title_my_dnd_notes_3 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_my_dnd_notes_6 = $mol_type_enforce<
+	type $mol_button_major__click_my_dnd_notes_4 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['add_note'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_form__sub_my_dnd_notes_7 = $mol_type_enforce<
+	type $mol_form__sub_my_dnd_notes_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['sub'] >
 	>
-	type $mol_check_box__checked_my_dnd_notes_8 = $mol_type_enforce<
+	type $mol_check_box__checked_my_dnd_notes_6 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['note_checked'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_string__value_my_dnd_notes_9 = $mol_type_enforce<
+	type $mol_string__value_my_dnd_notes_7 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['note_text'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_row__sub_my_dnd_notes_10 = $mol_type_enforce<
+	type $mol_row__sub_my_dnd_notes_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_list__rows_my_dnd_notes_11 = $mol_type_enforce<
+	type $mol_list__rows_my_dnd_notes_9 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['Note_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_section__sub_my_dnd_notes_12 = $mol_type_enforce<
+	type $mol_section__sub_my_dnd_notes_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['sub'] >
 	>
 	export class $my_dnd_notes extends $mol_page {
-		Close_icon( ): $mol_icon_close
-		Close( ): $mol_link
 		new_note_text( next?: string ): string
 		New_note_text( ): $mol_string
 		add_note( next?: any ): any
@@ -78,8 +64,6 @@ declare namespace $ {
 		Note_rows( ): readonly(any)[]
 		Note_list( ): $mol_list
 		List_section( ): $mol_section
-		title( ): string
-		tools( ): readonly(any)[]
 		body( ): readonly(any)[]
 	}
 	

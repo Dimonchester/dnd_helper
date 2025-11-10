@@ -57,8 +57,19 @@
 			(obj.body) = () => ([(this.Start())]);
 			return obj;
 		}
-		Notes_page(){
+		Notes(){
 			const obj = new this.$.$my_dnd_notes();
+			return obj;
+		}
+		Weapon(){
+			const obj = new this.$.$my_dnd_notes();
+			return obj;
+		}
+		Notes_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Notes_page_title")));
+			(obj.tools) = () => ([(this.Dise_spread_close())]);
+			(obj.body) = () => ([(this.Notes()), (this.Weapon())]);
 			return obj;
 		}
 		spreads_map(){
@@ -84,6 +95,8 @@
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_d100"));
 	($mol_mem(($.$my_dnd_app.prototype), "Start"));
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_page"));
+	($mol_mem(($.$my_dnd_app.prototype), "Notes"));
+	($mol_mem(($.$my_dnd_app.prototype), "Weapon"));
 	($mol_mem(($.$my_dnd_app.prototype), "Notes_page"));
 	($mol_mem(($.$my_dnd_app.prototype), "Catalog"));
 

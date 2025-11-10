@@ -7,9 +7,9 @@
 	"$mol_search_hint": "Search...",
 	"$my_dnd_app_Catalog_menu_title": "D&D Helper",
 	"$my_dnd_app_Dice_page_title": "Roll Dice",
+	"$my_dnd_app_Notes_page_title": "Notes and To-Do",
 	"$my_dnd_dice_Count_field_name": "Кол-во",
 	"$my_dnd_dice_Mod_field_name": "Модиф.",
 	"$my_dnd_notes_Add_button_title": "Добавить",
-	"$my_dnd_notes_New_note_text_hint": "Новая задача...",
-	"$my_dnd_notes_title": "Notes and To-Do"
+	"$my_dnd_notes_New_note_text_hint": "Новая задача..."
 }

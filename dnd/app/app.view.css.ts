@@ -20,7 +20,6 @@ namespace $.$$ {
 				basis: 'auto',
 			},
 			display: 'flex',
-			padding: '1rem',
 		},
 
 		Catalog:{

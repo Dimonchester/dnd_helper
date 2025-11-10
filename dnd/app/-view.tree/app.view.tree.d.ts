@@ -55,17 +55,32 @@ declare namespace $ {
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $mol_book2_catalog__param_my_dnd_app_12 = $mol_type_enforce<
+	type $mol_page__title_my_dnd_app_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__tools_my_dnd_app_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['tools'] >
+	>
+	type $mol_page__body_my_dnd_app_14 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['body'] >
+	>
+	type $mol_book2_catalog__param_my_dnd_app_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_book2_catalog['param'] >
 	>
-	type $mol_book2_catalog__menu_title_my_dnd_app_13 = $mol_type_enforce<
+	type $mol_book2_catalog__menu_title_my_dnd_app_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_book2_catalog['menu_title'] >
 	>
-	type $mol_book2_catalog__spreads_my_dnd_app_14 = $mol_type_enforce<
+	type $mol_book2_catalog__spreads_my_dnd_app_17 = $mol_type_enforce<
 		ReturnType< $my_dnd_app['spreads_map'] >
 		,
 		ReturnType< $mol_book2_catalog['spreads'] >
@@ -81,7 +96,9 @@ declare namespace $ {
 		Dice_d100( ): $my_dnd_dice
 		Start( ): $mol_row
 		Dice_page( ): $mol_page
-		Notes_page( ): $my_dnd_notes
+		Notes( ): $my_dnd_notes
+		Weapon( ): $my_dnd_notes
+		Notes_page( ): $mol_page
 		spreads_map( ): ({ 
 			'dice': ReturnType< $my_dnd_app['Dice_page'] >,
 			'notes': ReturnType< $my_dnd_app['Notes_page'] >,
