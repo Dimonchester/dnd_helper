@@ -1,13 +1,6 @@
 	($.$my_dnd_app) = class $my_dnd_app extends ($.$mol_view) {
-		Title(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.$.$mol_locale.text("$my_dnd_app_Title_text")));
-			return obj;
-		}
-		Title_roll(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.$.$mol_locale.text("$my_dnd_app_Title_roll_text")));
-			return obj;
+		Dise_spread_close(){
+			return (this.Catalog().Spread_close());
 		}
 		Dice_d4(){
 			const obj = new this.$.$my_dnd_dice();
@@ -47,7 +40,6 @@
 		Start(){
 			const obj = new this.$.$mol_row();
 			(obj.sub) = () => ([
-				(this.Title_roll()), 
 				(this.Dice_d4()), 
 				(this.Dice_d6()), 
 				(this.Dice_d8()), 
@@ -61,25 +53,28 @@
 		Dice_page(){
 			const obj = new this.$.$mol_page();
 			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Dice_page_title")));
-			(obj.sub) = () => ([(this.Start())]);
+			(obj.tools) = () => ([(this.Dise_spread_close())]);
+			(obj.body) = () => ([(this.Start())]);
 			return obj;
 		}
-		Spells_page(){
-			const obj = new this.$.$my_dnd_spells();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Spells_page_title")));
+		Notes_page(){
+			const obj = new this.$.$my_dnd_notes();
 			return obj;
 		}
-		Pager(){
-			const obj = new this.$.$mol_book();
-			(obj.pages) = () => ([(this.Dice_page()), (this.Spells_page())]);
+		spreads_map(){
+			return {"dice": (this.Dice_page()), "notes": (this.Notes_page())};
+		}
+		Catalog(){
+			const obj = new this.$.$mol_book2_catalog();
+			(obj.param) = () => ("page");
+			(obj.menu_title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Catalog_menu_title")));
+			(obj.spreads) = () => ((this.spreads_map()));
 			return obj;
 		}
 		sub(){
-			return [(this.Title()), (this.Pager())];
+			return [(this.Catalog())];
 		}
 	};
-	($mol_mem(($.$my_dnd_app.prototype), "Title"));
-	($mol_mem(($.$my_dnd_app.prototype), "Title_roll"));
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_d4"));
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_d6"));
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_d8"));
@@ -89,7 +84,7 @@
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_d100"));
 	($mol_mem(($.$my_dnd_app.prototype), "Start"));
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_page"));
-	($mol_mem(($.$my_dnd_app.prototype), "Spells_page"));
-	($mol_mem(($.$my_dnd_app.prototype), "Pager"));
+	($mol_mem(($.$my_dnd_app.prototype), "Notes_page"));
+	($mol_mem(($.$my_dnd_app.prototype), "Catalog"));
 
 //# sourceMappingURL=app.view.tree.js.map

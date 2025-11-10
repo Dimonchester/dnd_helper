@@ -1,6 +1,4 @@
 {
-	"$my_dnd_app_Title_text": "D&D Helper",
-	"$my_dnd_app_Title_roll_text": "D&D Dice",
-	"$my_dnd_app_Dice_page_title": "Кубики",
-	"$my_dnd_app_Spells_page_title": "Заклинания"
+	"$my_dnd_app_Dice_page_title": "Roll Dice",
+	"$my_dnd_app_Catalog_menu_title": "D&D Helper"
 }

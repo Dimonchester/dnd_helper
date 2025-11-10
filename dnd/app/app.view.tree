@@ -1,22 +1,28 @@
 $my_dnd_app $mol_view
 	sub /
-		<= Title $mol_text
-			text @ \D&D Helper
-		<= Start $mol_row
-			sub / 
-				<= Title_roll $mol_text
-					text @ \D&D Dice
-				<= Dice_d4 $my_dnd_dice
-					sides 4
-				<= Dice_d6 $my_dnd_dice
-					sides 6
-				<= Dice_d8 $my_dnd_dice
-					sides 8
-				<= Dice_d10 $my_dnd_dice
-					sides 10
-				<= Dice_d12 $my_dnd_dice
-					sides 12
-				<= Dice_d20 $my_dnd_dice
-					sides 20
-				<= Dice_d100 $my_dnd_dice
-					sides 100
+		<= Catalog $mol_book2_catalog
+			param \page
+			menu_title @ \D&D Helper
+			Spread_close => Dise_spread_close
+			spreads <= spreads_map *
+				dice <= Dice_page $mol_page
+					title @ \Roll Dice
+					tools / <= Dise_spread_close
+					body /
+						<= Start $mol_row
+							sub /
+								<= Dice_d4 $my_dnd_dice
+									sides 4
+								<= Dice_d6 $my_dnd_dice
+									sides 6
+								<= Dice_d8 $my_dnd_dice
+									sides 8
+								<= Dice_d10 $my_dnd_dice
+									sides 10
+								<= Dice_d12 $my_dnd_dice
+									sides 12
+								<= Dice_d20 $my_dnd_dice
+									sides 20
+								<= Dice_d100 $my_dnd_dice
+									sides 100
+				notes <= Notes_page $my_dnd_notes

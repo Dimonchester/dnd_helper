@@ -1,0 +1,27 @@
+$my_dnd_notes $mol_page
+	title @ \Notes and To-Do
+	tools /
+		<= Close $mol_link
+			arg *
+				page null
+			sub /
+				<= Close_icon $mol_icon_close
+	body /
+		<= Add_form $mol_form
+			sub /
+				<= New_note_text $mol_string
+					hint @ \Новая задача...
+					value? <=> new_note_text? \
+				<= Add_button $mol_button_major
+					title @ \Добавить
+					click? <=> add_note? null
+		<= List_section $mol_section
+			sub /
+				<= Note_list $mol_list
+					rows <= Note_rows /
+						<= Note_row* $mol_row
+							sub /
+								<= Note_check* $mol_check_box
+									checked? <=> note_checked*? false
+								<= Note_text* $mol_string
+									value? <=> note_text*? \
