@@ -5,29 +5,37 @@ on:
   push:
     branches:
       - main
-      # Проверьте, что здесь указана ваша основная ветка (main или master)
+      # Убедитесь, что здесь указана ваша основная ветка (main или master)
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
-    # 🔥 НОВОЕ: Предоставляем права на запись (write) для встроенного GITHUB_TOKEN
+    # Предоставляем права на запись (write) для встроенного токена
     permissions:
       contents: write
       
     steps:
     
+    # 1. Чекаут кода (нужно для peaceiris/actions-gh-pages)
+    - uses: actions/checkout@v4
+      
     - name: Build app
       uses: hyoo-ru/mam_build@master2
       with:
+        # Ваш личный токен (для скачивания зависимостей)
         token: ${{ secrets.GH_PAT }} 
         package: 'my/dnd'
-        path: ''
+        # Собираем в корень сайта
+        path: '' 
         
-    - name: Deploy on GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
-      uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
-
-        repo-token: ${{ secrets.GITHUB_TOKEN }} 
-        site-directory: '.'
+        # Используем встроенный токен, который теперь имеет права записи
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # '.' указывает на корень рабочей папки, куда собран код
+        publish_dir: '.' 
+        # Добавляем настройку, чтобы action не удалял файлы, если они есть
+        force_orphan: true
