@@ -1,42 +1,53 @@
-name: Deploy DND Helper
+# Имя рабочего процесса, отображаемое в GitHub Actions
+name: Deploy to GitHub Pages
 
 on:
+  # Позволяет запускать вручную со страницы Actions
   workflow_dispatch:
+  
+  # Запускать при каждом push в ветку 'main'
   push:
     branches:
-      - main
-      # Убедитесь, что здесь указана ваша основная ветка (main или master)
+      - main # У вашего репозитория ветка по умолчанию 'main'
 
 jobs:
   build:
+    # Запускаем на последней версии Ubuntu
     runs-on: ubuntu-latest
     
-    # Предоставляем права на запись (write) для встроенного токена
-    permissions:
-      contents: write
-      
     steps:
-    
-    # 1. Чекаут кода (нужно для peaceiris/actions-gh-pages)
-    - uses: actions/checkout@v4
-      
-    - name: Build app
-      uses: hyoo-ru/mam_build@master2
-      with:
-        # Ваш личный токен (для скачивания зависимостей)
-        token: ${{ secrets.GH_PAT }} 
-        package: 'my/dnd'
-        # Собираем в корень сайта
-        path: '' 
-        
-    # 2. НОВЫЙ ДЕПЛОЙ-ЭКШЕН (более надежный)
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
-      with:
-        # Используем встроенный токен, который теперь имеет права записи
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        # '.' указывает на корень рабочей папки, куда собран код
-        publish_dir: '.' 
-        # Добавляем настройку, чтобы action не удалял файлы, если они есть
-        force_orphan: true
+      # Шаг 1: Сборка приложения
+      # Используем специальный сборщик для $mol (mam)
+      - name: Build $mol app
+        uses: hyoo-ru/mam_build@master2
+        with:
+          # Используем токен, который мы добавили в секреты
+          token: ${{ secrets.GH_PAT }}
+          
+          # 'package' - это главный пакет вашего приложения.
+          # Судя по вашим путям (my/dnd/app/index.html)
+          # и URL (my/dnd/app/-/test.html),
+          # ваш главный пакет - 'my/dnd/app'.
+          package: 'my/dnd/app'
+          
+          # 'meta' - это карта пространств имен.
+          # Она говорит сборщику, что пакеты из 'my'
+          # (например, 'my/dnd/dice', 'my/dnd/generator')
+          # находятся в репозитории 'dnd_helper'.
+          meta: |
+            my https://github.com/Dimonchester/dnd_helper
+
+      # Шаг 2: Развертывание (деплой)
+      # Этот action возьмет собранные файлы и отправит их в ветку 'gh-pages'
+      - name: Deploy to GitHub Pages
+        # Запускаем, только если коммит был в 'main'
+        if: github.ref == 'refs/heads/main'
+        uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+        with:
+          # Снова используем токен для push в репозиторий
+          repo-token: ${{ secrets.GH_PAT }}
+          
+          # 'site-directory' - это папка, куда сборщик
+          # положит готовый сайт. По конвенции $mol,
+          # это '<имя_пакета>/-'.
+          site-directory: 'my/dnd/app/-'
