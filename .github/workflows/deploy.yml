@@ -1,0 +1,38 @@
+name: Deploy DND Helper
+
+on:
+  # Запуск вручную через интерфейс GitHub
+  workflow_dispatch:
+  # Запуск при каждом push в ветку main
+  push:
+    branches:
+      - main
+      # Если ваша основная ветка называется master, замените main на master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+    - name: Build app
+      # Используем действие для сборки $mol-приложений
+      uses: hyoo-ru/mam_build@master2
+      with:
+        token: ${{ secrets.GH_PAT }}
+        # Имя вашего пакета
+        package: 'my/dnd'
+        # Если сборка завершится ошибкой "не найден модуль",
+        # возможно, вам нужно будет добавить мета-ссылку на mam_my.
+        # meta: |
+        #   my https://github.com/Dimonchester/mam_my
+    
+    - name: Deploy on GitHub Pages
+      # Проверяем, что деплоим только из основной ветки
+      if: github.ref == 'refs/heads/main'
+      uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+      with:
+        repo-token: ${{ secrets.GH_PAT }}
+        # Путь к собранным файлам ('my/dnd/-' - это стандартный путь вывода для $mol)
+        site-directory: 'my/dnd/-'
