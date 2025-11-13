@@ -1,0 +1,64 @@
+$my_dnd_roll_composer $mol_view
+	sub /
+		<= Formula_field $mol_form_field
+			name @ \Формула броска
+			content /
+				<= Formula_input $mol_string
+					hint @ \Напр: 2d20 + 1d6
+					value? <=> formula?
+		<= Mod_field $mol_form_field
+			name @ \Общий модификатор
+			content /
+				<= Mod_control_row $mol_row
+					sub /
+						<= Mod_decrease $mol_button_minor
+							title @ \-
+							click? <=> mod_decrease? null
+						<= Mod_input $mol_string
+							hint @ \Напр: +5 или -2
+							value? <=> modifier?
+						<= Mod_increase $mol_button_minor
+							title @ \+
+							click? <=> mod_increase? null
+		<= Quick_buttons $mol_row
+			sub /
+				<= Add_d4 $mol_button_minor
+					title @ \d4
+					click? <=> add_d4? null
+				<= Add_d6 $mol_button_minor
+					title @ \d6
+					click? <=> add_d6? null
+				<= Add_d8 $mol_button_minor
+					title @ \d8
+					click? <=> add_d8? null
+				<= Add_d10 $mol_button_minor
+					title @ \d10
+					click? <=> add_d10? null
+				<= Add_d12 $mol_button_minor
+					title @ \d12
+					click? <=> add_d12? null
+				<= Add_d20 $mol_button_minor
+					title @ \d20
+					click? <=> add_d20? null
+				<= Add_d100 $mol_button_minor
+					title @ \d100
+					click? <=> add_d100? null
+				<= Clear_formula $mol_button_minor
+					title @ \Очистить
+					click? <=> clear_formula null
+		<= Roll_button $mol_button_major
+			title @ \Бросок!
+			click? <=> roll? null
+		<= Result_block $mol_view
+			sub /
+				<= Result_label $mol_text
+					text @ \Результат:
+				<= Result_display $mol_text
+					text <= result_text \-
+				<= Math_display $mol_text
+					text <= math_text \...
+		<= History_section $mol_section
+			title @ \История бросков
+			sub /
+				<= History_list $mol_list
+					rows <= history_rows

@@ -1,0 +1,12 @@
+dnd/*/-view.tree/
+dnd/*/*/-view.tree/
+
+dnd/app/-/
+dnd/dice/-/
+dnd/generator/-/
+dnd/notes/-/
+dnd/roll/composer/-/
+
+dnd/**/*-view.tree/
+
+dnd/**/-
