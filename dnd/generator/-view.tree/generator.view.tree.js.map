@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"sources": [
+		"my/dnd/generator/generator.view.tree",
+		"localized_string"
+	],
+	"sourcesContent": [
+		"$my_dnd_generator $mol_page\n\tbody /\n\t\t<= Category_field $mol_form_field\n\t\t\tname @ \\Категория\n\t\t\tcontent /\n\t\t\t\t<= Category_select $mol_select\n\t\t\t\t\tvalue? <=> category_key? \\Male name\n\t\t\t\t\tdictionary <= options *\n\t\t\t\t\t\tmale_name \\Male name\n\t\t\t\t\t\tfemale_name \\Female name\n\t\t\t\t\t\ttreasure \\Treasure\n\t\t\t\t\t\tcity \\City\n\t\t<= Generate_button $mol_button_major\n\t\t\ttitle \\Сгенерировать\n\t\t\tclick? <=> generate? null\n\t\t<= Result_field $mol_form_field\n\t\t\tname @ \\Результат\n\t\t\tcontent /\n\t\t\t\t<= Result_text $mol_text\n\t\t\t\t\ttext <= result \\...\n",
+		"\n\t\t()\n\t\t\tthis\n\t\t\t[] \\$\n\t\t\t[] \\$mol_locale\n\t\t\t[] \\text\n\t\t\t(,) #key\n\t"
+	],
+	"mappings": "AAAA,AAAA,iDAAkB,sBAAlB;AAAA,AAMgB;AAAA,AAAA;AAAA,UAAe,WAAf;AAAA;AACG;AAAA,AAAA,UAAQ;AAAA,AACrB,iBAAW,WADU;AAErB,mBAAa,aAFQ;AAGrB,gBAAU,UAHW;AAIrB,YAAM;AAJe,CAAR;AAAA;AAFZ;AAAA,AAAgB,uCAAhB;AACF,4BAAO,KAAI,mBAAJ,CAAP,CADE;AAEF,6BAAW,KAAG,UAAH,CAAX,CAFE;AAAA,UAAgB,GAAhB;AAAA;AAHF;AAAA,AAAe,2CAAf;AACF,uBCFD,CACC,IACA,EACA,YACA,KACA,CDHK,uCCGL,CALD,CDEC,CADE;AAEF,0BAAQ,CACP,KAAG,kBAAH,CADO,CAAR,CAFE;AAAA,UAAe,GAAf;AAAA;AAYS;AAAA,AAAA;AAAA,UAAU,IAAV;AAAA;AAFT;AAAA,AAAgB,6CAAhB;AACF,wBAAO,eAAP,CADE;AAEF,4BAAO,KAAI,eAAJ,CAAP,CAFE;AAAA,UAAgB,GAAhB;AAAA;AAOQ;AAAA,AAAA,UAAQ,KAAR;AAAA;AADN;AAAA,AAAY,qCAAZ;AACF,uBAAK,KAAG,SAAH,CAAL,CADE;AAAA,UAAY,GAAZ;AAAA;AAHF;AAAA,AAAa,2CAAb;AACF,uBCfD,CACC,IACA,EACA,YACA,KACA,CDUK,qCCVL,CALD,CDeC,CADE;AAEF,0BAAQ,CACP,KAAG,cAAH,CADO,CAAR,CAFE;AAAA,UAAa,GAAb;AAAA;AAdJ;AAAA,AAAA,UAAK;AAAA,AACJ,SAAG,iBAAH,CADI;AAWJ,SAAG,kBAAH,CAXI;AAcJ,SAAG,eAAH;AAdI,CAAL;AAAA;AADD,CAAA;AAMgB,YANhB,CAMgB,+CANhB;AAKO,YALP,CAKO,kDALP;AAEK,YAFL,CAEK,iDAFL;AAcc,YAdd,CAcc,2CAdd;AAYK,YAZL,CAYK,kDAZL;AAkBO,YAlBP,CAkBO,8CAlBP;AAeK,YAfL,CAeK,+CAfL;"
+}

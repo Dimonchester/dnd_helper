@@ -1,0 +1,19 @@
+{
+	"$my_dnd_roll_composer_Formula_input_hint": "Напр: 2d20 + 1d6",
+	"$my_dnd_roll_composer_Formula_field_name": "Формула броска",
+	"$my_dnd_roll_composer_Mod_decrease_title": "-",
+	"$my_dnd_roll_composer_Mod_input_hint": "Напр: +5 или -2",
+	"$my_dnd_roll_composer_Mod_increase_title": "+",
+	"$my_dnd_roll_composer_Mod_field_name": "Общий модификатор",
+	"$my_dnd_roll_composer_Add_d4_title": "d4",
+	"$my_dnd_roll_composer_Add_d6_title": "d6",
+	"$my_dnd_roll_composer_Add_d8_title": "d8",
+	"$my_dnd_roll_composer_Add_d10_title": "d10",
+	"$my_dnd_roll_composer_Add_d12_title": "d12",
+	"$my_dnd_roll_composer_Add_d20_title": "d20",
+	"$my_dnd_roll_composer_Add_d100_title": "d100",
+	"$my_dnd_roll_composer_Clear_formula_title": "Очистить",
+	"$my_dnd_roll_composer_Roll_button_title": "Бросок!",
+	"$my_dnd_roll_composer_Result_label_text": "Результат:",
+	"$my_dnd_roll_composer_History_section_title": "История бросков"
+}

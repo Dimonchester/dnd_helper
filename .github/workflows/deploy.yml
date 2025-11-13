@@ -35,4 +35,4 @@ jobs:
       with:
         repo-token: ${{ secrets.GH_PAT }}
         # Путь к собранным файлам ('my/dnd/-' - это стандартный путь вывода для $mol)
-        site-directory: 'my\dnd\app\-\test.html'
+        site-directory: 'my/dnd/-'
