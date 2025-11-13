@@ -5,24 +5,29 @@ on:
   push:
     branches:
       - main
+      # Проверьте, что здесь указана ваша основная ветка (main или master)
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     
+    # 🔥 НОВОЕ: Предоставляем права на запись (write) для встроенного GITHUB_TOKEN
+    permissions:
+      contents: write
+      
     steps:
     
     - name: Build app
       uses: hyoo-ru/mam_build@master2
       with:
-        token: ${{ secrets.GH_PAT }}
+        token: ${{ secrets.GH_PAT }} 
         package: 'my/dnd'
-        path: '' 
+        path: ''
         
     - name: Deploy on GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
-        repo-token: ${{ secrets.GH_PAT }}
+
+        repo-token: ${{ secrets.GITHUB_TOKEN }} 
         site-directory: '.'
