@@ -9,25 +9,18 @@ $my_dnd_app $mol_view
 					title @ \Roll Dice
 					tools / <= Dise_spread_close
 					body /
-						<= Start $mol_row
-							sub /
-								<= Dice_d4 $my_dnd_dice
-									sides 4
-								<= Dice_d6 $my_dnd_dice
-									sides 6
-								<= Dice_d8 $my_dnd_dice
-									sides 8
-								<= Dice_d10 $my_dnd_dice
-									sides 10
-								<= Dice_d12 $my_dnd_dice
-									sides 12
-								<= Dice_d20 $my_dnd_dice
-									sides 20
-								<= Dice_d100 $my_dnd_dice
-									sides 100
+						<= Roll_composer $my_dnd_roll_composer
 				notes <= Notes_page $mol_page
 					title @ \Notes and To-Do
 					tools / <= Dise_spread_close
 					body /
-						<= Notes $my_dnd_notes
-						<= Weapon $my_dnd_notes
+						<= Notes_container $mol_row
+							sub /
+								<= Notes $my_dnd_notes
+								<= Weapon $my_dnd_notes
+								<= NPC $my_dnd_notes
+				generator <= Generator_page $mol_page
+					title @ \Generator
+					tools / <= Dise_spread_close
+					body /
+						<= Generator $my_dnd_generator

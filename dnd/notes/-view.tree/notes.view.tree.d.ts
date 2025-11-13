@@ -30,22 +30,37 @@ declare namespace $ {
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_string__value_my_dnd_notes_7 = $mol_type_enforce<
+	type $mol_textarea__value_my_dnd_notes_7 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['note_text'] >
 		,
-		ReturnType< $mol_string['value'] >
+		ReturnType< $mol_textarea['value'] >
 	>
-	type $mol_row__sub_my_dnd_notes_8 = $mol_type_enforce<
+	type $mol_textarea__enabled_my_dnd_notes_8 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_textarea['enabled'] >
+	>
+	type $mol_button_open__click_my_dnd_notes_9 = $mol_type_enforce<
+		ReturnType< $my_dnd_notes['delete_note'] >
+		,
+		ReturnType< $mol_button_open['click'] >
+	>
+	type $mol_button_open__sub_my_dnd_notes_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_open['sub'] >
+	>
+	type $mol_row__sub_my_dnd_notes_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_list__rows_my_dnd_notes_9 = $mol_type_enforce<
+	type $mol_list__rows_my_dnd_notes_12 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['Note_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_section__sub_my_dnd_notes_10 = $mol_type_enforce<
+	type $mol_section__sub_my_dnd_notes_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['sub'] >
@@ -59,7 +74,10 @@ declare namespace $ {
 		note_checked( id: any, next?: boolean ): boolean
 		Note_check( id: any): $mol_check_box
 		note_text( id: any, next?: string ): string
-		Note_text( id: any): $mol_string
+		Note_text( id: any): $mol_textarea
+		delete_note( id: any, next?: any ): any
+		icondelete( ): $mol_icon_delete
+		Delete_button( id: any): $mol_button_open
 		Note_row( id: any): $mol_row
 		Note_rows( ): readonly(any)[]
 		Note_list( ): $mol_list

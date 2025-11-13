@@ -15,11 +15,7 @@
 				enabled true
 				click? <=> roll? null
 				sub /
-					<= Button_content $mol_view
-						sub /
-							<= Result $mol_labeler
-								sub / 
-									<= dice_type
-									<= result_badge $mol_view
-										sub /
-											<= result_title
+					<= Dice_type_label $mol_view
+						sub / <= dice_type
+					<= Result_label $mol_view
+						sub / <= result_title

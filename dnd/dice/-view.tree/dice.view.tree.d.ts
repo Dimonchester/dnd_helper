@@ -35,27 +35,22 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_labeler__sub_my_dnd_dice_8 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_labeler['sub'] >
-	>
-	type $mol_view__sub_my_dnd_dice_9 = $mol_type_enforce<
+	type $mol_view__sub_my_dnd_dice_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_button_major__enabled_my_dnd_dice_10 = $mol_type_enforce<
+	type $mol_button_major__enabled_my_dnd_dice_9 = $mol_type_enforce<
 		boolean
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_button_major__click_my_dnd_dice_11 = $mol_type_enforce<
+	type $mol_button_major__click_my_dnd_dice_10 = $mol_type_enforce<
 		ReturnType< $my_dnd_dice['roll'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__sub_my_dnd_dice_12 = $mol_type_enforce<
+	type $mol_button_major__sub_my_dnd_dice_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button_major['sub'] >
@@ -68,9 +63,8 @@ declare namespace $ {
 		Mod_input( ): $mol_number
 		Mod_field( ): $mol_form_field
 		roll( next?: any ): any
-		result_badge( ): $mol_view
-		Result( ): $mol_labeler
-		Button_content( ): $mol_view
+		Dice_type_label( ): $mol_view
+		Result_label( ): $mol_view
 		Roll( ): $mol_button_major
 		sides( ): number
 		sub( ): readonly(any)[]

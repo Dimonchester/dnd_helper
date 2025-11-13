@@ -1,0 +1,300 @@
+Путь всех файлов E:\mam\my\dnd\roll\composer
+composer.view.tree
+$my_dnd_roll_composer $mol_view
+	sub /
+		<= Formula_field $mol_form_field
+			name @ \Формула броска
+			content /
+				<= Formula_input $mol_string
+					hint @ \Напр: 2d20 + 1d6 + 5
+					value? <=> formula?
+		<= Quick_buttons $mol_row
+			sub /
+				<= Add_d4 $mol_button_minor
+					title @ \d4
+					click? <=> add_to_formula
+				<= Add_d6 $mol_button_minor
+					title @ \d6
+					click? <=> add_to_formula
+				<= Add_d8 $mol_button_minor
+					title @ \d8
+					click? <=> add_to_formula
+				<= Add_d10 $mol_button_minor
+					title @ \d10
+					click? <=> add_to_formula
+				<= Add_d12 $mol_button_minor
+					title @ \d12
+					click? <=> add_to_formula
+				<= Add_d20 $mol_button_minor
+					title @ \d20
+					click? <=> add_to_formula
+				<= Add_d100 $mol_button_minor
+					title @ \d100
+					click? <=> add_to_formula
+				<= Clear_formula $mol_button_minor
+					title @ \Очистить
+					click? <=> clear_formula null
+		<= Roll_button $mol_button_major
+			title @ \Бросок!
+			click? <=> roll? null
+		<= Result_block $mol_view
+			sub /
+				<= Result_label $mol_text
+					text @ \Результат:
+				<= Result_display $mol_text
+					text <= result_text \-
+				<= Math_display $mol_text
+					text <= math_text \...
+		<= History_section $mol_section
+			title @ \История бросков
+			sub /
+				<= History_list $mol_list
+					rows <= history_rows
+						<= History_item* $mol_text
+							text <= History_item_text*
+
+
+
+
+
+
+composer.view.css.ts
+namespace $.$$ {
+
+	$mol_style_define( $my_dnd_roll_composer, {
+		display: 'flex',
+		flexDirection: 'column',
+		padding: '1rem',
+		gap: '1rem',
+		color: 'white',
+		flex: {
+			grow: 1,
+			shrink: 1,
+		},
+
+		Formula_field: {
+			color: 'white',
+		},
+
+		Quick_buttons: {
+			flexWrap: 'wrap',
+			gap: '0.5rem',
+		},
+
+		Roll_button: {
+			width: 'fit-content',
+		},
+
+		Result_block: {
+			display: 'flex',
+			flexDirection: 'column',
+			padding: '1rem',
+			backgroundColor: 'rgba(0,0,0, 0.2)',
+			borderRadius: '10px',
+			border: {
+				radius:'1px',
+				style: 'solid',
+			},
+			gap: '0.5rem',
+		},
+
+		Result_label: {
+			fontSize: '0.9rem',
+			opacity: 0.7,
+		},
+
+		Result_display: {
+			fontSize: '2.5rem',
+			fontWeight: 'bold',
+			color: '#a9ffc1', // Яркий акцент на результате
+		},
+
+		Math_display: {
+			fontSize: '1rem',
+			opacity: 0.9,
+			fontFamily: 'monospace', // Моноширинный шрифт для "математики"
+		},
+
+		History_section: {
+			padding: '0px',
+			flex: {
+				grow: 1,
+				shrink: 1,
+			},
+		},
+
+		History_list: {
+			display: 'flex',
+			flexDirection: 'column',
+			gap: '0.5rem',
+			maxHeight: '20rem', // Ограничим высоту, чтобы не занимало весь экран
+			overflowY: 'auto',
+			padding: '0.5rem',
+			backgroundColor: 'rgba(0,0,0, 0.1)',
+			borderRadius: '8px',
+			opacity: 0.8,
+			fontFamily: 'monospace',
+		},
+
+	} )
+
+}
+
+
+composer.view.ts
+namespace $.$$ {
+
+	// Тип для хранения одного элемента истории
+	type RollHistoryEntry = {
+		id: number,
+		formula: string,
+		result: string,
+		math: string
+	}
+
+	export class $my_dnd_roll_composer extends $.$my_dnd_roll_composer {
+
+		// Хранит строку с формулой из поля ввода
+		@ $mol_mem
+		formula( next?: string ) {
+			return next ?? ''
+		}
+
+		// Добавляет текст к формуле (для кнопок)
+		@ $mol_action
+		add_to_formula( text: string ) {
+			const current = this.formula().trim()
+			if ( text === '+' || text === '-' ) {
+				// Добавляем операторы с пробелами
+				this.formula( `${current} ${text} ` )
+			} else {
+				// Добавляем кубики/числа
+				this.formula( `${current}${text}` )
+			}
+		}
+
+		// Очищает формулу
+		@ $mol_action
+		clear_formula() {
+			this.formula( '' )
+		}
+
+		// Хранит список всех бросков
+		@ $mol_mem
+		roll_history( next?: RollHistoryEntry[] ): RollHistoryEntry[] {
+			return next ?? []
+		}
+
+		// Текст для главного (последнего) результата
+		@ $mol_mem
+		result_text() {
+			const history = this.roll_history()
+			return history.length > 0 ? history[0].result : '...'
+		}
+
+		// Текст для математики последнего броска
+		@ $mol_mem
+		math_text() {
+			const history = this.roll_history()
+			return history.length > 0 ? history[0].math : '...'
+		}
+
+		// Генерирует список компонентов-строк для истории (кроме последней)
+		@ $mol_mem
+		history_rows() {
+			return this.roll_history()
+				.slice( 1 ) // Берем все, кроме самого нового (он в Math_display)
+				.map( entry => {
+					// Используем $mol_text для отображения, т.к. $mol_row не нужен
+					const text_widget = $mol_text.make({})
+					// Устанавливаем текст виджета
+					text_widget.text = () => `(${entry.formula}): ${entry.math}`
+					return text_widget
+				} )
+		}
+
+		// ГЛАВНАЯ ФУНКЦИЯ: Бросок кубика
+		@ $mol_action
+		roll() {
+			const formula = this.formula().trim()
+			if ( !formula ) return
+
+			// 1. Нормализуем и разбиваем формулу
+			// "2d20 + 1d6 - 5" -> ["2d20", "+1d6", "-5"]
+			const formula_spaced = formula
+				.replace( /\s/g, '' ) // Убираем все пробелы
+				.replace( /\+/g, ' +' ) // Ставим пробел перед +
+				.replace( /\-/g, ' -' ) // Ставим пробел перед -
+			
+			const parts = formula_spaced.split( ' ' ).filter( p => p.trim() !== '' )
+			if ( parts.length === 0 ) return
+
+			let total_result = 0
+			let math_details: string[] = []
+
+			for ( const part of parts ) {
+				let sign = 1
+				let term = part
+
+				// Определяем знак (+ или -)
+				if ( part.startsWith( '+' ) ) {
+					sign = 1
+					term = part.substring( 1 )
+				} else if ( part.startsWith( '-' ) ) {
+					sign = -1
+					term = part.substring( 1 )
+				}
+				
+				// Случай 1: Это бросок кубика (напр. "2d20" или "d20")
+				if ( term.includes( 'd' ) ) {
+					const [ count_str, sides_str ] = term.split( 'd' )
+					const count = count_str === '' ? 1 : parseInt( count_str, 10 ) // "d20" = "1d20"
+					const sides = parseInt( sides_str, 10 )
+
+					if ( isNaN( count ) || isNaN( sides ) || sides <= 0 ) continue // Пропускаем неверную часть
+
+					let part_total = 0
+					let rolls: number[] = []
+					for ( let i = 0; i < count; i++ ) {
+						const roll = Math.floor( Math.random() * sides ) + 1
+						rolls.push( roll )
+						part_total += roll
+					}
+					
+					total_result += ( part_total * sign )
+					math_details.push( `${ sign > 0 ? '+' : '-' } ${term} [${ rolls.join( ', ' ) }]` )
+				
+				} 
+				// Случай 2: Это просто число (модификатор, напр. "5")
+				else {
+					const constant = parseInt( term, 10 )
+					if ( isNaN( constant ) ) continue // Пропускаем неверную часть
+
+					total_result += ( constant * sign )
+					math_details.push( `${ sign > 0 ? '+' : '-' } ${ constant }` )
+				}
+			}
+
+			// 3. Форматируем результат и математику
+			let math_string = math_details.join( ' ' ).trim()
+			// Убираем лишний "+" в начале, если он есть
+			if ( math_string.startsWith( '+' ) ) {
+				math_string = math_string.substring( 1 ).trim()
+			}
+
+			const final_result = total_result.toString()
+			const final_math = `${ math_string } = ${ final_result }`
+			
+			const new_entry: RollHistoryEntry = {
+				id: Date.now(), // Уникальный ID для $mol_list
+				formula: formula,
+				result: final_result,
+				math: final_math
+			}
+
+			// 4. Обновляем историю
+			const old_history = this.roll_history()
+			this.roll_history( [ new_entry, ...old_history ] )
+		}
+	}
+}

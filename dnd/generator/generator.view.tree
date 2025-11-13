@@ -1,0 +1,20 @@
+$my_dnd_generator $mol_page
+	body /
+		<= Category_field $mol_form_field
+			name @ \Категория
+			content /
+				<= Category_select $mol_select
+					value? <=> category_key? \Male name
+					dictionary <= options *
+						male_name \Male name
+						female_name \Female name
+						treasure \Treasure
+						city \City
+		<= Generate_button $mol_button_major
+			title \Сгенерировать
+			click? <=> generate? null
+		<= Result_field $mol_form_field
+			name @ \Результат
+			content /
+				<= Result_text $mol_text
+					text <= result \...

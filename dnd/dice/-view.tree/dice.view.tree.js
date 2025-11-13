@@ -33,26 +33,21 @@
 			if(next !== undefined) return next;
 			return null;
 		}
-		result_badge(){
+		Dice_type_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.dice_type())]);
+			return obj;
+		}
+		Result_label(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.result_title())]);
-			return obj;
-		}
-		Result(){
-			const obj = new this.$.$mol_labeler();
-			(obj.sub) = () => ([(this.dice_type()), (this.result_badge())]);
-			return obj;
-		}
-		Button_content(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Result())]);
 			return obj;
 		}
 		Roll(){
 			const obj = new this.$.$mol_button_major();
 			(obj.enabled) = () => (true);
 			(obj.click) = (next) => ((this.roll(next)));
-			(obj.sub) = () => ([(this.Button_content())]);
+			(obj.sub) = () => ([(this.Dice_type_label()), (this.Result_label())]);
 			return obj;
 		}
 		sides(){
@@ -73,9 +68,8 @@
 	($mol_mem(($.$my_dnd_dice.prototype), "Mod_input"));
 	($mol_mem(($.$my_dnd_dice.prototype), "Mod_field"));
 	($mol_mem(($.$my_dnd_dice.prototype), "roll"));
-	($mol_mem(($.$my_dnd_dice.prototype), "result_badge"));
-	($mol_mem(($.$my_dnd_dice.prototype), "Result"));
-	($mol_mem(($.$my_dnd_dice.prototype), "Button_content"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Dice_type_label"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Result_label"));
 	($mol_mem(($.$my_dnd_dice.prototype), "Roll"));
 
 //# sourceMappingURL=dice.view.tree.js.map

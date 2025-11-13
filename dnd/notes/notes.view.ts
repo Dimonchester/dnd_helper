@@ -14,6 +14,30 @@ namespace $.$$ {
 			return next ?? []
 		}
 
+		// notes_list( next?: $my_dnd_note_item[] ): $my_dnd_note_item[] {
+			
+		// 	// 1. Если поступили новые данные (next), сохраняем их первыми
+		// 	if( next !== undefined ) {
+		// 		// Приводим результат JSON.stringify к типу string, чтобы исключить ошибку записи
+		// 		const data_to_store = JSON.stringify( next ) as string
+		// 		$mol_state_local.value( 'my_dnd_notes', data_to_store )
+		// 		return next
+		// 	}
+			
+		// 	// 2. Получаем сохраненную строку из localStorage, 
+		// 	//    приводим результат к string для совместимости чтения
+		// 	const stored_data = $mol_state_local.value( 'my_dnd_notes' ) as string | null
+			
+		// 	// 3. Десериализуем данные, если они существуют и не являются пустой строкой.
+		// 	if( stored_data ) {
+		// 		// Приводим результат JSON.parse к нашему целевому типу
+		// 		return JSON.parse( stored_data ) as $my_dnd_note_item[]
+		// 	}
+			
+		// 	// Если данных нет, возвращаем пустой массив
+		// 	return []
+		// }
+
 		// Хранит текст из поля ввода для новой заметки
 		@ $mol_mem
 		new_note_text( next?: string ) {
@@ -77,5 +101,15 @@ namespace $.$$ {
 			return next
 		}
 
+		@ $mol_action
+		delete_note( index: number ) {
+			const list = this.notes_list();
+			
+			// Создаем новый массив, отфильтровав элемент по индексу
+			const new_list = list.filter( ( _, i ) => i !== index );
+			
+			this.notes_list( new_list );
+		}
+		
 	}
 }

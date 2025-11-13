@@ -38,13 +38,32 @@
 			return "";
 		}
 		Note_text(id){
-			const obj = new this.$.$mol_string();
+			const obj = new this.$.$mol_textarea();
 			(obj.value) = (next) => ((this.note_text(id, next)));
+			(obj.enabled) = () => (true);
+			return obj;
+		}
+		delete_note(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		icondelete(){
+			const obj = new this.$.$mol_icon_delete();
+			return obj;
+		}
+		Delete_button(id){
+			const obj = new this.$.$mol_button_open();
+			(obj.click) = (next) => ((this.delete_note(id, next)));
+			(obj.sub) = () => ([(this.icondelete())]);
 			return obj;
 		}
 		Note_row(id){
 			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Note_check(id)), (this.Note_text(id))]);
+			(obj.sub) = () => ([
+				(this.Note_check(id)), 
+				(this.Note_text(id)), 
+				(this.Delete_button(id))
+			]);
 			return obj;
 		}
 		Note_rows(){
@@ -73,6 +92,9 @@
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_check"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "note_text"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_text"));
+	($mol_mem_key(($.$my_dnd_notes.prototype), "delete_note"));
+	($mol_mem(($.$my_dnd_notes.prototype), "icondelete"));
+	($mol_mem_key(($.$my_dnd_notes.prototype), "Delete_button"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_row"));
 	($mol_mem(($.$my_dnd_notes.prototype), "Note_list"));
 	($mol_mem(($.$my_dnd_notes.prototype), "List_section"));

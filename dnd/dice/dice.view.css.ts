@@ -2,25 +2,33 @@ namespace $.$$ {
 
 	// Основные стили для всех кубиков
 	$mol_style_define( $my_dnd_dice, {
-		margin: '0.5rem',
 		display: 'flex',
 		flexDirection: 'column',
-		padding: '0.5rem',
-		backgroundColor: 'rgba(255,255,255, 0.1)',
-		borderRadius: '10px',
+		padding: '0.5rem', // <-- УМЕНЬШЕНО: было '0.75rem'
+		backgroundColor: 'rgba(255,255,255, 0.07)',
+		borderRadius: '10px', // <-- УМЕНЬШЕНО: было '12px'
 		alignItems: 'center',
-		maxWidth: '100%',
-		minWidth: '12rem',
+		border: {
+			radius:'1px',
+			style: 'solid',
+		},
+		boxShadow: '0 2px 8px rgba(0,0,0, 0.2)', // <-- УМЕНЬШЕНО: тень
+		
+		flex: {
+			grow: 1,
+			shrink: 1,
+			basis: '7.5rem', // <-- УМЕНЬШЕНО: было '9rem'
+		},
 		
 		Count_field:{
 			color: 'white',
-			marginBottom: '0.5rem',
+			marginBottom: '0.25rem', // <-- УМЕНЬШЕНО: было '0.5rem'
 			alignItems: 'center',
 		},
 
 		Mod_field:{
 			color: 'white',
-			marginBottom: '0.5rem',
+			marginBottom: '0.25rem', // <-- УМЕНЬШЕНО: было '0.5rem'
 			alignItems: 'center',
 		},
 
@@ -30,51 +38,45 @@ namespace $.$$ {
 			alignItems: 'center',
 			justifyContent: 'center',
 			width: '100%',
-			maxWidth: '9rem',
-			backgroundColor: 'white',
-			color: 'black',
-			padding: '0.5rem',
+			backgroundColor: 'linear-gradient(145deg, #4b6cb7, #182848)',
+			color: 'white',
+			padding: '0.5rem', // <-- УМЕНЬШЕНО: было '0.75rem 0.5rem'
 			fontSize: '1rem',
 			fontWeight: 'bold',
 			border: {
-				width: '2px',
-				style: 'solid',
-				color: '#666',
+				width: '0px',
 			},
-			borderRadius: '10px',
-			boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+			borderRadius: '8px',
+			boxShadow: '0 2px 5px rgba(0,0,0, 0.2)',
 			cursor: 'pointer',
 			transition: 'all 0.2s ease',
 			textAlign: 'center',
+
 			':hover': {
-				backgroundColor: '#f8f8f8',
+				backgroundColor: 'linear-gradient(145deg, #5a7fcf, #1f325e)',
 				transform: 'translateY(-2px)',
-				boxShadow: '0 4px 8px rgba(0,0,0,0.15)',
+				boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
 			},
 			':active': {
 				transform: 'translateY(0)',
-				boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+				boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
 			},
 		},
 
-
-		Result: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			fontSize: '1.5rem',
+		Dice_type_label: {
+			fontSize: '1.3rem', // <-- УМЕНЬШЕНО: было '1.5rem'
 			fontWeight: 'bold',
 			lineHeight: '1.1',
-			rowGap: '7px',
-  			columnGap: '3%',
+			color: 'white',
 		},
-
-		Button_content:{
-			fontSize: '1rem',
+		
+		Result_label: {
+			fontSize: '0.9rem', // <-- УМЕНЬШЕНО: было '1rem'
 			opacity: 0.7,
 			fontWeight: 'normal',
+			minHeight: '1rem', // <-- УМЕНЬШЕНО: было '1.2rem'
+			color: 'white',
 		},
 
 	} )
-
 }

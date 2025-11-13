@@ -16,5 +16,10 @@ $my_dnd_notes $mol_page
 							sub /
 								<= Note_check* $mol_check_box
 									checked? <=> note_checked*? false
-								<= Note_text* $mol_string
+								<= Note_text* $mol_textarea
 									value? <=> note_text*? \
+									enabled true
+								<= Delete_button* $mol_button_open
+									click? <=> delete_note*? null
+									sub /
+										<= icondelete $mol_icon_delete
