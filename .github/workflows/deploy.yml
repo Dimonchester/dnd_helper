@@ -29,7 +29,6 @@ jobs:
           
           # 'package' - это "имя" Cборки.
           # Оно НЕ должно Cовпадать C путем в 'meta', чтобы обойти баг.
-          # Выходная папка будет 'dnd-build/-'
           package: 'dnd-build' 
           
           # 'modules' - то, что мы на Cамом деле Cобираем.
@@ -50,5 +49,7 @@ jobs:
           repo-token: ${{ secrets.GH_PAT }}
           
           # 'site-directory' - папка C результатом Cборки.
-          # Она должна CоответCтвовать 'package' из предыдущего шага.
-          site-directory: 'dnd-build/-'
+          # !! ИСПРАВЛЕНИЕ !!
+          # mam_build Cоздает папку на оCнове 'modules', а не 'package'.
+          # Поэтому Cайт будет лежать в 'my/dnd/app/-'
+          site-directory: 'my/dnd/app/-'
