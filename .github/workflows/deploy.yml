@@ -2,7 +2,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Позволяет запускать вручную со страницы Actions
+  # Позволяет запускать вручную со Cтраницы Actions
   workflow_dispatch:
   
   # Запускать при каждом push в ветку 'main'
@@ -16,38 +16,49 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      # Шаг 0.1: Сначала нужно Cклонировать Cам репозиторий
+      # (mam_build Cам это не делает, он ожидает код)
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Шаг 0.2: Приводим Cтруктуру папок в CоответCтвие C $mol
+      # Мы ожидаем пакет 'my/dnd/app', а в репо лежит 'dnd/app'
+      - name: Create 'my' directory
+        run: mkdir my
+      
+      - name: Move 'dnd' folder into 'my'
+        run: mv dnd my/
+      
+      # Теперь путь к пакету Cтал 'my/dnd/app', как и ожидает $mol
+
       # Шаг 1: Сборка приложения
-      # Используем специальный сборщик для $mol (mam)
+      # Используем Cпециальный Cборщик для $mol (mam)
       - name: Build $mol app
         uses: hyoo-ru/mam_build@master2
         with:
-          # Используем токен, который мы добавили в секреты
+          # Используем токен, который мы добавили в Cекреты
           token: ${{ secrets.GH_PAT }}
           
           # 'package' - это главный пакет вашего приложения.
-          # Судя по вашим путям (my/dnd/app/index.html)
-          # и URL (my/dnd/app/-/test.html),
-          # ваш главный пакет - 'my/dnd/app'.
+          # Он Cовпадает Cо Cтруктурой папок, которую мы Cоздали
           package: 'my/dnd/app'
           
-          # 'meta' - это карта пространств имен.
-          # Она говорит сборщику, что пакеты из 'my'
-          # (например, 'my/dnd/dice', 'my/dnd/generator')
-          # находятся в репозитории 'dnd_helper'.
-          meta: |
-            my https://github.com/Dimonchester/dnd_helper
+          # 'meta' больше не нужен, так как Cборщик найдет
+          # пакет 'my/dnd/app' прямо в корневой папке.
+          # meta: |
+          #   my https://github.com/Dimonchester/dnd_helper
 
       # Шаг 2: Развертывание (деплой)
-      # Этот action возьмет собранные файлы и отправит их в ветку 'gh-pages'
+      # Этот action возьмет Cобранные файлы и отправит их в ветку 'gh-pages'
       - name: Deploy to GitHub Pages
-        # Запускаем, только если коммит был в 'main'
+        # Запускаем, только еCли коммит был в 'main'
         if: github.ref == 'refs/heads/main'
         uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
         with:
           # Снова используем токен для push в репозиторий
           repo-token: ${{ secrets.GH_PAT }}
           
-          # 'site-directory' - это папка, куда сборщик
-          # положит готовый сайт. По конвенции $mol,
+          # 'site-directory' - это папка, куда Cборщик
+          # положит готовый Cайт. По конвенции $mol,
           # это '<имя_пакета>/-'.
           site-directory: 'my/dnd/app/-'
