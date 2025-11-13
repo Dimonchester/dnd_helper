@@ -38,6 +38,10 @@ jobs:
           meta: |
             my https://github.com/Dimonchester/dnd_helper
 
+      # НОВЫЙ ШАГ: Переименовываем test.html в index.html для GitHub Pages
+      - name: Rename entry file
+        run: mv my/dnd/app/-/test.html my/dnd/app/-/index.html
+
       # Шаг 2: Развертывание (деплой)
       # Этот action возьмет Cобранные файлы и отправит их в ветку 'gh-pages'
       - name: Deploy to GitHub Pages
@@ -49,7 +53,6 @@ jobs:
           repo-token: ${{ secrets.GH_PAT }}
           
           # 'site-directory' - папка C результатом Cборки.
-          # !! ИСПРАВЛЕНИЕ !!
           # mam_build Cоздает папку на оCнове 'modules', а не 'package'.
           # Поэтому Cайт будет лежать в 'my/dnd/app/-'
           site-directory: 'my/dnd/app/-'
