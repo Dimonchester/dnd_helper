@@ -1,38 +1,42 @@
 name: Deploy DND Helper
 
 on:
-  # Запуск вручную через интерфейс GitHub
   workflow_dispatch:
-  # Запуск при каждом push в ветку main
   push:
     branches:
       - main
-      # Если ваша основная ветка называется master, замените main на master
+      # Убедитесь, что здесь указана ваша основная ветка (main или master)
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     
+    # Предоставляем права на запись (write) для встроенного токена
+    permissions:
+      contents: write
+      
     steps:
     
+    # 1. Чекаут кода (нужно для peaceiris/actions-gh-pages)
+    - uses: actions/checkout@v4
+      
     - name: Build app
-      # Используем действие для сборки $mol-приложений
       uses: hyoo-ru/mam_build@master2
       with:
-        token: ${{ secrets.GH_PAT }}
-        # Имя вашего пакета
+        # Ваш личный токен (для скачивания зависимостей)
+        token: ${{ secrets.GH_PAT }} 
         package: 'my/dnd'
-        # Если сборка завершится ошибкой "не найден модуль",
-        # возможно, вам нужно будет добавить мета-ссылку на mam_my.
-        # meta: |
-        #   my https://github.com/Dimonchester/mam_my
-    
-    - name: Deploy on GitHub Pages
-      # Проверяем, что деплоим только из основной ветки
+        # Собираем в корень сайта
+        path: '' 
+        
+    # 2. НОВЫЙ ДЕПЛОЙ-ЭКШЕН (более надежный)
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
-      uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
-        repo-token: ${{ secrets.GH_PAT }}
-        # Путь к собранным файлам ('my/dnd/-' - это стандартный путь вывода для $mol)
-        site-directory: 'my/dnd/-'
+        # Используем встроенный токен, который теперь имеет права записи
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # '.' указывает на корень рабочей папки, куда собран код
+        publish_dir: '.' 
+        # Добавляем настройку, чтобы action не удалял файлы, если они есть
+        force_orphan: true
