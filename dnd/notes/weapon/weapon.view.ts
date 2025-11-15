@@ -18,7 +18,6 @@ namespace $.$$ {
 			return 'my_dnd_weapon_default'
 		}
 
-		// (ИЗМЕНЕНО) Блок weapon_list с надежной миграцией
 		@ $mol_mem
 		weapon_list( next?: $my_dnd_weapon_item[] ): $my_dnd_weapon_item[] {
 			if( next !== undefined ) {
@@ -30,7 +29,6 @@ namespace $.$$ {
 			if (stored) {
 				let items = JSON.parse( stored ) as any[]
 				
-				// Надежная миграция
 				const needs_migration = items.some( (item: any) => item.id === undefined || typeof item.id !== 'number');
 				if ( needs_migration ) {
 					items = items.map((item: any, index: number) => {
@@ -45,7 +43,6 @@ namespace $.$$ {
 			return []
 		}
 
-		// ... (поля new_name, new_damage и т.д. остаются без изменений) ...
 		@ $mol_mem new_name( next?: string ) { return next ?? '' }
 		@ $mol_mem new_damage( next?: string ) { return next ?? '' }
 		@ $mol_mem new_properties( next?: string ) { return next ?? '' }
@@ -56,7 +53,6 @@ namespace $.$$ {
 		@ $mol_mem new_used( next?: boolean ) { return next ?? false }
 
 
-		// (ИЗМЕНЕНО) Блок add_weapon с надежным генератором ID
 		@ $mol_action
 		add_weapon() {
 			const name = this.new_name()
@@ -84,7 +80,6 @@ namespace $.$$ {
 
 			this.weapon_list( [ new_item, ...list ] )
 
-			// Очистка полей
 			this.new_name('')
 			this.new_damage('')
 			this.new_properties('')
@@ -105,7 +100,6 @@ namespace $.$$ {
 			this.weapon_list( this.weapon_list().filter( item => item.id !== id ) );
 		}
 
-		// ... (блок update_item и биндеры weapon_name, weapon_damage и т.д. остаются без изменений) ...
 		@ $mol_action
 		update_item( id: number, field: keyof $my_dnd_weapon_item, value: any ) {
 			const list = this.weapon_list()

@@ -33,7 +33,6 @@ namespace $.$$ {
 			if (modifier > 0) {
 				mod_string = ` + ${modifier}`
 			} else if (modifier < 0) {
-				// Показываем " - 3" вместо " + -3"
 				mod_string = ` - ${Math.abs(modifier)}`
 			}
 
@@ -46,19 +45,19 @@ namespace $.$$ {
 			return result > 0 ? result.toString(): "."
 		}
 		
-		// Обработчик клика по кнопке (обновлено)
+		// Обработчик клика по кнопке
 		@ $mol_action
 		roll() {
 			const sides = this.sides()
 			const count = this.count()
-			const modifier = this.modifier() // Получаем модификатор
+			const modifier = this.modifier()
 			
 			let total_result = 0
 			for (let i = 0; i < count; i++) {
 				total_result += Math.floor(Math.random() * sides) + 1
 			}
 
-			total_result += modifier // Прибавляем модификатор
+			total_result += modifier
 			
 			this.result(total_result)
 		}

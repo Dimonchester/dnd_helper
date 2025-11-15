@@ -1,7 +1,6 @@
 namespace $.$$ {
 
 	$mol_style_define( $my_dnd_notes_npc, {
-		// Копируем стили из $my_dnd_notes
 		flex: {
 			grow: 1,
 			shrink: 1,
@@ -18,7 +17,6 @@ namespace $.$$ {
 			marginBottom: '0.5rem',
 		},
 		
-		// Стили для полей ввода
 		New_name: { color: 'white' },
 		New_descr: { 
 			color: 'white',
@@ -45,7 +43,6 @@ namespace $.$$ {
 			gap: '0.5rem',
 		},
 		
-		// Заголовок (Имя + Кнопка)
 		Npc_header: {
 			flexWrap: 'nowrap',
 			alignItems: 'center',

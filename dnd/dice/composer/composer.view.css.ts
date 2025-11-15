@@ -27,28 +27,28 @@ namespace $.$$ {
 		Mod_control_row: {
 			flexWrap: 'nowrap',
 			flex: {
-				grow: 1, // Растягиваем строку на всю ширину
+				grow: 1,
 			},
-			gap: '0.5rem', // Отступы между кнопками и полем
+			gap: '0.5rem',
 		},
 
 		Mod_input: {
 			flex: {
-				grow: 1, // Поле ввода занимает основное место
+				grow: 1,
 				shrink: 1,
 			},
-			textAlign: 'center', // Приятно смотрится для чисел
+			textAlign: 'center',
 		},
 
 		Mod_decrease: {
 			flex: {
-				grow: 0, // Кнопки не растягиваются
+				grow: 0,
 			},
 		},
 		
 		Mod_increase: {
 			flex: {
-				grow: 0, // Кнопки не растягиваются
+				grow: 0,
 			},
 		},
 
@@ -73,13 +73,13 @@ namespace $.$$ {
 		Result_display: {
 			fontSize: '2.5rem',
 			fontWeight: 'bold',
-			color: '#a9ffc1', // Яркий акцент на результате
+			color: '#a9ffc1',
 		},
 
 		Math_display: {
 			fontSize: '1rem',
 			opacity: 0.9,
-			fontFamily: 'monospace', // Моноширинный шрифт для "математики"
+			fontFamily: 'monospace',
 		},
 
 		History_section: {
@@ -94,7 +94,7 @@ namespace $.$$ {
 			display: 'flex',
 			flexDirection: 'column',
 			gap: '0.5rem',
-			maxHeight: '20rem', // Ограничим высоту, чтобы не занимало весь экран
+			maxHeight: '20rem',
 			overflowY: 'auto',
 			padding: '0.5rem',
 			backgroundColor: 'rgba(0,0,0, 0.1)',

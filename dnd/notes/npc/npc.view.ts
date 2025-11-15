@@ -12,7 +12,6 @@ namespace $.$$ {
 			return 'my_dnd_npc_default'
 		}
 
-		// (ИЗМЕНЕНО) Блок npc_list с надежной миграцией
 		@ $mol_mem
 		npc_list( next?: $my_dnd_npc_item[] ): $my_dnd_npc_item[] {
 			if( next !== undefined ) {
@@ -25,7 +24,6 @@ namespace $.$$ {
 			if( stored_data ) {
 				let items = JSON.parse( stored_data ) as any[]
 
-				// Надежная миграция
 				const needs_migration = items.some( (item: any) => item.id === undefined || typeof item.id !== 'number');
 				if ( needs_migration ) {
 					items = items.map( (item: any, index: number) => {
@@ -50,7 +48,6 @@ namespace $.$$ {
 			return next ?? ''
 		}
 
-		// (ИЗМЕНЕНО) Блок add_npc с надежным генератором ID
 		@ $mol_action
 		add_npc() {
 			const name = this.new_name_text()
@@ -71,7 +68,7 @@ namespace $.$$ {
 				description: description 
 			}
 			
-			this.npc_list( [ new_npc, ...current_list ] ) // Добавляем в начало
+			this.npc_list( [ new_npc, ...current_list ] )
 			this.new_name_text('')
 			this.new_descr_text('')
 		}
@@ -81,7 +78,6 @@ namespace $.$$ {
 			return this.npc_list().map( ( item ) => this.Npc_row( item.id ) )
 		}
 
-		// (ИЗМЕНЕНО) Биндинг по ID
 		@ $mol_mem_key
 		npc_name( id: number, next?: string ) {
 			const list = this.npc_list()
@@ -98,7 +94,6 @@ namespace $.$$ {
 			return next
 		}
 
-		// (ИЗМЕНЕНО) Биндинг по ID
 		@ $mol_mem_key
 		npc_descr( id: number, next?: string ) {
 			const list = this.npc_list()

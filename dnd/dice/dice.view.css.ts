@@ -4,31 +4,31 @@ namespace $.$$ {
 	$mol_style_define( $my_dnd_dice, {
 		display: 'flex',
 		flexDirection: 'column',
-		padding: '0.5rem', // <-- УМЕНЬШЕНО: было '0.75rem'
+		padding: '0.5rem',
 		backgroundColor: 'rgba(255,255,255, 0.07)',
-		borderRadius: '10px', // <-- УМЕНЬШЕНО: было '12px'
+		borderRadius: '10px',
 		alignItems: 'center',
 		border: {
 			radius:'1px',
 			style: 'solid',
 		},
-		boxShadow: '0 2px 8px rgba(0,0,0, 0.2)', // <-- УМЕНЬШЕНО: тень
+		boxShadow: '0 2px 8px rgba(0,0,0, 0.2)',
 		
 		flex: {
 			grow: 1,
 			shrink: 1,
-			basis: '7.5rem', // <-- УМЕНЬШЕНО: было '9rem'
+			basis: '7.5rem',
 		},
 		
 		Count_field:{
 			color: 'white',
-			marginBottom: '0.25rem', // <-- УМЕНЬШЕНО: было '0.5rem'
+			marginBottom: '0.25rem',
 			alignItems: 'center',
 		},
 
 		Mod_field:{
 			color: 'white',
-			marginBottom: '0.25rem', // <-- УМЕНЬШЕНО: было '0.5rem'
+			marginBottom: '0.25rem',
 			alignItems: 'center',
 		},
 
@@ -40,7 +40,7 @@ namespace $.$$ {
 			width: '100%',
 			backgroundColor: 'linear-gradient(145deg, #4b6cb7, #182848)',
 			color: 'white',
-			padding: '0.5rem', // <-- УМЕНЬШЕНО: было '0.75rem 0.5rem'
+			padding: '0.5rem',
 			fontSize: '1rem',
 			fontWeight: 'bold',
 			border: {
@@ -64,17 +64,17 @@ namespace $.$$ {
 		},
 
 		Dice_type_label: {
-			fontSize: '1.3rem', // <-- УМЕНЬШЕНО: было '1.5rem'
+			fontSize: '1.3rem',
 			fontWeight: 'bold',
 			lineHeight: '1.1',
 			color: 'white',
 		},
 		
 		Result_label: {
-			fontSize: '0.9rem', // <-- УМЕНЬШЕНО: было '1rem'
+			fontSize: '0.9rem',
 			opacity: 0.7,
 			fontWeight: 'normal',
-			minHeight: '1rem', // <-- УМЕНЬШЕНО: было '1.2rem'
+			minHeight: '1rem',
 			color: 'white',
 		},
 
