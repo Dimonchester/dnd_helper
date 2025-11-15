@@ -1,12 +1,13 @@
 namespace $.$$ {
 
-	$mol_style_define( $my_dnd_notes, {
+	$mol_style_define( $my_dnd_notes_npc, {
+		// Копируем стили из $my_dnd_notes
 		flex: {
 			grow: 1,
 			shrink: 1,
-			basis: '20rem', // (ИЗМЕНЕНО) Базовая ширина для авто-переноса
+			basis: '20rem',
 		},
-		minWidth: '18rem', // (ДОБАВЛЕНО) Минимальная ширина на моб. устройствах
+		minWidth: '18rem',
 		display: 'flex',
 		color: 'white',
 
@@ -16,53 +17,47 @@ namespace $.$$ {
 			borderRadius: '10px',
 			marginBottom: '0.5rem',
 		},
-
-		New_note_text: {
+		
+		// Стили для полей ввода
+		New_name: { color: 'white' },
+		New_descr: { 
 			color: 'white',
+			minHeight: '4rem',
 		},
-
+		
 		List_section: {
 			padding: '0px',
 		},
-
-		Note_list: {
+		
+		Npc_list: {
 			display: 'flex',
 			flexDirection: 'column',
 			gap: '0.5rem',
 		},
-
-		Note_row: {
-			flexWrap: 'nowrap',
+		
+		// Карточка NPC
+		Npc_row: {
+			display: 'flex',
+			flexDirection: 'column',
 			padding: '0.75rem',
 			backgroundColor: 'rgba(255,255,255, 0.05)',
 			borderRadius: '8px',
+			gap: '0.5rem',
+		},
+		
+		// Заголовок (Имя + Кнопка)
+		Npc_header: {
+			flexWrap: 'nowrap',
 			alignItems: 'center',
 			gap: '0.5rem',
 		},
 
-		Note_text: {
-			color: 'white',
-			flex: {
-				grow: 1,
-				shrink: 1,
-				basis: 'auto',
-			},
-			background: {
-				color: 'transparent',
-			},
-			boxShadow: 'none',
-		},
-
-		// (БЛОК ДОБАВЛЕН) Стили для кнопки удаления
 		Delete_button: {
 			justifyContent: 'center',
 			padding: '0.25rem',
 			minWidth: '2rem',
 			minHeight: '2rem',
-			flex: {
-				grow: 0,
-				shrink: 0,
-			},
+			flex: { grow: 0, shrink: 0 },
 			backgroundColor: 'rgba(255,255,255, 0.1)',
 			color: 'white',
 			':hover': {

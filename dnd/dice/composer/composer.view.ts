@@ -8,7 +8,7 @@ namespace $.$$ {
 		math: string
 	}
 
-	export class $my_dnd_roll_composer extends $.$my_dnd_roll_composer {
+	export class $my_dnd_dice_composer extends $.$my_dnd_dice_composer {
 
 		@ $mol_mem
 		formula( next?: string ) {

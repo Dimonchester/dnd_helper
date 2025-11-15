@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define( $my_dnd_roll_composer, {
+	$mol_style_define( $my_dnd_dice_composer, {
 		display: 'flex',
 		flexDirection: 'column',
 		padding: '1rem',

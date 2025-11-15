@@ -1,6 +1,10 @@
 {
 	"$my_dnd_app_Dice_page_title": "Roll Dice",
-	"$my_dnd_app_Notes_page_title": "Notes and To-Do",
+	"$my_dnd_app_Notes_title": "Notes",
+	"$my_dnd_app_Quests_title": "Quests",
+	"$my_dnd_app_Weapon_title": "Weapon",
+	"$my_dnd_app_NPC_title": "NPC",
+	"$my_dnd_app_Notes_book_menu_title": "Notes and To-Do",
 	"$my_dnd_app_Generator_page_title": "Generator",
 	"$my_dnd_app_Catalog_menu_title": "D&D Helper"
 }

@@ -55,12 +55,19 @@ declare namespace $ {
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_list__rows_my_dnd_notes_12 = $mol_type_enforce<
+	type $mol_row__attr_my_dnd_notes_12 = $mol_type_enforce<
+		({ 
+			'data-checked': ReturnType< $my_dnd_notes['note_checked'] >,
+		}) 
+		,
+		ReturnType< $mol_row['attr'] >
+	>
+	type $mol_list__rows_my_dnd_notes_13 = $mol_type_enforce<
 		ReturnType< $my_dnd_notes['Note_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_section__sub_my_dnd_notes_13 = $mol_type_enforce<
+	type $mol_section__sub_my_dnd_notes_14 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['sub'] >
@@ -76,7 +83,7 @@ declare namespace $ {
 		note_text( id: any, next?: string ): string
 		Note_text( id: any): $mol_textarea
 		delete_note( id: any, next?: any ): any
-		icondelete( ): $mol_icon_delete
+		icondelete( id: any): $mol_icon_delete
 		Delete_button( id: any): $mol_button_open
 		Note_row( id: any): $mol_row
 		Note_rows( ): readonly(any)[]

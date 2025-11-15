@@ -3,24 +3,37 @@ $my_dnd_app $mol_view
 		<= Catalog $mol_book2_catalog
 			param \page
 			menu_title @ \D&D Helper
-			Spread_close => Dise_spread_close
-			spreads <= spreads_map *
+			Spread_close => Spread_close
+			spreads *
 				dice <= Dice_page $mol_page
 					title @ \Roll Dice
-					tools / <= Dise_spread_close
+					tools / <= Spread_close
 					body /
-						<= Roll_composer $my_dnd_roll_composer
-				notes <= Notes_page $mol_page
-					title @ \Notes and To-Do
-					tools / <= Dise_spread_close
-					body /
-						<= Notes_container $mol_row
-							sub /
-								<= Notes $my_dnd_notes
-								<= Weapon $my_dnd_notes
-								<= NPC $my_dnd_notes
+						<= Roll_composer $my_dnd_dice_composer
+				notes_book <= Notes_book $mol_book2_catalog
+					param \notes_catalog
+					menu_title @ \Notes and To-Do
+					menu_tools / <= Spread_close
+					Spread_close => Notes_spread_close
+					spreads *
+						notes <= Notes $my_dnd_notes
+							title @ \Notes
+							tools / <= Notes_spread_close
+							state_key \my_dnd_notes_general
+						quests <= Quests $my_dnd_notes
+							title @ \Quests
+							tools / <= Notes_spread_close
+							state_key \my_dnd_notes_quests
+						weapon <= Weapon $my_dnd_notes_weapon
+							title @ \Weapon
+							tools / <= Notes_spread_close
+							state_key \my_dnd_weapon_items
+						npc <= NPC $my_dnd_notes_npc
+							title @ \NPC
+							tools / <= Notes_spread_close
+							state_key \my_dnd_npc_items
 				generator <= Generator_page $mol_page
 					title @ \Generator
-					tools / <= Dise_spread_close
+					tools / <= Spread_close
 					body /
 						<= Generator $my_dnd_generator

@@ -1,4 +1,4 @@
-$my_dnd_roll_composer $mol_view
+$my_dnd_dice_composer $mol_view
 	sub /
 		<= Formula_field $mol_form_field
 			name @ \Формула броска

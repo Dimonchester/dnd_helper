@@ -1,0 +1,80 @@
+$my_dnd_notes_weapon $mol_page
+	body /
+		<= Add_form $mol_form
+			sub /
+				<= New_row_1 $mol_row
+					sub /
+						<= New_name $mol_string
+							hint @ \Название...
+							value? <=> new_name? \
+						<= New_damage $mol_string
+							hint @ \Урон (1d8)...
+							value? <=> new_damage? \
+				<= New_row_2 $mol_row
+					sub /
+						<= New_cost $mol_string
+							hint @ \Цена (15 зм)
+							value? <=> new_cost? \
+						<= New_weight $mol_string
+							hint @ \Вес (2 ф)
+							value? <=> new_weight? \
+				<= New_quantity_field $mol_form_field
+					name @ \Кол-во
+					content /
+						<= New_quantity $mol_number
+							value? <=> new_quantity? 1
+				<= New_properties $mol_textarea
+					hint @ \Свойства (Фехт., легк.)...
+					value? <=> new_properties? \
+				<= New_row_3 $mol_row
+					sub /
+						<= New_attunement $mol_check_box
+							title @ \Настройка?
+							checked? <=> new_attunement? false
+						<= New_used $mol_check_box
+							title @ \Используется?
+							checked? <=> new_used? false
+				<= Add_button $mol_button_major
+					title @ \Добавить
+					click? <=> add_weapon? null
+		<= List_section $mol_section
+			sub /
+				<= Weapon_list $mol_list
+					rows <= Weapon_rows /
+						<= Weapon_row* $mol_view
+							sub /
+								<= Weapon_header* $mol_row
+									sub /
+										<= Weapon_name* $mol_string
+											value? <=> weapon_name*? \
+										<= Weapon_damage* $mol_string
+											value? <=> weapon_damage*? \
+										<= Delete_button* $mol_button_open
+											click? <=> delete_weapon*? null
+											sub / <= icondelete* $mol_icon_delete
+								<= Weapon_stats_row* $mol_row
+									sub /
+										<= Weapon_cost_field* $mol_form_field
+											name @ \Цена
+											content / <= Weapon_cost* $mol_string
+												value? <=> weapon_cost*? \
+										<= Weapon_weight_field* $mol_form_field
+											name @ \Вес
+											content / <= Weapon_weight* $mol_string
+												value? <=> weapon_weight*? \
+										<= Weapon_quantity_field* $mol_form_field
+											name @ \Кол-во
+											content / <= Weapon_quantity* $mol_number
+												value? <=> weapon_quantity*? 1
+								<= Weapon_properties_field* $mol_form_field
+									name @ \Свойства
+									content / <= Weapon_properties* $mol_textarea
+										value? <=> weapon_properties*? \
+								<= Weapon_bool_row* $mol_row
+									sub /
+										<= Weapon_attunement* $mol_check_box
+											title @ \Настройка
+											checked? <=> weapon_attunement*? false
+										<= Weapon_used* $mol_check_box
+											title @ \Используется
+											checked? <=> weapon_used*? false

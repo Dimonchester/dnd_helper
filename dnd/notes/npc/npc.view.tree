@@ -1,0 +1,31 @@
+$my_dnd_notes_npc $mol_page
+	body /
+		<= Add_form $mol_form
+			sub /
+				<= New_name $mol_string
+					hint @ \Имя NPC...
+					value? <=> new_name_text? \
+				<= New_descr $mol_textarea
+					hint @ \Описание...
+					value? <=> new_descr_text? \
+				<= Add_button $mol_button_major
+					title @ \Добавить
+					click? <=> add_npc? null
+		<= List_section $mol_section
+			sub /
+				<= Npc_list $mol_list
+					rows <= Npc_rows /
+						<= Npc_row* $mol_view
+							sub /
+								<= Npc_header* $mol_row
+									sub /
+										<= Npc_name_text* $mol_string
+											value? <=> npc_name*? \
+											enabled true
+										<= Delete_button* $mol_button_open
+											click? <=> delete_npc*? null
+											sub /
+												<= icondelete* $mol_icon_delete
+								<= Npc_descr_text* $mol_textarea
+									value? <=> npc_descr*? \
+									enabled true

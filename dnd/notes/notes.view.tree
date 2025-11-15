@@ -22,4 +22,5 @@ $my_dnd_notes $mol_page
 								<= Delete_button* $mol_button_open
 									click? <=> delete_note*? null
 									sub /
-										<= icondelete $mol_icon_delete
+										<= icondelete* $mol_icon_delete
+							attr * data-checked <= note_checked*

@@ -1,0 +1,17 @@
+{
+	"$my_dnd_notes_weapon_New_name_hint": "Название...",
+	"$my_dnd_notes_weapon_New_damage_hint": "Урон (1d8)...",
+	"$my_dnd_notes_weapon_New_cost_hint": "Цена (15 зм)",
+	"$my_dnd_notes_weapon_New_weight_hint": "Вес (2 ф)",
+	"$my_dnd_notes_weapon_New_quantity_field_name": "Кол-во",
+	"$my_dnd_notes_weapon_New_properties_hint": "Свойства (Фехт., легк.)...",
+	"$my_dnd_notes_weapon_New_attunement_title": "Настройка?",
+	"$my_dnd_notes_weapon_New_used_title": "Используется?",
+	"$my_dnd_notes_weapon_Add_button_title": "Добавить",
+	"$my_dnd_notes_weapon_Weapon_cost_field_name": "Цена",
+	"$my_dnd_notes_weapon_Weapon_weight_field_name": "Вес",
+	"$my_dnd_notes_weapon_Weapon_quantity_field_name": "Кол-во",
+	"$my_dnd_notes_weapon_Weapon_properties_field_name": "Свойства",
+	"$my_dnd_notes_weapon_Weapon_attunement_title": "Настройка",
+	"$my_dnd_notes_weapon_Weapon_used_title": "Используется"
+}

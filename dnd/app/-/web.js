@@ -3617,6 +3617,435 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_svg) = class $mol_svg extends ($.$mol_view) {
+		dom_name(){
+			return "svg";
+		}
+		dom_name_space(){
+			return "http://www.w3.org/2000/svg";
+		}
+		font_size(){
+			return 16;
+		}
+		font_family(){
+			return "";
+		}
+		style_size(){
+			return {};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_time extends $mol_object {
+        static task(precision, reset) {
+            if (precision) {
+                return new $mol_after_timeout(precision, () => this.task(precision, null));
+            }
+            else {
+                return new $mol_after_frame(() => this.task(precision, null));
+            }
+        }
+        static now(precision) {
+            this.task(precision);
+            return Date.now();
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_time, "task", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_time, "now", null);
+    $.$mol_state_time = $mol_state_time;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_svg extends $.$mol_svg {
+            computed_style() {
+                const win = this.$.$mol_dom_context;
+                const style = win.getComputedStyle(this.dom_node());
+                if (!style['font-size'])
+                    $mol_state_time.now(0);
+                return style;
+            }
+            font_size() {
+                return parseInt(this.computed_style()['font-size']) || 16;
+            }
+            font_family() {
+                return this.computed_style()['font-family'];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_svg.prototype, "computed_style", null);
+        __decorate([
+            $mol_mem
+        ], $mol_svg.prototype, "font_size", null);
+        __decorate([
+            $mol_mem
+        ], $mol_svg.prototype, "font_family", null);
+        $$.$mol_svg = $mol_svg;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_svg_root) = class $mol_svg_root extends ($.$mol_svg) {
+		view_box(){
+			return "0 0 100 100";
+		}
+		aspect(){
+			return "xMidYMid";
+		}
+		dom_name(){
+			return "svg";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"viewBox": (this.view_box()), 
+				"preserveAspectRatio": (this.aspect())
+			};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/svg/root/root.view.css", "[mol_svg_root] {\n\toverflow: hidden;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_svg_path) = class $mol_svg_path extends ($.$mol_svg) {
+		geometry(){
+			return "";
+		}
+		dom_name(){
+			return "path";
+		}
+		attr(){
+			return {...(super.attr()), "d": (this.geometry())};
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon) = class $mol_icon extends ($.$mol_svg_root) {
+		path(){
+			return "";
+		}
+		Path(){
+			const obj = new this.$.$mol_svg_path();
+			(obj.geometry) = () => ((this.path()));
+			return obj;
+		}
+		view_box(){
+			return "0 0 24 24";
+		}
+		minimal_width(){
+			return 16;
+		}
+		minimal_height(){
+			return 16;
+		}
+		sub(){
+			return [(this.Path())];
+		}
+	};
+	($mol_mem(($.$mol_icon.prototype), "Path"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/icon/icon.view.css", "[mol_icon] {\n\tfill: currentColor;\n\tstroke: none;\n\twidth: 1em;\n\theight: 1.5em;\n\tflex: 0 0 auto;\n\tvertical-align: top;\n\tdisplay: inline-block;\n\tfilter: drop-shadow(0px 1px 1px var(--mol_theme_back));\n\ttransform-origin: center;\n}\n\n[mol_icon_path] {\n\ttransform-origin: center;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_icon_chevron) = class $mol_icon_chevron extends ($.$mol_icon) {
+		path(){
+			return "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_chevron_left) = class $mol_icon_chevron_left extends ($.$mol_icon) {
+		path(){
+			return "M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_speck) = class $mol_speck extends ($.$mol_view) {
+		value(){
+			return null;
+		}
+		theme(){
+			return "$mol_theme_accent";
+		}
+		sub(){
+			return [(this.value())];
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_layer = $mol_style_prop('mol_layer', [
+        'hover',
+        'focus',
+        'speck',
+        'float',
+        'popup',
+    ]);
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/layer/layer.css", ":root {\n\t--mol_layer_hover: 1;\n\t--mol_layer_focus: 2;\n\t--mol_layer_speck: 3;\n\t--mol_layer_float: 4;\n\t--mol_layer_popup: 5;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/speck/speck.view.css", "[mol_speck] {\n\tfont-size: .75rem;\n\tborder-radius: 1rem;\n\tmargin: -0.5rem -0.2rem;\n\talign-self: flex-start;\n\tmin-height: 1em;\n\tmin-width: .75rem;\n\tvertical-align: sub;\n\tpadding: 0 .2rem;\n\tposition: absolute;\n\tz-index: var(--mol_layer_speck);\n\ttext-align: center;\n\tline-height: .9;\n\tdisplay: inline-block;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\tuser-select: none;\n\tbox-shadow: 0 0 3px rgba(0,0,0,.5);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_button) = class $mol_button extends ($.$mol_view) {
+		event_activate(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		activate(next){
+			return (this.event_activate(next));
+		}
+		clicks(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event_key_press(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		key_press(next){
+			return (this.event_key_press(next));
+		}
+		disabled(){
+			return false;
+		}
+		tab_index(){
+			return 0;
+		}
+		hint(){
+			return "";
+		}
+		hint_safe(){
+			return (this.hint());
+		}
+		error(){
+			return "";
+		}
+		enabled(){
+			return true;
+		}
+		click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		status(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		event(){
+			return {
+				...(super.event()), 
+				"click": (next) => (this.activate(next)), 
+				"dblclick": (next) => (this.clicks(next)), 
+				"keydown": (next) => (this.key_press(next))
+			};
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"disabled": (this.disabled()), 
+				"role": "button", 
+				"tabindex": (this.tab_index()), 
+				"title": (this.hint_safe())
+			};
+		}
+		sub(){
+			return [(this.title())];
+		}
+		Speck(){
+			const obj = new this.$.$mol_speck();
+			(obj.value) = () => ((this.error()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_button.prototype), "event_activate"));
+	($mol_mem(($.$mol_button.prototype), "clicks"));
+	($mol_mem(($.$mol_button.prototype), "event_key_press"));
+	($mol_mem(($.$mol_button.prototype), "click"));
+	($mol_mem(($.$mol_button.prototype), "event_click"));
+	($mol_mem(($.$mol_button.prototype), "status"));
+	($mol_mem(($.$mol_button.prototype), "Speck"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button extends $.$mol_button {
+            disabled() {
+                return !this.enabled();
+            }
+            event_activate(next) {
+                if (!next)
+                    return;
+                if (!this.enabled())
+                    return;
+                try {
+                    this.event_click(next);
+                    this.click(next);
+                    this.status([null]);
+                }
+                catch (error) {
+                    Promise.resolve().then(() => this.status([error]));
+                    $mol_fail_hidden(error);
+                }
+            }
+            event_key_press(event) {
+                if (event.keyCode === $mol_keyboard_code.enter) {
+                    return this.activate(event);
+                }
+            }
+            tab_index() {
+                return this.enabled() ? super.tab_index() : -1;
+            }
+            error() {
+                const error = this.status()?.[0];
+                if (!error)
+                    return '';
+                if ($mol_promise_like(error)) {
+                    return $mol_fail_hidden(error);
+                }
+                return this.$.$mol_error_message(error);
+            }
+            hint_safe() {
+                try {
+                    return this.hint();
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return '';
+                }
+            }
+            sub_visible() {
+                return [
+                    ...this.error() ? [this.Speck()] : [],
+                    ...this.sub(),
+                ];
+            }
+        }
+        $$.$mol_button = $mol_button;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/button.view.css", "[mol_button] {\n\tborder: none;\n\tfont: inherit;\n\tdisplay: inline-flex;\n\tflex-shrink: 0;\n\ttext-decoration: inherit;\n\tcursor: inherit;\n\tposition: relative;\n\tbox-sizing: border-box;\n\tword-break: normal;\n\tcursor: default;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tborder-radius: var(--mol_gap_round);\n\tbackground: transparent;\n\tcolor: inherit;\n}\n\n[mol_button]:where(:not(:disabled)):hover {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_button]:focus {\n\toutline: none;\n\tz-index: var(--mol_layer_focus);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_button_typed) = class $mol_button_typed extends ($.$mol_button) {
+		minimal_height(){
+			return 40;
+		}
+		minimal_width(){
+			return 40;
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n\tmin-width: 2.5rem;\n\tmin-height: 2.5rem;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus-visible {\n\tbox-shadow: inset 0 0 0 100vmax var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_button_minor) = class $mol_button_minor extends ($.$mol_button_typed) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/minor/minor.view.css", "[mol_button_minor] {\n\tcolor: var(--mol_theme_control);\n}\n\n[mol_button_minor][disabled] {\n\tcolor: var(--mol_theme_shade);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
 	($.$mol_string) = class $mol_string extends ($.$mol_view) {
 		selection_watcher(){
 			return null;
@@ -3764,29 +4193,6 @@ var $;
 
 ;
 "use strict";
-var $;
-(function ($) {
-    $.$mol_layer = $mol_style_prop('mol_layer', [
-        'hover',
-        'focus',
-        'speck',
-        'float',
-        'popup',
-    ]);
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/layer/layer.css", ":root {\n\t--mol_layer_hover: 1;\n\t--mol_layer_focus: 2;\n\t--mol_layer_speck: 3;\n\t--mol_layer_float: 4;\n\t--mol_layer_popup: 5;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
 
 ;
 "use strict";
@@ -3892,6 +4298,643 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/string/string.view.css", "[mol_string] {\n\tbox-sizing: border-box;\n\toutline-offset: 0;\n\tborder: none;\n\tborder-radius: var(--mol_gap_round);\n\twhite-space: pre-line;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\tpadding: var(--mol_gap_text);\n\ttext-align: left;\n\tposition: relative;\n\tfont: inherit;\n\tflex: 1 1 auto;\n\tbackground: transparent;\n\tmin-width: 0;\n\tcolor: inherit;\n\tbackground: var(--mol_theme_field);\n}\n\n[mol_string]:disabled:not(:placeholder-shown) {\n\tbackground-color: transparent;\n\tcolor: var(--mol_theme_text);\n}\n\n[mol_string]:where(:not(:disabled)) {\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n}\n\n[mol_string]:where(:not(:disabled)):hover {\n\tbox-shadow: inset 0 0 0 2px var(--mol_theme_line);\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_string]:focus {\n\toutline: none;\n\tz-index: var(--mol_layer_focus);\n\tcolor: var(--mol_theme_text);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_focus);\n}\n\n[mol_string]::placeholder {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_string]::-ms-clear {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_chevron_right) = class $mol_icon_chevron_right extends ($.$mol_icon) {
+		path(){
+			return "M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_number) = class $mol_number extends ($.$mol_view) {
+		precision(){
+			return 1;
+		}
+		event_dec(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event_inc(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event_dec_boost(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event_inc_boost(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Hotkey(){
+			const obj = new this.$.$mol_hotkey();
+			(obj.key) = () => ({
+				"down": (next) => (this.event_dec(next)), 
+				"up": (next) => (this.event_inc(next)), 
+				"pageDown": (next) => (this.event_dec_boost(next)), 
+				"pageUp": (next) => (this.event_inc_boost(next))
+			});
+			return obj;
+		}
+		dec_enabled(){
+			return (this.enabled());
+		}
+		dec_icon(){
+			const obj = new this.$.$mol_icon_chevron_left();
+			return obj;
+		}
+		Dec(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_dec(next)));
+			(obj.enabled) = () => ((this.dec_enabled()));
+			(obj.sub) = () => ([(this.dec_icon())]);
+			return obj;
+		}
+		type(){
+			return "text";
+		}
+		value_string(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		hint(){
+			return " ";
+		}
+		string_enabled(){
+			return (this.enabled());
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		String(){
+			const obj = new this.$.$mol_string();
+			(obj.type) = () => ((this.type()));
+			(obj.keyboard) = () => ("decimal");
+			(obj.value) = (next) => ((this.value_string(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.string_enabled()));
+			(obj.submit) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		inc_enabled(){
+			return (this.enabled());
+		}
+		inc_icon(){
+			const obj = new this.$.$mol_icon_chevron_right();
+			return obj;
+		}
+		Inc(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_inc(next)));
+			(obj.enabled) = () => ((this.inc_enabled()));
+			(obj.sub) = () => ([(this.inc_icon())]);
+			return obj;
+		}
+		precision_view(){
+			return (this.precision());
+		}
+		precision_change(){
+			return (this.precision());
+		}
+		boost(){
+			return 10;
+		}
+		value_min(){
+			return -Infinity;
+		}
+		value_max(){
+			return +Infinity;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return +NaN;
+		}
+		enabled(){
+			return true;
+		}
+		plugins(){
+			return [(this.Hotkey())];
+		}
+		sub(){
+			return [
+				(this.Dec()), 
+				(this.String()), 
+				(this.Inc())
+			];
+		}
+	};
+	($mol_mem(($.$mol_number.prototype), "event_dec"));
+	($mol_mem(($.$mol_number.prototype), "event_inc"));
+	($mol_mem(($.$mol_number.prototype), "event_dec_boost"));
+	($mol_mem(($.$mol_number.prototype), "event_inc_boost"));
+	($mol_mem(($.$mol_number.prototype), "Hotkey"));
+	($mol_mem(($.$mol_number.prototype), "dec_icon"));
+	($mol_mem(($.$mol_number.prototype), "Dec"));
+	($mol_mem(($.$mol_number.prototype), "value_string"));
+	($mol_mem(($.$mol_number.prototype), "submit"));
+	($mol_mem(($.$mol_number.prototype), "String"));
+	($mol_mem(($.$mol_number.prototype), "inc_icon"));
+	($mol_mem(($.$mol_number.prototype), "Inc"));
+	($mol_mem(($.$mol_number.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/number/number.css", "[mol_number] {\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tposition: relative;\n\talign-items: stretch;\n\tmax-width: 100%;\n}\n\n[mol_number_string] {\n\tappearance: textfield;\n\tflex: 1 1 7rem;\n\twidth: 7rem;\n}\n\n[mol_number_string]::-webkit-inner-spin-button {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_number extends $.$mol_number {
+            value_limited(val) {
+                if (Number.isNaN(val))
+                    return this.value(val);
+                if (val === undefined)
+                    return this.value();
+                const min = this.value_min();
+                const max = this.value_max();
+                if (val < min)
+                    return this.value(min);
+                if (val > max)
+                    return this.value(max);
+                return this.value(val);
+            }
+            event_dec(next) {
+                this.value_limited((this.value_limited() || 0) - this.precision_change());
+                next?.preventDefault();
+            }
+            event_inc(next) {
+                this.value_limited((this.value_limited() || 0) + this.precision_change());
+                next?.preventDefault();
+            }
+            event_dec_boost(next) {
+                this.value_limited((this.value_limited() || 0) - this.precision_change() * this.boost());
+                next?.preventDefault();
+            }
+            event_inc_boost(next) {
+                this.value_limited((this.value_limited() || 0) + this.precision_change() * this.boost());
+                next?.preventDefault();
+            }
+            round(val) {
+                if (Number.isNaN(val))
+                    return '';
+                if (val === 0)
+                    return '0';
+                if (!val)
+                    return '';
+                const precision_view = this.precision_view();
+                if (!precision_view)
+                    return val.toFixed();
+                if (precision_view >= 1) {
+                    return (val / precision_view).toFixed();
+                }
+                else {
+                    const fixed_number = Math.log10(1 / precision_view);
+                    return val.toFixed(Math.ceil(fixed_number));
+                }
+            }
+            value_string(next) {
+                const current = this.round(this.value_limited());
+                if (next === undefined)
+                    return current;
+                const precision = this.precision_view();
+                if (precision - Math.floor(precision) === 0)
+                    next = next.replace(/[.,]/g, '');
+                next = (this.value_min() < 0 && next.startsWith('-') ? '-' : '')
+                    + next.replace(/,/g, '.').replace(/[^\d\.]/g, '').replace(/^0{2,}/, '0');
+                let dot_pos = next.indexOf('.');
+                if (dot_pos !== -1) {
+                    const prev = $mol_wire_probe(() => this.value_string()) ?? '';
+                    const dot_pos_prev = prev.indexOf('.');
+                    if (dot_pos_prev === dot_pos)
+                        dot_pos = next.lastIndexOf('.');
+                    const frac = next.slice(dot_pos + 1).replace(/\./g, '');
+                    next = (next.slice(0, dot_pos) || '0').replace(/\./g, '') + '.' + frac;
+                }
+                if (Number.isNaN(Number(next)))
+                    return next;
+                if (next.endsWith('.'))
+                    return next;
+                if (next.endsWith('-'))
+                    return next;
+                this.value_limited(Number(next || Number.NaN));
+                return next;
+            }
+            dec_enabled() {
+                return this.enabled() && (!((this.value() || 0) <= this.value_min()));
+            }
+            inc_enabled() {
+                return this.enabled() && (!((this.value() || 0) >= this.value_max()));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "value_string", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "dec_enabled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "inc_enabled", null);
+        $$.$mol_number = $mol_number;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_list) = class $mol_list extends ($.$mol_view) {
+		gap_before(){
+			return 0;
+		}
+		Gap_before(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_before())});
+			return obj;
+		}
+		Empty(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		gap_after(){
+			return 0;
+		}
+		Gap_after(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_after())});
+			return obj;
+		}
+		rows(){
+			return [
+				(this.Gap_before()), 
+				(this.Empty()), 
+				(this.Gap_after())
+			];
+		}
+		render_visible_only(){
+			return true;
+		}
+		render_over(){
+			return 0.1;
+		}
+		sub(){
+			return (this.rows());
+		}
+		item_height_min(id){
+			return 1;
+		}
+		item_width_min(id){
+			return 1;
+		}
+		view_window_shift(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		view_window(){
+			return [0, 0];
+		}
+	};
+	($mol_mem(($.$mol_list.prototype), "Gap_before"));
+	($mol_mem(($.$mol_list.prototype), "Empty"));
+	($mol_mem(($.$mol_list.prototype), "Gap_after"));
+	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    let cache = null;
+    function $mol_support_css_overflow_anchor() {
+        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
+    }
+    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_print extends $mol_object {
+        static before() {
+            return new $mol_dom_listener(this.$.$mol_dom_context, 'beforeprint', () => {
+                this.active(true);
+            });
+        }
+        static after() {
+            return new $mol_dom_listener(this.$.$mol_dom_context, 'afterprint', () => {
+                this.active(false);
+            });
+        }
+        static active(next) {
+            this.before();
+            this.after();
+            return next || false;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_print, "before", null);
+    __decorate([
+        $mol_mem
+    ], $mol_print, "after", null);
+    __decorate([
+        $mol_mem
+    ], $mol_print, "active", null);
+    $.$mol_print = $mol_print;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_list extends $.$mol_list {
+            sub() {
+                const rows = this.rows();
+                const next = (rows.length === 0) ? [this.Empty()] : rows;
+                const prev = $mol_mem_cached(() => this.sub());
+                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
+                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
+                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
+                    if (index >= 0)
+                        this.view_window_shift(index - start);
+                }
+                return next;
+            }
+            render_visible_only() {
+                return this.$.$mol_support_css_overflow_anchor();
+            }
+            view_window(next) {
+                const kids = this.sub();
+                if (kids.length < 3)
+                    return [0, kids.length];
+                if (this.$.$mol_print.active())
+                    return [0, kids.length];
+                const rect = this.view_rect();
+                if (next)
+                    return next;
+                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
+                const shift = this.view_window_shift();
+                min += shift;
+                max += shift;
+                let max2 = max = Math.min(max, kids.length);
+                let min2 = min = Math.max(0, Math.min(min, max - 1));
+                const anchoring = this.render_visible_only();
+                const window_height = this.$.$mol_window.size().height + 40;
+                const over = Math.ceil(window_height * this.render_over());
+                const limit_top = -over;
+                const limit_bottom = window_height + over;
+                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
+                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
+                let top = Math.ceil(rect?.top ?? 0) + gap_before;
+                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
+                if (top <= limit_top && bottom >= limit_bottom) {
+                    return [min2, max2];
+                }
+                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
+                    min = 0;
+                    top = Math.ceil(rect?.top ?? 0);
+                    while (min < (kids.length - 1)) {
+                        const height = this.item_height_min(min);
+                        if (top + height >= limit_top)
+                            break;
+                        top += height;
+                        ++min;
+                    }
+                    min2 = min;
+                    max2 = max = min;
+                    bottom = top;
+                }
+                let top2 = top;
+                let bottom2 = bottom;
+                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
+                    min2 = max;
+                    top2 = bottom;
+                }
+                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
+                    max2 = min;
+                    bottom2 = top;
+                }
+                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
+                    --min2;
+                    top2 -= this.item_height_min(min2);
+                }
+                while (bottom2 < limit_bottom && max2 < kids.length) {
+                    bottom2 += this.item_height_min(max2);
+                    ++max2;
+                }
+                return [min2, max2];
+            }
+            item_height_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_height() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            row_width_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_width() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            gap_before() {
+                let gap = 0;
+                const skipped = this.view_window()[0];
+                for (let i = 0; i < skipped; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            gap_after() {
+                let gap = 0;
+                const from = this.view_window()[1];
+                const to = this.sub().length;
+                for (let i = from; i < to; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            sub_visible() {
+                return [
+                    ...this.gap_before() ? [this.Gap_before()] : [],
+                    ...this.sub().slice(...this.view_window()),
+                    ...this.gap_after() ? [this.Gap_after()] : [],
+                ];
+            }
+            minimal_height() {
+                let height = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    height += this.item_height_min(i);
+                return height;
+            }
+            minimal_width() {
+                let width = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    width = Math.max(width, this.item_width_min(i));
+                return width;
+            }
+            force_render(path) {
+                const kids = this.rows();
+                const index = kids.findIndex(item => path.has(item));
+                if (index >= 0) {
+                    const win = this.view_window();
+                    if (index < win[0] || index >= win[1]) {
+                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
+                    }
+                    kids[index].force_render(path);
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "view_window", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_before", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_after", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub_visible", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_height", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_width", null);
+        $$.$mol_list = $mol_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: 1.5rem;\n\t/* will-change: contents; */\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
+		label(){
+			return [(this.title())];
+		}
+		Label(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (32);
+			(obj.sub) = () => ((this.label()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (24);
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		rows(){
+			return [(this.Label()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_labeler.prototype), "Label"));
+	($mol_mem(($.$mol_labeler.prototype), "Content"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n\tmin-height: 2.5rem;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_form_field) = class $mol_form_field extends ($.$mol_labeler) {
+		name(){
+			return "";
+		}
+		bid(){
+			return "";
+		}
+		Bid(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.bid())]);
+			return obj;
+		}
+		control(){
+			return null;
+		}
+		bids(){
+			return [];
+		}
+		label(){
+			return [(this.name()), (this.Bid())];
+		}
+		content(){
+			return [(this.control())];
+		}
+	};
+	($mol_mem(($.$mol_form_field.prototype), "Bid"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_form_field extends $.$mol_form_field {
+            bid() {
+                return this.bids().filter(Boolean)[0] ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_form_field.prototype, "bid", null);
+        $$.$mol_form_field = $mol_form_field;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/form/field/field.view.css", "[mol_form_field] {\n\talign-items: stretch;\n}\n\n[mol_form_field_bid] {\n\tcolor: var(--mol_theme_focus);\n\tdisplay: inline-block;\n\ttext-shadow: 0 0;\n}\n\n[mol_form_field_content] {\n\tborder-radius: var(--mol_gap_round);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -4861,617 +5904,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_list) = class $mol_list extends ($.$mol_view) {
-		gap_before(){
-			return 0;
-		}
-		Gap_before(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_before())});
-			return obj;
-		}
-		Empty(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		gap_after(){
-			return 0;
-		}
-		Gap_after(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_after())});
-			return obj;
-		}
-		rows(){
-			return [
-				(this.Gap_before()), 
-				(this.Empty()), 
-				(this.Gap_after())
-			];
-		}
-		render_visible_only(){
-			return true;
-		}
-		render_over(){
-			return 0.1;
-		}
-		sub(){
-			return (this.rows());
-		}
-		item_height_min(id){
-			return 1;
-		}
-		item_width_min(id){
-			return 1;
-		}
-		view_window_shift(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		view_window(){
-			return [0, 0];
-		}
-	};
-	($mol_mem(($.$mol_list.prototype), "Gap_before"));
-	($mol_mem(($.$mol_list.prototype), "Empty"));
-	($mol_mem(($.$mol_list.prototype), "Gap_after"));
-	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    let cache = null;
-    function $mol_support_css_overflow_anchor() {
-        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
-    }
-    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_print extends $mol_object {
-        static before() {
-            return new $mol_dom_listener(this.$.$mol_dom_context, 'beforeprint', () => {
-                this.active(true);
-            });
-        }
-        static after() {
-            return new $mol_dom_listener(this.$.$mol_dom_context, 'afterprint', () => {
-                this.active(false);
-            });
-        }
-        static active(next) {
-            this.before();
-            this.after();
-            return next || false;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_print, "before", null);
-    __decorate([
-        $mol_mem
-    ], $mol_print, "after", null);
-    __decorate([
-        $mol_mem
-    ], $mol_print, "active", null);
-    $.$mol_print = $mol_print;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_list extends $.$mol_list {
-            sub() {
-                const rows = this.rows();
-                const next = (rows.length === 0) ? [this.Empty()] : rows;
-                const prev = $mol_mem_cached(() => this.sub());
-                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
-                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
-                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
-                    if (index >= 0)
-                        this.view_window_shift(index - start);
-                }
-                return next;
-            }
-            render_visible_only() {
-                return this.$.$mol_support_css_overflow_anchor();
-            }
-            view_window(next) {
-                const kids = this.sub();
-                if (kids.length < 3)
-                    return [0, kids.length];
-                if (this.$.$mol_print.active())
-                    return [0, kids.length];
-                const rect = this.view_rect();
-                if (next)
-                    return next;
-                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
-                const shift = this.view_window_shift();
-                min += shift;
-                max += shift;
-                let max2 = max = Math.min(max, kids.length);
-                let min2 = min = Math.max(0, Math.min(min, max - 1));
-                const anchoring = this.render_visible_only();
-                const window_height = this.$.$mol_window.size().height + 40;
-                const over = Math.ceil(window_height * this.render_over());
-                const limit_top = -over;
-                const limit_bottom = window_height + over;
-                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
-                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
-                let top = Math.ceil(rect?.top ?? 0) + gap_before;
-                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
-                if (top <= limit_top && bottom >= limit_bottom) {
-                    return [min2, max2];
-                }
-                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
-                    min = 0;
-                    top = Math.ceil(rect?.top ?? 0);
-                    while (min < (kids.length - 1)) {
-                        const height = this.item_height_min(min);
-                        if (top + height >= limit_top)
-                            break;
-                        top += height;
-                        ++min;
-                    }
-                    min2 = min;
-                    max2 = max = min;
-                    bottom = top;
-                }
-                let top2 = top;
-                let bottom2 = bottom;
-                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
-                    min2 = max;
-                    top2 = bottom;
-                }
-                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
-                    max2 = min;
-                    bottom2 = top;
-                }
-                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
-                    --min2;
-                    top2 -= this.item_height_min(min2);
-                }
-                while (bottom2 < limit_bottom && max2 < kids.length) {
-                    bottom2 += this.item_height_min(max2);
-                    ++max2;
-                }
-                return [min2, max2];
-            }
-            item_height_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_height() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            row_width_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_width() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            gap_before() {
-                let gap = 0;
-                const skipped = this.view_window()[0];
-                for (let i = 0; i < skipped; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            gap_after() {
-                let gap = 0;
-                const from = this.view_window()[1];
-                const to = this.sub().length;
-                for (let i = from; i < to; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            sub_visible() {
-                return [
-                    ...this.gap_before() ? [this.Gap_before()] : [],
-                    ...this.sub().slice(...this.view_window()),
-                    ...this.gap_after() ? [this.Gap_after()] : [],
-                ];
-            }
-            minimal_height() {
-                let height = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    height += this.item_height_min(i);
-                return height;
-            }
-            minimal_width() {
-                let width = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    width = Math.max(width, this.item_width_min(i));
-                return width;
-            }
-            force_render(path) {
-                const kids = this.rows();
-                const index = kids.findIndex(item => path.has(item));
-                if (index >= 0) {
-                    const win = this.view_window();
-                    if (index < win[0] || index >= win[1]) {
-                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
-                    }
-                    kids[index].force_render(path);
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "view_window", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_before", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_after", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub_visible", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_height", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_width", null);
-        $$.$mol_list = $mol_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: 1.5rem;\n\t/* will-change: contents; */\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
-		label(){
-			return [(this.title())];
-		}
-		Label(){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (32);
-			(obj.sub) = () => ((this.label()));
-			return obj;
-		}
-		content(){
-			return [];
-		}
-		Content(){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (24);
-			(obj.sub) = () => ((this.content()));
-			return obj;
-		}
-		rows(){
-			return [(this.Label()), (this.Content())];
-		}
-	};
-	($mol_mem(($.$mol_labeler.prototype), "Label"));
-	($mol_mem(($.$mol_labeler.prototype), "Content"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n\tmin-height: 2.5rem;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$mol_form_field) = class $mol_form_field extends ($.$mol_labeler) {
-		name(){
-			return "";
-		}
-		bid(){
-			return "";
-		}
-		Bid(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.bid())]);
-			return obj;
-		}
-		control(){
-			return null;
-		}
-		bids(){
-			return [];
-		}
-		label(){
-			return [(this.name()), (this.Bid())];
-		}
-		content(){
-			return [(this.control())];
-		}
-	};
-	($mol_mem(($.$mol_form_field.prototype), "Bid"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_form_field extends $.$mol_form_field {
-            bid() {
-                return this.bids().filter(Boolean)[0] ?? '';
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_form_field.prototype, "bid", null);
-        $$.$mol_form_field = $mol_form_field;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/form/field/field.view.css", "[mol_form_field] {\n\talign-items: stretch;\n}\n\n[mol_form_field_bid] {\n\tcolor: var(--mol_theme_focus);\n\tdisplay: inline-block;\n\ttext-shadow: 0 0;\n}\n\n[mol_form_field_content] {\n\tborder-radius: var(--mol_gap_round);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_speck) = class $mol_speck extends ($.$mol_view) {
-		value(){
-			return null;
-		}
-		theme(){
-			return "$mol_theme_accent";
-		}
-		sub(){
-			return [(this.value())];
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/speck/speck.view.css", "[mol_speck] {\n\tfont-size: .75rem;\n\tborder-radius: 1rem;\n\tmargin: -0.5rem -0.2rem;\n\talign-self: flex-start;\n\tmin-height: 1em;\n\tmin-width: .75rem;\n\tvertical-align: sub;\n\tpadding: 0 .2rem;\n\tposition: absolute;\n\tz-index: var(--mol_layer_speck);\n\ttext-align: center;\n\tline-height: .9;\n\tdisplay: inline-block;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\tuser-select: none;\n\tbox-shadow: 0 0 3px rgba(0,0,0,.5);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$mol_button) = class $mol_button extends ($.$mol_view) {
-		event_activate(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		activate(next){
-			return (this.event_activate(next));
-		}
-		clicks(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		event_key_press(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		key_press(next){
-			return (this.event_key_press(next));
-		}
-		disabled(){
-			return false;
-		}
-		tab_index(){
-			return 0;
-		}
-		hint(){
-			return "";
-		}
-		hint_safe(){
-			return (this.hint());
-		}
-		error(){
-			return "";
-		}
-		enabled(){
-			return true;
-		}
-		click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		event_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		status(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		event(){
-			return {
-				...(super.event()), 
-				"click": (next) => (this.activate(next)), 
-				"dblclick": (next) => (this.clicks(next)), 
-				"keydown": (next) => (this.key_press(next))
-			};
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"disabled": (this.disabled()), 
-				"role": "button", 
-				"tabindex": (this.tab_index()), 
-				"title": (this.hint_safe())
-			};
-		}
-		sub(){
-			return [(this.title())];
-		}
-		Speck(){
-			const obj = new this.$.$mol_speck();
-			(obj.value) = () => ((this.error()));
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_button.prototype), "event_activate"));
-	($mol_mem(($.$mol_button.prototype), "clicks"));
-	($mol_mem(($.$mol_button.prototype), "event_key_press"));
-	($mol_mem(($.$mol_button.prototype), "click"));
-	($mol_mem(($.$mol_button.prototype), "event_click"));
-	($mol_mem(($.$mol_button.prototype), "status"));
-	($mol_mem(($.$mol_button.prototype), "Speck"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_button extends $.$mol_button {
-            disabled() {
-                return !this.enabled();
-            }
-            event_activate(next) {
-                if (!next)
-                    return;
-                if (!this.enabled())
-                    return;
-                try {
-                    this.event_click(next);
-                    this.click(next);
-                    this.status([null]);
-                }
-                catch (error) {
-                    Promise.resolve().then(() => this.status([error]));
-                    $mol_fail_hidden(error);
-                }
-            }
-            event_key_press(event) {
-                if (event.keyCode === $mol_keyboard_code.enter) {
-                    return this.activate(event);
-                }
-            }
-            tab_index() {
-                return this.enabled() ? super.tab_index() : -1;
-            }
-            error() {
-                const error = this.status()?.[0];
-                if (!error)
-                    return '';
-                if ($mol_promise_like(error)) {
-                    return $mol_fail_hidden(error);
-                }
-                return this.$.$mol_error_message(error);
-            }
-            hint_safe() {
-                try {
-                    return this.hint();
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return '';
-                }
-            }
-            sub_visible() {
-                return [
-                    ...this.error() ? [this.Speck()] : [],
-                    ...this.sub(),
-                ];
-            }
-        }
-        $$.$mol_button = $mol_button;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/button.view.css", "[mol_button] {\n\tborder: none;\n\tfont: inherit;\n\tdisplay: inline-flex;\n\tflex-shrink: 0;\n\ttext-decoration: inherit;\n\tcursor: inherit;\n\tposition: relative;\n\tbox-sizing: border-box;\n\tword-break: normal;\n\tcursor: default;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tborder-radius: var(--mol_gap_round);\n\tbackground: transparent;\n\tcolor: inherit;\n}\n\n[mol_button]:where(:not(:disabled)):hover {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_button]:focus {\n\toutline: none;\n\tz-index: var(--mol_layer_focus);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_button_typed) = class $mol_button_typed extends ($.$mol_button) {
-		minimal_height(){
-			return 40;
-		}
-		minimal_width(){
-			return 40;
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n\tmin-width: 2.5rem;\n\tmin-height: 2.5rem;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus-visible {\n\tbox-shadow: inset 0 0 0 100vmax var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$mol_button_minor) = class $mol_button_minor extends ($.$mol_button_typed) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/minor/minor.view.css", "[mol_button_minor] {\n\tcolor: var(--mol_theme_control);\n}\n\n[mol_button_minor][disabled] {\n\tcolor: var(--mol_theme_shade);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
 	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
 		theme(){
 			return "$mol_theme_base";
@@ -5488,6 +5920,596 @@ var $;
 
 ;
 "use strict";
+
+;
+	($.$mol_status) = class $mol_status extends ($.$mol_view) {
+		message(){
+			return "";
+		}
+		status(){
+			return (this.title());
+		}
+		minimal_height(){
+			return 24;
+		}
+		minimal_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.message())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_status extends $.$mol_status {
+            message() {
+                try {
+                    return this.status() ?? null;
+                }
+                catch (error) {
+                    if (error instanceof Promise)
+                        $mol_fail_hidden(error);
+                    $mol_fail_log(error);
+                    return error.message;
+                }
+            }
+        }
+        $$.$mol_status = $mol_status;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n\tflex-shrink: 1;\n\tword-wrap: break-word;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_form) = class $mol_form extends ($.$mol_list) {
+		keydown(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		form_invalid(){
+			return (this.$.$mol_locale.text("$mol_form_form_invalid"));
+		}
+		form_fields(){
+			return [];
+		}
+		body(){
+			return (this.form_fields());
+		}
+		Body(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.body()));
+			return obj;
+		}
+		submit_title(){
+			return (this.$.$mol_locale.text("$mol_form_submit_title"));
+		}
+		submit_hint(){
+			return "";
+		}
+		submit_activate(next){
+			return (this.Submit().activate(next));
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Submit(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.submit_title()));
+			(obj.hint) = () => ((this.submit_hint()));
+			(obj.click) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		result(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Result(){
+			const obj = new this.$.$mol_status();
+			(obj.message) = () => ((this.result()));
+			return obj;
+		}
+		buttons(){
+			return [(this.Submit()), (this.Result())];
+		}
+		foot(){
+			return (this.buttons());
+		}
+		Foot(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.foot()));
+			return obj;
+		}
+		submit_allowed(){
+			return true;
+		}
+		submit_blocked(){
+			return false;
+		}
+		event(){
+			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
+		}
+		save(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		message_done(){
+			return (this.$.$mol_locale.text("$mol_form_message_done"));
+		}
+		errors(){
+			return {"Form invalid": (this.form_invalid())};
+		}
+		rows(){
+			return [(this.Body()), (this.Foot())];
+		}
+	};
+	($mol_mem(($.$mol_form.prototype), "keydown"));
+	($mol_mem(($.$mol_form.prototype), "Body"));
+	($mol_mem(($.$mol_form.prototype), "submit"));
+	($mol_mem(($.$mol_form.prototype), "Submit"));
+	($mol_mem(($.$mol_form.prototype), "result"));
+	($mol_mem(($.$mol_form.prototype), "Result"));
+	($mol_mem(($.$mol_form.prototype), "Foot"));
+	($mol_mem(($.$mol_form.prototype), "save"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/form/form.view.css", "[mol_form] {\r\n\tgap: var(--mol_gap_block);\r\n}\r\n\r\n[mol_form_body] {\r\n\tgap: var(--mol_gap_block);\r\n}");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_form extends $.$mol_form {
+            form_fields() {
+                return [...this.view_find(view => view instanceof $mol_form_field)]
+                    .map(path => path[path.length - 1]);
+            }
+            submit_allowed() {
+                return this.form_fields().every(field => !field.bid());
+            }
+            submit_blocked() {
+                return !this.submit_allowed();
+            }
+            keydown(next) {
+                if (next.ctrlKey && next.keyCode === $mol_keyboard_code.enter && !this.submit_blocked())
+                    this.submit(next);
+            }
+            result(next) {
+                if (next instanceof Error)
+                    next = this.errors()[next.message] || next.message || this.form_invalid();
+                return next ?? '';
+            }
+            buttons() {
+                return [
+                    this.Submit(),
+                    ...this.result() ? [this.Result()] : [],
+                ];
+            }
+            submit(next) {
+                try {
+                    if (!this.submit_allowed()) {
+                        throw new Error('Form invalid');
+                    }
+                    this.save(next);
+                }
+                catch (e) {
+                    if ($mol_promise_like(e))
+                        $mol_fail_hidden(e);
+                    $mol_fail_log(e);
+                    this.result(e);
+                    return false;
+                }
+                this.result(this.message_done());
+                return true;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_form.prototype, "form_fields", null);
+        __decorate([
+            $mol_mem
+        ], $mol_form.prototype, "submit_allowed", null);
+        __decorate([
+            $mol_mem
+        ], $mol_form.prototype, "result", null);
+        __decorate([
+            $mol_mem
+        ], $mol_form.prototype, "buttons", null);
+        __decorate([
+            $mol_action
+        ], $mol_form.prototype, "submit", null);
+        $$.$mol_form = $mol_form;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$my_dnd_dice) = class $my_dnd_dice extends ($.$mol_view) {
+		count(next){
+			if(next !== undefined) return next;
+			return 1;
+		}
+		Count_input(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.count(next)));
+			return obj;
+		}
+		Count_field(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_dice_Count_field_name")));
+			(obj.content) = () => ([(this.Count_input())]);
+			return obj;
+		}
+		modifier(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Mod_input(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.modifier(next)));
+			return obj;
+		}
+		Mod_field(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_dice_Mod_field_name")));
+			(obj.content) = () => ([(this.Mod_input())]);
+			return obj;
+		}
+		roll(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Dice_type_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.dice_type())]);
+			return obj;
+		}
+		Result_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.result_title())]);
+			return obj;
+		}
+		Roll(){
+			const obj = new this.$.$mol_button_major();
+			(obj.enabled) = () => (true);
+			(obj.click) = (next) => ((this.roll(next)));
+			(obj.sub) = () => ([(this.Dice_type_label()), (this.Result_label())]);
+			return obj;
+		}
+		sides(){
+			return 20;
+		}
+		sub(){
+			return [
+				(this.Count_field()), 
+				(this.Mod_field()), 
+				(this.Roll())
+			];
+		}
+	};
+	($mol_mem(($.$my_dnd_dice.prototype), "count"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Count_input"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Count_field"));
+	($mol_mem(($.$my_dnd_dice.prototype), "modifier"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Mod_input"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Mod_field"));
+	($mol_mem(($.$my_dnd_dice.prototype), "roll"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Dice_type_label"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Result_label"));
+	($mol_mem(($.$my_dnd_dice.prototype), "Roll"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+
+;
+"use strict";
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_style_sheet(Component, config0) {
+        let rules = [];
+        const block = $mol_dom_qname($mol_ambient({}).$mol_func_name(Component));
+        const kebab = (name) => name.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
+        const make_class = (prefix, path, config) => {
+            const props = [];
+            const selector = (prefix, path) => {
+                if (path.length === 0)
+                    return prefix || `[${block}]`;
+                let res = `[${block}_${path.join('_')}]`;
+                if (prefix)
+                    res = prefix + ' :where(' + res + ')';
+                return res;
+            };
+            for (const key of Object.keys(config).reverse()) {
+                if (/^(--)?[a-z]/.test(key)) {
+                    const addProp = (keys, val) => {
+                        if (Array.isArray(val)) {
+                            if (val[0] && [Array, Object].includes(val[0].constructor)) {
+                                val = val.map(v => {
+                                    return Object.entries(v).map(([n, a]) => {
+                                        if (a === true)
+                                            return kebab(n);
+                                        if (a === false)
+                                            return null;
+                                        return String(a);
+                                    }).filter(Boolean).join(' ');
+                                }).join(',');
+                            }
+                            else {
+                                val = val.join(' ');
+                            }
+                            props.push(`\t${keys.join('-')}: ${val};\n`);
+                        }
+                        else if (val.constructor === Object) {
+                            for (let suffix of Object.keys(val).reverse()) {
+                                addProp([...keys, kebab(suffix)], val[suffix]);
+                            }
+                        }
+                        else {
+                            props.push(`\t${keys.join('-')}: ${val};\n`);
+                        }
+                    };
+                    addProp([kebab(key)], config[key]);
+                }
+                else if (/^[A-Z]/.test(key)) {
+                    make_class(prefix, [...path, key.toLowerCase()], config[key]);
+                }
+                else if (key[0] === '$') {
+                    make_class(selector(prefix, path) + ' :where([' + $mol_dom_qname(key) + '])', [], config[key]);
+                }
+                else if (key === '>') {
+                    const types = config[key];
+                    for (let type of Object.keys(types).reverse()) {
+                        make_class(selector(prefix, path) + ' > :where([' + $mol_dom_qname(type) + '])', [], types[type]);
+                    }
+                }
+                else if (key === '@') {
+                    const attrs = config[key];
+                    for (let name of Object.keys(attrs).reverse()) {
+                        for (let val in attrs[name]) {
+                            make_class(selector(prefix, path) + ':where([' + name + '=' + JSON.stringify(val) + '])', [], attrs[name][val]);
+                        }
+                    }
+                }
+                else if (key === '@media') {
+                    const media = config[key];
+                    for (let query of Object.keys(media).reverse()) {
+                        rules.push('}\n');
+                        make_class(prefix, path, media[query]);
+                        rules.push(`${key} ${query} {\n`);
+                    }
+                }
+                else if (key === '@starting-style') {
+                    const styles = config[key];
+                    rules.push('}\n');
+                    make_class(prefix, path, styles);
+                    rules.push(`${key} {\n`);
+                }
+                else if (key[0] === '[' && key[key.length - 1] === ']') {
+                    const attr = key.slice(1, -1);
+                    const vals = config[key];
+                    for (let val of Object.keys(vals).reverse()) {
+                        make_class(selector(prefix, path) + ':where([' + attr + '=' + JSON.stringify(val) + '])', [], vals[val]);
+                    }
+                }
+                else {
+                    make_class(selector(prefix, path) + key, [], config[key]);
+                }
+            }
+            if (props.length) {
+                rules.push(`${selector(prefix, path)} {\n${props.reverse().join('')}}\n`);
+            }
+        };
+        make_class('', [], config0);
+        return rules.reverse().join('');
+    }
+    $.$mol_style_sheet = $mol_style_sheet;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_style_define(Component, config) {
+        return $mol_style_attach(Component.name, $mol_style_sheet(Component, config));
+    }
+    $.$mol_style_define = $mol_style_define;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $my_dnd_dice extends $.$my_dnd_dice {
+            sides(next) {
+                return next ?? 20;
+            }
+            count(next) {
+                return next ?? 1;
+            }
+            result(next = 0) {
+                return next;
+            }
+            modifier(next) {
+                return next ?? 0;
+            }
+            dice_type() {
+                const count = this.count();
+                const sides = this.sides();
+                const modifier = this.modifier();
+                let mod_string = '';
+                if (modifier > 0) {
+                    mod_string = ` + ${modifier}`;
+                }
+                else if (modifier < 0) {
+                    mod_string = ` - ${Math.abs(modifier)}`;
+                }
+                return `${count}d${sides}${mod_string}`;
+            }
+            result_title() {
+                const result = this.result();
+                return result > 0 ? result.toString() : ".";
+            }
+            roll() {
+                const sides = this.sides();
+                const count = this.count();
+                const modifier = this.modifier();
+                let total_result = 0;
+                for (let i = 0; i < count; i++) {
+                    total_result += Math.floor(Math.random() * sides) + 1;
+                }
+                total_result += modifier;
+                this.result(total_result);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $my_dnd_dice.prototype, "sides", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_dice.prototype, "count", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_dice.prototype, "result", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_dice.prototype, "modifier", null);
+        __decorate([
+            $mol_action
+        ], $my_dnd_dice.prototype, "roll", null);
+        $$.$my_dnd_dice = $my_dnd_dice;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($my_dnd_dice, {
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '0.5rem',
+            backgroundColor: 'rgba(255,255,255, 0.07)',
+            borderRadius: '10px',
+            alignItems: 'center',
+            border: {
+                radius: '1px',
+                style: 'solid',
+            },
+            boxShadow: '0 2px 8px rgba(0,0,0, 0.2)',
+            flex: {
+                grow: 1,
+                shrink: 1,
+                basis: '7.5rem',
+            },
+            Count_field: {
+                color: 'white',
+                marginBottom: '0.25rem',
+                alignItems: 'center',
+            },
+            Mod_field: {
+                color: 'white',
+                marginBottom: '0.25rem',
+                alignItems: 'center',
+            },
+            Roll: {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                backgroundColor: 'linear-gradient(145deg, #4b6cb7, #182848)',
+                color: 'white',
+                padding: '0.5rem',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                border: {
+                    width: '0px',
+                },
+                borderRadius: '8px',
+                boxShadow: '0 2px 5px rgba(0,0,0, 0.2)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                textAlign: 'center',
+                ':hover': {
+                    backgroundColor: 'linear-gradient(145deg, #5a7fcf, #1f325e)',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                },
+                ':active': {
+                    transform: 'translateY(0)',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
+                },
+            },
+            Dice_type_label: {
+                fontSize: '1.3rem',
+                fontWeight: 'bold',
+                lineHeight: '1.1',
+                color: 'white',
+            },
+            Result_label: {
+                fontSize: '0.9rem',
+                opacity: 0.7,
+                fontWeight: 'normal',
+                minHeight: '1rem',
+                color: 'white',
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
@@ -5988,132 +7010,6 @@ var $;
 
 ;
 "use strict";
-
-;
-"use strict";
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_style_sheet(Component, config0) {
-        let rules = [];
-        const block = $mol_dom_qname($mol_ambient({}).$mol_func_name(Component));
-        const kebab = (name) => name.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
-        const make_class = (prefix, path, config) => {
-            const props = [];
-            const selector = (prefix, path) => {
-                if (path.length === 0)
-                    return prefix || `[${block}]`;
-                let res = `[${block}_${path.join('_')}]`;
-                if (prefix)
-                    res = prefix + ' :where(' + res + ')';
-                return res;
-            };
-            for (const key of Object.keys(config).reverse()) {
-                if (/^(--)?[a-z]/.test(key)) {
-                    const addProp = (keys, val) => {
-                        if (Array.isArray(val)) {
-                            if (val[0] && [Array, Object].includes(val[0].constructor)) {
-                                val = val.map(v => {
-                                    return Object.entries(v).map(([n, a]) => {
-                                        if (a === true)
-                                            return kebab(n);
-                                        if (a === false)
-                                            return null;
-                                        return String(a);
-                                    }).filter(Boolean).join(' ');
-                                }).join(',');
-                            }
-                            else {
-                                val = val.join(' ');
-                            }
-                            props.push(`\t${keys.join('-')}: ${val};\n`);
-                        }
-                        else if (val.constructor === Object) {
-                            for (let suffix of Object.keys(val).reverse()) {
-                                addProp([...keys, kebab(suffix)], val[suffix]);
-                            }
-                        }
-                        else {
-                            props.push(`\t${keys.join('-')}: ${val};\n`);
-                        }
-                    };
-                    addProp([kebab(key)], config[key]);
-                }
-                else if (/^[A-Z]/.test(key)) {
-                    make_class(prefix, [...path, key.toLowerCase()], config[key]);
-                }
-                else if (key[0] === '$') {
-                    make_class(selector(prefix, path) + ' :where([' + $mol_dom_qname(key) + '])', [], config[key]);
-                }
-                else if (key === '>') {
-                    const types = config[key];
-                    for (let type of Object.keys(types).reverse()) {
-                        make_class(selector(prefix, path) + ' > :where([' + $mol_dom_qname(type) + '])', [], types[type]);
-                    }
-                }
-                else if (key === '@') {
-                    const attrs = config[key];
-                    for (let name of Object.keys(attrs).reverse()) {
-                        for (let val in attrs[name]) {
-                            make_class(selector(prefix, path) + ':where([' + name + '=' + JSON.stringify(val) + '])', [], attrs[name][val]);
-                        }
-                    }
-                }
-                else if (key === '@media') {
-                    const media = config[key];
-                    for (let query of Object.keys(media).reverse()) {
-                        rules.push('}\n');
-                        make_class(prefix, path, media[query]);
-                        rules.push(`${key} ${query} {\n`);
-                    }
-                }
-                else if (key === '@starting-style') {
-                    const styles = config[key];
-                    rules.push('}\n');
-                    make_class(prefix, path, styles);
-                    rules.push(`${key} {\n`);
-                }
-                else if (key[0] === '[' && key[key.length - 1] === ']') {
-                    const attr = key.slice(1, -1);
-                    const vals = config[key];
-                    for (let val of Object.keys(vals).reverse()) {
-                        make_class(selector(prefix, path) + ':where([' + attr + '=' + JSON.stringify(val) + '])', [], vals[val]);
-                    }
-                }
-                else {
-                    make_class(selector(prefix, path) + key, [], config[key]);
-                }
-            }
-            if (props.length) {
-                rules.push(`${selector(prefix, path)} {\n${props.reverse().join('')}}\n`);
-            }
-        };
-        make_class('', [], config0);
-        return rules.reverse().join('');
-    }
-    $.$mol_style_sheet = $mol_style_sheet;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_style_define(Component, config) {
-        return $mol_style_attach(Component.name, $mol_style_sheet(Component, config));
-    }
-    $.$mol_style_define = $mol_style_define;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
 var $;
 (function ($) {
     var $$;
@@ -6490,174 +7386,6 @@ var $;
 (function ($) {
     $.$mol_blob = ($node.buffer?.Blob ?? $mol_dom_context.Blob);
 })($ || ($ = {}));
-
-;
-	($.$mol_svg) = class $mol_svg extends ($.$mol_view) {
-		dom_name(){
-			return "svg";
-		}
-		dom_name_space(){
-			return "http://www.w3.org/2000/svg";
-		}
-		font_size(){
-			return 16;
-		}
-		font_family(){
-			return "";
-		}
-		style_size(){
-			return {};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_state_time extends $mol_object {
-        static task(precision, reset) {
-            if (precision) {
-                return new $mol_after_timeout(precision, () => this.task(precision, null));
-            }
-            else {
-                return new $mol_after_frame(() => this.task(precision, null));
-            }
-        }
-        static now(precision) {
-            this.task(precision);
-            return Date.now();
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_time, "task", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_time, "now", null);
-    $.$mol_state_time = $mol_state_time;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_svg extends $.$mol_svg {
-            computed_style() {
-                const win = this.$.$mol_dom_context;
-                const style = win.getComputedStyle(this.dom_node());
-                if (!style['font-size'])
-                    $mol_state_time.now(0);
-                return style;
-            }
-            font_size() {
-                return parseInt(this.computed_style()['font-size']) || 16;
-            }
-            font_family() {
-                return this.computed_style()['font-family'];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_svg.prototype, "computed_style", null);
-        __decorate([
-            $mol_mem
-        ], $mol_svg.prototype, "font_size", null);
-        __decorate([
-            $mol_mem
-        ], $mol_svg.prototype, "font_family", null);
-        $$.$mol_svg = $mol_svg;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_svg_root) = class $mol_svg_root extends ($.$mol_svg) {
-		view_box(){
-			return "0 0 100 100";
-		}
-		aspect(){
-			return "xMidYMid";
-		}
-		dom_name(){
-			return "svg";
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"viewBox": (this.view_box()), 
-				"preserveAspectRatio": (this.aspect())
-			};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/svg/root/root.view.css", "[mol_svg_root] {\n\toverflow: hidden;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$mol_svg_path) = class $mol_svg_path extends ($.$mol_svg) {
-		geometry(){
-			return "";
-		}
-		dom_name(){
-			return "path";
-		}
-		attr(){
-			return {...(super.attr()), "d": (this.geometry())};
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$mol_icon) = class $mol_icon extends ($.$mol_svg_root) {
-		path(){
-			return "";
-		}
-		Path(){
-			const obj = new this.$.$mol_svg_path();
-			(obj.geometry) = () => ((this.path()));
-			return obj;
-		}
-		view_box(){
-			return "0 0 24 24";
-		}
-		minimal_width(){
-			return 16;
-		}
-		minimal_height(){
-			return 16;
-		}
-		sub(){
-			return [(this.Path())];
-		}
-	};
-	($mol_mem(($.$mol_icon.prototype), "Path"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/icon/icon.view.css", "[mol_icon] {\n\tfill: currentColor;\n\tstroke: none;\n\twidth: 1em;\n\theight: 1.5em;\n\tflex: 0 0 auto;\n\tvertical-align: top;\n\tdisplay: inline-block;\n\tfilter: drop-shadow(0px 1px 1px var(--mol_theme_back));\n\ttransform-origin: center;\n}\n\n[mol_icon_path] {\n\ttransform-origin: center;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 	($.$mol_icon_clipboard) = class $mol_icon_clipboard extends ($.$mol_icon) {
@@ -7086,17 +7814,6 @@ var $;
         $$.$mol_check = $mol_check;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_icon_chevron) = class $mol_icon_chevron extends ($.$mol_icon) {
-		path(){
-			return "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z";
-		}
-	};
-
-
-;
-"use strict";
 
 ;
 	($.$mol_check_expand) = class $mol_check_expand extends ($.$mol_check) {
@@ -9351,231 +10068,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_status) = class $mol_status extends ($.$mol_view) {
-		message(){
-			return "";
-		}
-		status(){
-			return (this.title());
-		}
-		minimal_height(){
-			return 24;
-		}
-		minimal_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.message())];
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_status extends $.$mol_status {
-            message() {
-                try {
-                    return this.status() ?? null;
-                }
-                catch (error) {
-                    if (error instanceof Promise)
-                        $mol_fail_hidden(error);
-                    $mol_fail_log(error);
-                    return error.message;
-                }
-            }
-        }
-        $$.$mol_status = $mol_status;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n\tflex-shrink: 1;\n\tword-wrap: break-word;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_form) = class $mol_form extends ($.$mol_list) {
-		keydown(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		form_invalid(){
-			return (this.$.$mol_locale.text("$mol_form_form_invalid"));
-		}
-		form_fields(){
-			return [];
-		}
-		body(){
-			return (this.form_fields());
-		}
-		Body(){
-			const obj = new this.$.$mol_list();
-			(obj.sub) = () => ((this.body()));
-			return obj;
-		}
-		submit_title(){
-			return (this.$.$mol_locale.text("$mol_form_submit_title"));
-		}
-		submit_hint(){
-			return "";
-		}
-		submit_activate(next){
-			return (this.Submit().activate(next));
-		}
-		submit(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Submit(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.submit_title()));
-			(obj.hint) = () => ((this.submit_hint()));
-			(obj.click) = (next) => ((this.submit(next)));
-			return obj;
-		}
-		result(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Result(){
-			const obj = new this.$.$mol_status();
-			(obj.message) = () => ((this.result()));
-			return obj;
-		}
-		buttons(){
-			return [(this.Submit()), (this.Result())];
-		}
-		foot(){
-			return (this.buttons());
-		}
-		Foot(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ((this.foot()));
-			return obj;
-		}
-		submit_allowed(){
-			return true;
-		}
-		submit_blocked(){
-			return false;
-		}
-		event(){
-			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
-		}
-		save(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		message_done(){
-			return (this.$.$mol_locale.text("$mol_form_message_done"));
-		}
-		errors(){
-			return {"Form invalid": (this.form_invalid())};
-		}
-		rows(){
-			return [(this.Body()), (this.Foot())];
-		}
-	};
-	($mol_mem(($.$mol_form.prototype), "keydown"));
-	($mol_mem(($.$mol_form.prototype), "Body"));
-	($mol_mem(($.$mol_form.prototype), "submit"));
-	($mol_mem(($.$mol_form.prototype), "Submit"));
-	($mol_mem(($.$mol_form.prototype), "result"));
-	($mol_mem(($.$mol_form.prototype), "Result"));
-	($mol_mem(($.$mol_form.prototype), "Foot"));
-	($mol_mem(($.$mol_form.prototype), "save"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/form/form.view.css", "[mol_form] {\r\n\tgap: var(--mol_gap_block);\r\n}\r\n\r\n[mol_form_body] {\r\n\tgap: var(--mol_gap_block);\r\n}");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_form extends $.$mol_form {
-            form_fields() {
-                return [...this.view_find(view => view instanceof $mol_form_field)]
-                    .map(path => path[path.length - 1]);
-            }
-            submit_allowed() {
-                return this.form_fields().every(field => !field.bid());
-            }
-            submit_blocked() {
-                return !this.submit_allowed();
-            }
-            keydown(next) {
-                if (next.ctrlKey && next.keyCode === $mol_keyboard_code.enter && !this.submit_blocked())
-                    this.submit(next);
-            }
-            result(next) {
-                if (next instanceof Error)
-                    next = this.errors()[next.message] || next.message || this.form_invalid();
-                return next ?? '';
-            }
-            buttons() {
-                return [
-                    this.Submit(),
-                    ...this.result() ? [this.Result()] : [],
-                ];
-            }
-            submit(next) {
-                try {
-                    if (!this.submit_allowed()) {
-                        throw new Error('Form invalid');
-                    }
-                    this.save(next);
-                }
-                catch (e) {
-                    if ($mol_promise_like(e))
-                        $mol_fail_hidden(e);
-                    $mol_fail_log(e);
-                    this.result(e);
-                    return false;
-                }
-                this.result(this.message_done());
-                return true;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_form.prototype, "form_fields", null);
-        __decorate([
-            $mol_mem
-        ], $mol_form.prototype, "submit_allowed", null);
-        __decorate([
-            $mol_mem
-        ], $mol_form.prototype, "result", null);
-        __decorate([
-            $mol_mem
-        ], $mol_form.prototype, "buttons", null);
-        __decorate([
-            $mol_action
-        ], $mol_form.prototype, "submit", null);
-        $$.$mol_form = $mol_form;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
 		type(){
 			return "";
@@ -9615,16 +10107,16 @@ var $;
 "use strict";
 
 ;
-	($.$my_dnd_roll_composer) = class $my_dnd_roll_composer extends ($.$mol_view) {
+	($.$my_dnd_dice_composer) = class $my_dnd_dice_composer extends ($.$mol_view) {
 		Formula_input(){
 			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Formula_input_hint")));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Formula_input_hint")));
 			(obj.value) = (next) => ((this.formula(next)));
 			return obj;
 		}
 		Formula_field(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Formula_field_name")));
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Formula_field_name")));
 			(obj.content) = () => ([(this.Formula_input())]);
 			return obj;
 		}
@@ -9634,13 +10126,13 @@ var $;
 		}
 		Mod_decrease(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Mod_decrease_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Mod_decrease_title")));
 			(obj.click) = (next) => ((this.mod_decrease(next)));
 			return obj;
 		}
 		Mod_input(){
 			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Mod_input_hint")));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Mod_input_hint")));
 			(obj.value) = (next) => ((this.modifier(next)));
 			return obj;
 		}
@@ -9650,7 +10142,7 @@ var $;
 		}
 		Mod_increase(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Mod_increase_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Mod_increase_title")));
 			(obj.click) = (next) => ((this.mod_increase(next)));
 			return obj;
 		}
@@ -9665,7 +10157,7 @@ var $;
 		}
 		Mod_field(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Mod_field_name")));
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Mod_field_name")));
 			(obj.content) = () => ([(this.Mod_control_row())]);
 			return obj;
 		}
@@ -9675,7 +10167,7 @@ var $;
 		}
 		Add_d4(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d4_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d4_title")));
 			(obj.click) = (next) => ((this.add_d4(next)));
 			return obj;
 		}
@@ -9685,7 +10177,7 @@ var $;
 		}
 		Add_d6(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d6_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d6_title")));
 			(obj.click) = (next) => ((this.add_d6(next)));
 			return obj;
 		}
@@ -9695,7 +10187,7 @@ var $;
 		}
 		Add_d8(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d8_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d8_title")));
 			(obj.click) = (next) => ((this.add_d8(next)));
 			return obj;
 		}
@@ -9705,7 +10197,7 @@ var $;
 		}
 		Add_d10(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d10_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d10_title")));
 			(obj.click) = (next) => ((this.add_d10(next)));
 			return obj;
 		}
@@ -9715,7 +10207,7 @@ var $;
 		}
 		Add_d12(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d12_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d12_title")));
 			(obj.click) = (next) => ((this.add_d12(next)));
 			return obj;
 		}
@@ -9725,7 +10217,7 @@ var $;
 		}
 		Add_d20(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d20_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d20_title")));
 			(obj.click) = (next) => ((this.add_d20(next)));
 			return obj;
 		}
@@ -9735,7 +10227,7 @@ var $;
 		}
 		Add_d100(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Add_d100_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Add_d100_title")));
 			(obj.click) = (next) => ((this.add_d100(next)));
 			return obj;
 		}
@@ -9744,7 +10236,7 @@ var $;
 		}
 		Clear_formula(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Clear_formula_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Clear_formula_title")));
 			(obj.click) = (next) => ((this.clear_formula()));
 			return obj;
 		}
@@ -9768,13 +10260,13 @@ var $;
 		}
 		Roll_button(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Roll_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Roll_button_title")));
 			(obj.click) = (next) => ((this.roll(next)));
 			return obj;
 		}
 		Result_label(){
 			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_Result_label_text")));
+			(obj.text) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_Result_label_text")));
 			return obj;
 		}
 		result_text(){
@@ -9809,7 +10301,7 @@ var $;
 		}
 		History_section(){
 			const obj = new this.$.$mol_section();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_roll_composer_History_section_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_dice_composer_History_section_title")));
 			(obj.sub) = () => ([(this.History_list())]);
 			return obj;
 		}
@@ -9824,39 +10316,39 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Formula_input"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Formula_field"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "mod_decrease"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Mod_decrease"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Mod_input"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "mod_increase"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Mod_increase"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Mod_control_row"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Mod_field"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d4"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d4"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d6"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d6"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d8"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d8"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d10"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d10"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d12"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d12"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d20"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d20"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "add_d100"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Add_d100"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Clear_formula"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Quick_buttons"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "roll"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Roll_button"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Result_label"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Result_display"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Math_display"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "Result_block"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "History_list"));
-	($mol_mem(($.$my_dnd_roll_composer.prototype), "History_section"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Formula_input"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Formula_field"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "mod_decrease"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Mod_decrease"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Mod_input"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "mod_increase"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Mod_increase"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Mod_control_row"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Mod_field"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d4"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d4"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d6"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d6"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d8"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d8"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d10"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d10"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d12"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d12"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d20"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d20"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "add_d100"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Add_d100"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Clear_formula"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Quick_buttons"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "roll"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Roll_button"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Result_label"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Result_display"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Math_display"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "Result_block"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "History_list"));
+	($mol_mem(($.$my_dnd_dice_composer.prototype), "History_section"));
 
 
 ;
@@ -9868,7 +10360,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $my_dnd_roll_composer extends $.$my_dnd_roll_composer {
+        class $my_dnd_dice_composer extends $.$my_dnd_dice_composer {
             formula(next) {
                 return next ?? '';
             }
@@ -10033,62 +10525,62 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $my_dnd_roll_composer.prototype, "formula", null);
+        ], $my_dnd_dice_composer.prototype, "formula", null);
         __decorate([
             $mol_mem
-        ], $my_dnd_roll_composer.prototype, "modifier", null);
+        ], $my_dnd_dice_composer.prototype, "modifier", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "change_modifier", null);
+        ], $my_dnd_dice_composer.prototype, "change_modifier", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "mod_increase", null);
+        ], $my_dnd_dice_composer.prototype, "mod_increase", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "mod_decrease", null);
+        ], $my_dnd_dice_composer.prototype, "mod_decrease", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d4", null);
+        ], $my_dnd_dice_composer.prototype, "add_d4", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d6", null);
+        ], $my_dnd_dice_composer.prototype, "add_d6", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d8", null);
+        ], $my_dnd_dice_composer.prototype, "add_d8", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d10", null);
+        ], $my_dnd_dice_composer.prototype, "add_d10", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d12", null);
+        ], $my_dnd_dice_composer.prototype, "add_d12", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d20", null);
+        ], $my_dnd_dice_composer.prototype, "add_d20", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_d100", null);
+        ], $my_dnd_dice_composer.prototype, "add_d100", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "add_to_formula", null);
+        ], $my_dnd_dice_composer.prototype, "add_to_formula", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "clear_formula", null);
+        ], $my_dnd_dice_composer.prototype, "clear_formula", null);
         __decorate([
             $mol_mem
-        ], $my_dnd_roll_composer.prototype, "roll_history", null);
+        ], $my_dnd_dice_composer.prototype, "roll_history", null);
         __decorate([
             $mol_mem
-        ], $my_dnd_roll_composer.prototype, "result_text", null);
+        ], $my_dnd_dice_composer.prototype, "result_text", null);
         __decorate([
             $mol_mem
-        ], $my_dnd_roll_composer.prototype, "math_text", null);
+        ], $my_dnd_dice_composer.prototype, "math_text", null);
         __decorate([
             $mol_mem
-        ], $my_dnd_roll_composer.prototype, "history_rows", null);
+        ], $my_dnd_dice_composer.prototype, "history_rows", null);
         __decorate([
             $mol_action
-        ], $my_dnd_roll_composer.prototype, "roll", null);
-        $$.$my_dnd_roll_composer = $my_dnd_roll_composer;
+        ], $my_dnd_dice_composer.prototype, "roll", null);
+        $$.$my_dnd_dice_composer = $my_dnd_dice_composer;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -10098,7 +10590,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($my_dnd_roll_composer, {
+        $mol_style_define($my_dnd_dice_composer, {
             display: 'flex',
             flexDirection: 'column',
             padding: '1rem',
@@ -10893,14 +11385,14 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
-		icondelete(){
+		icondelete(id){
 			const obj = new this.$.$mol_icon_delete();
 			return obj;
 		}
 		Delete_button(id){
 			const obj = new this.$.$mol_button_open();
 			(obj.click) = (next) => ((this.delete_note(id, next)));
-			(obj.sub) = () => ([(this.icondelete())]);
+			(obj.sub) = () => ([(this.icondelete(id))]);
 			return obj;
 		}
 		Note_row(id){
@@ -10910,6 +11402,7 @@ var $;
 				(this.Note_text(id)), 
 				(this.Delete_button(id))
 			]);
+			(obj.attr) = () => ({"data-checked": (this.note_checked(id))});
 			return obj;
 		}
 		Note_rows(){
@@ -10939,7 +11432,7 @@ var $;
 	($mol_mem_key(($.$my_dnd_notes.prototype), "note_text"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_text"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "delete_note"));
-	($mol_mem(($.$my_dnd_notes.prototype), "icondelete"));
+	($mol_mem_key(($.$my_dnd_notes.prototype), "icondelete"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Delete_button"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_row"));
 	($mol_mem(($.$my_dnd_notes.prototype), "Note_list"));
@@ -10956,8 +11449,45 @@ var $;
     var $$;
     (function ($$) {
         class $my_dnd_notes extends $.$my_dnd_notes {
+            state_key() {
+                return 'my_dnd_notes_default';
+            }
             notes_list(next) {
-                return next ?? [];
+                if (next !== undefined) {
+                    const data_to_store = JSON.stringify(next);
+                    $mol_state_local.value(this.state_key(), data_to_store);
+                    return next;
+                }
+                const stored_data = $mol_state_local.value(this.state_key());
+                if (stored_data) {
+                    let items = [];
+                    try {
+                        items = JSON.parse(stored_data);
+                        if (!Array.isArray(items))
+                            items = [];
+                    }
+                    catch (e) {
+                        items = [];
+                    }
+                    items = items.filter(item => item && typeof item === 'object');
+                    const needs_migration = items.some((item) => typeof item.id !== 'number' || isNaN(item.id));
+                    if (needs_migration) {
+                        const all_ids = items.map((item) => item.id)
+                            .filter((id) => typeof id === 'number' && !isNaN(id));
+                        let next_id = all_ids.length > 0 ? Math.max(...all_ids) + 1 : 1;
+                        items = items.map((item) => {
+                            if (typeof item.id !== 'number' || isNaN(item.id)) {
+                                const migrated_item = { ...item, id: next_id };
+                                next_id++;
+                                return migrated_item;
+                            }
+                            return item;
+                        });
+                    }
+                    items = items.filter((item) => typeof item.id === 'number' && !isNaN(item.id));
+                    return items;
+                }
+                return [];
             }
             new_note_text(next) {
                 return next ?? '';
@@ -10966,20 +11496,26 @@ var $;
                 const text = this.new_note_text();
                 if (!text)
                     return;
-                const new_note = { text: text, completed: false };
                 const current_list = this.notes_list();
+                const all_ids = current_list.map((item) => item.id)
+                    .filter((id) => typeof id === 'number' && !isNaN(id));
+                const max_id = all_ids.length > 0 ? Math.max(...all_ids) : 0;
+                const new_id = max_id + 1;
+                const new_note = { id: new_id, text: text, completed: false };
                 this.notes_list([...current_list, new_note]);
                 this.new_note_text('');
             }
             Note_rows() {
-                return this.notes_list().map((_, index) => this.Note_row(index));
+                return this.notes_list().map((item) => this.Note_row(item.id));
             }
-            note_checked(index, next) {
+            note_checked(id, next) {
                 const list = this.notes_list();
+                const index = list.findIndex(i => i.id === id);
+                if (index === -1)
+                    return false;
                 const item = list[index];
-                if (next === undefined) {
+                if (next === undefined)
                     return item.completed;
-                }
                 if (item.completed === next)
                     return next;
                 const new_item = { ...item, completed: next };
@@ -10987,12 +11523,14 @@ var $;
                 this.notes_list(new_list);
                 return next;
             }
-            note_text(index, next) {
+            note_text(id, next) {
                 const list = this.notes_list();
+                const index = list.findIndex(i => i.id === id);
+                if (index === -1)
+                    return '';
                 const item = list[index];
-                if (next === undefined) {
+                if (next === undefined)
                     return item.text;
-                }
                 if (item.text === next)
                     return next;
                 const new_item = { ...item, text: next };
@@ -11000,9 +11538,9 @@ var $;
                 this.notes_list(new_list);
                 return next;
             }
-            delete_note(index) {
+            delete_note(id) {
                 const list = this.notes_list();
-                const new_list = list.filter((_, i) => i !== index);
+                const new_list = list.filter((item) => item.id !== id);
                 this.notes_list(new_list);
             }
         }
@@ -11035,6 +11573,13 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_style_attach("my/dnd/notes/notes.view.css", "\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         $mol_style_define($my_dnd_notes, {
@@ -11045,7 +11590,6 @@ var $;
             },
             minWidth: '18rem',
             display: 'flex',
-            padding: '1rem',
             color: 'white',
             Add_form: {
                 padding: '1rem',
@@ -11083,18 +11627,6 @@ var $;
                     color: 'transparent',
                 },
                 boxShadow: 'none',
-                Edit: {
-                    background: {
-                        color: 'transparent',
-                    },
-                    boxShadow: 'none',
-                    border: {
-                        style: 'none',
-                    },
-                    color: 'white',
-                    padding: '0px',
-                    minHeight: '1.5rem',
-                },
             },
             Delete_button: {
                 justifyContent: 'center',
@@ -11113,6 +11645,1043 @@ var $;
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$my_dnd_notes_weapon) = class $my_dnd_notes_weapon extends ($.$mol_page) {
+		new_name(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_name(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_name_hint")));
+			(obj.value) = (next) => ((this.new_name(next)));
+			return obj;
+		}
+		new_damage(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_damage(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_damage_hint")));
+			(obj.value) = (next) => ((this.new_damage(next)));
+			return obj;
+		}
+		New_row_1(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.New_name()), (this.New_damage())]);
+			return obj;
+		}
+		new_cost(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_cost(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_cost_hint")));
+			(obj.value) = (next) => ((this.new_cost(next)));
+			return obj;
+		}
+		new_weight(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_weight(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_weight_hint")));
+			(obj.value) = (next) => ((this.new_weight(next)));
+			return obj;
+		}
+		New_row_2(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.New_cost()), (this.New_weight())]);
+			return obj;
+		}
+		new_quantity(next){
+			if(next !== undefined) return next;
+			return 1;
+		}
+		New_quantity(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.new_quantity(next)));
+			return obj;
+		}
+		New_quantity_field(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_quantity_field_name")));
+			(obj.content) = () => ([(this.New_quantity())]);
+			return obj;
+		}
+		new_properties(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_properties(){
+			const obj = new this.$.$mol_textarea();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_properties_hint")));
+			(obj.value) = (next) => ((this.new_properties(next)));
+			return obj;
+		}
+		new_attunement(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		New_attunement(){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_attunement_title")));
+			(obj.checked) = (next) => ((this.new_attunement(next)));
+			return obj;
+		}
+		new_used(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		New_used(){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_New_used_title")));
+			(obj.checked) = (next) => ((this.new_used(next)));
+			return obj;
+		}
+		New_row_3(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.New_attunement()), (this.New_used())]);
+			return obj;
+		}
+		add_weapon(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add_button(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Add_button_title")));
+			(obj.click) = (next) => ((this.add_weapon(next)));
+			return obj;
+		}
+		Add_form(){
+			const obj = new this.$.$mol_form();
+			(obj.sub) = () => ([
+				(this.New_row_1()), 
+				(this.New_row_2()), 
+				(this.New_quantity_field()), 
+				(this.New_properties()), 
+				(this.New_row_3()), 
+				(this.Add_button())
+			]);
+			return obj;
+		}
+		weapon_name(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Weapon_name(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.weapon_name(id, next)));
+			return obj;
+		}
+		weapon_damage(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Weapon_damage(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.weapon_damage(id, next)));
+			return obj;
+		}
+		delete_weapon(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		icondelete(id){
+			const obj = new this.$.$mol_icon_delete();
+			return obj;
+		}
+		Delete_button(id){
+			const obj = new this.$.$mol_button_open();
+			(obj.click) = (next) => ((this.delete_weapon(id, next)));
+			(obj.sub) = () => ([(this.icondelete(id))]);
+			return obj;
+		}
+		Weapon_header(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([
+				(this.Weapon_name(id)), 
+				(this.Weapon_damage(id)), 
+				(this.Delete_button(id))
+			]);
+			return obj;
+		}
+		weapon_cost(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Weapon_cost(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.weapon_cost(id, next)));
+			return obj;
+		}
+		Weapon_cost_field(id){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Weapon_cost_field_name")));
+			(obj.content) = () => ([(this.Weapon_cost(id))]);
+			return obj;
+		}
+		weapon_weight(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Weapon_weight(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.weapon_weight(id, next)));
+			return obj;
+		}
+		Weapon_weight_field(id){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Weapon_weight_field_name")));
+			(obj.content) = () => ([(this.Weapon_weight(id))]);
+			return obj;
+		}
+		weapon_quantity(id, next){
+			if(next !== undefined) return next;
+			return 1;
+		}
+		Weapon_quantity(id){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.weapon_quantity(id, next)));
+			return obj;
+		}
+		Weapon_quantity_field(id){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Weapon_quantity_field_name")));
+			(obj.content) = () => ([(this.Weapon_quantity(id))]);
+			return obj;
+		}
+		Weapon_stats_row(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([
+				(this.Weapon_cost_field(id)), 
+				(this.Weapon_weight_field(id)), 
+				(this.Weapon_quantity_field(id))
+			]);
+			return obj;
+		}
+		weapon_properties(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Weapon_properties(id){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.weapon_properties(id, next)));
+			return obj;
+		}
+		Weapon_properties_field(id){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Weapon_properties_field_name")));
+			(obj.content) = () => ([(this.Weapon_properties(id))]);
+			return obj;
+		}
+		weapon_attunement(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Weapon_attunement(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Weapon_attunement_title")));
+			(obj.checked) = (next) => ((this.weapon_attunement(id, next)));
+			return obj;
+		}
+		weapon_used(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Weapon_used(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_notes_weapon_Weapon_used_title")));
+			(obj.checked) = (next) => ((this.weapon_used(id, next)));
+			return obj;
+		}
+		Weapon_bool_row(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Weapon_attunement(id)), (this.Weapon_used(id))]);
+			return obj;
+		}
+		Weapon_row(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Weapon_header(id)), 
+				(this.Weapon_stats_row(id)), 
+				(this.Weapon_properties_field(id)), 
+				(this.Weapon_bool_row(id))
+			]);
+			return obj;
+		}
+		Weapon_rows(){
+			return [(this.Weapon_row(id))];
+		}
+		Weapon_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.Weapon_rows()));
+			return obj;
+		}
+		List_section(){
+			const obj = new this.$.$mol_section();
+			(obj.sub) = () => ([(this.Weapon_list())]);
+			return obj;
+		}
+		body(){
+			return [(this.Add_form()), (this.List_section())];
+		}
+	};
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_name"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_name"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_damage"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_damage"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_row_1"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_cost"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_cost"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_weight"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_weight"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_row_2"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_quantity"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_quantity"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_quantity_field"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_properties"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_properties"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_attunement"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_attunement"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "new_used"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_used"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "New_row_3"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "add_weapon"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "Add_button"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "Add_form"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_name"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_name"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_damage"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_damage"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "delete_weapon"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "icondelete"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Delete_button"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_header"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_cost"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_cost"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_cost_field"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_weight"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_weight"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_weight_field"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_quantity"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_quantity"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_quantity_field"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_stats_row"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_properties"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_properties"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_properties_field"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_attunement"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_attunement"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "weapon_used"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_used"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_bool_row"));
+	($mol_mem_key(($.$my_dnd_notes_weapon.prototype), "Weapon_row"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "Weapon_list"));
+	($mol_mem(($.$my_dnd_notes_weapon.prototype), "List_section"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $my_dnd_notes_weapon extends $.$my_dnd_notes_weapon {
+            state_key() {
+                return 'my_dnd_weapon_default';
+            }
+            weapon_list(next) {
+                if (next !== undefined) {
+                    $mol_state_local.value(this.state_key(), JSON.stringify(next));
+                    return next;
+                }
+                const stored = $mol_state_local.value(this.state_key());
+                if (stored) {
+                    let items = JSON.parse(stored);
+                    const needs_migration = items.some((item) => item.id === undefined || typeof item.id !== 'number');
+                    if (needs_migration) {
+                        items = items.map((item, index) => {
+                            if (item.id === undefined || typeof item.id !== 'number') {
+                                return { ...item, id: Date.now() + index };
+                            }
+                            return item;
+                        });
+                    }
+                    return items;
+                }
+                return [];
+            }
+            new_name(next) { return next ?? ''; }
+            new_damage(next) { return next ?? ''; }
+            new_properties(next) { return next ?? ''; }
+            new_cost(next) { return next ?? ''; }
+            new_weight(next) { return next ?? ''; }
+            new_quantity(next) { return next ?? 1; }
+            new_attunement(next) { return next ?? false; }
+            new_used(next) { return next ?? false; }
+            add_weapon() {
+                const name = this.new_name();
+                if (!name)
+                    return;
+                const list = this.weapon_list();
+                const all_ids = list.map((item) => item.id)
+                    .filter((id) => typeof id === 'number' && !isNaN(id));
+                const max_id = all_ids.length > 0 ? Math.max(...all_ids) : 0;
+                const new_id = max_id + 1;
+                const new_item = {
+                    id: new_id,
+                    name: name,
+                    damage: this.new_damage(),
+                    properties: this.new_properties(),
+                    cost: this.new_cost(),
+                    weight: this.new_weight(),
+                    quantity: this.new_quantity(),
+                    attunement: this.new_attunement(),
+                    used: this.new_used(),
+                };
+                this.weapon_list([new_item, ...list]);
+                this.new_name('');
+                this.new_damage('');
+                this.new_properties('');
+                this.new_cost('');
+                this.new_weight('');
+                this.new_quantity(1);
+                this.new_attunement(false);
+                this.new_used(false);
+            }
+            Weapon_rows() {
+                return this.weapon_list().map((item) => this.Weapon_row(item.id));
+            }
+            delete_weapon(id) {
+                this.weapon_list(this.weapon_list().filter(item => item.id !== id));
+            }
+            update_item(id, field, value) {
+                const list = this.weapon_list();
+                const index = list.findIndex(item => item.id === id);
+                if (index === -1)
+                    return;
+                const item = list[index];
+                if (item[field] === value)
+                    return;
+                const new_item = { ...item, [field]: value };
+                const new_list = [...list.slice(0, index), new_item, ...list.slice(index + 1)];
+                this.weapon_list(new_list);
+                return value;
+            }
+            weapon_name(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.name ?? '';
+                return this.update_item(id, 'name', next);
+            }
+            weapon_damage(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.damage ?? '';
+                return this.update_item(id, 'damage', next);
+            }
+            weapon_properties(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.properties ?? '';
+                return this.update_item(id, 'properties', next);
+            }
+            weapon_cost(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.cost ?? '';
+                return this.update_item(id, 'cost', next);
+            }
+            weapon_weight(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.weight ?? '';
+                return this.update_item(id, 'weight', next);
+            }
+            weapon_quantity(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.quantity ?? 1;
+                return this.update_item(id, 'quantity', next);
+            }
+            weapon_attunement(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.attunement ?? false;
+                return this.update_item(id, 'attunement', next);
+            }
+            weapon_used(id, next) {
+                if (next === undefined)
+                    return this.weapon_list().find(i => i.id === id)?.used ?? false;
+                return this.update_item(id, 'used', next);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "weapon_list", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_name", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_damage", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_properties", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_cost", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_weight", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_quantity", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_attunement", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "new_used", null);
+        __decorate([
+            $mol_action
+        ], $my_dnd_notes_weapon.prototype, "add_weapon", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_weapon.prototype, "Weapon_rows", null);
+        __decorate([
+            $mol_action
+        ], $my_dnd_notes_weapon.prototype, "delete_weapon", null);
+        __decorate([
+            $mol_action
+        ], $my_dnd_notes_weapon.prototype, "update_item", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_name", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_damage", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_properties", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_cost", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_weight", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_quantity", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_attunement", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_weapon.prototype, "weapon_used", null);
+        $$.$my_dnd_notes_weapon = $my_dnd_notes_weapon;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($my_dnd_notes_weapon, {
+            flex: { grow: 1, shrink: 1, basis: '20rem' },
+            minWidth: '18rem',
+            display: 'flex',
+            color: 'white',
+            Add_form: {
+                padding: '1rem',
+                backgroundColor: 'rgba(255,255,255, 0.1)',
+                borderRadius: '10px',
+                marginBottom: '0.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem',
+            },
+            New_quantity_field: {
+                alignItems: 'center',
+            },
+            New_row_3: {
+                justifyContent: 'center',
+            },
+            List_section: { padding: '0px' },
+            Weapon_list: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem',
+            },
+            Weapon_row: {
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '0.75rem',
+                backgroundColor: 'rgba(255,255,255, 0.05)',
+                borderRadius: '8px',
+                gap: '0.5rem',
+            },
+            Weapon_header: {
+                flexWrap: 'nowrap',
+                alignItems: 'center',
+                gap: '0.5rem',
+            },
+            Weapon_stats_row: {
+                flexWrap: 'wrap',
+                gap: '0.5rem',
+            },
+            Weapon_cost_field: { color: 'white', flex: { grow: 1, basis: '5rem' } },
+            Weapon_weight_field: { color: 'white', flex: { grow: 1, basis: '5rem' } },
+            Weapon_quantity_field: { color: 'white', flex: { grow: 1, basis: '5rem' } },
+            Weapon_bool_row: {
+                gap: '1rem',
+            },
+            Delete_button: {
+                justifyContent: 'center',
+                padding: '0.25rem',
+                minWidth: '2rem',
+                minHeight: '2rem',
+                flex: { grow: 0, shrink: 0 },
+                backgroundColor: 'rgba(255,255,255, 0.1)',
+                color: 'white',
+                ':hover': {
+                    backgroundColor: 'rgba(255,255,255, 0.2)',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$my_dnd_notes_npc) = class $my_dnd_notes_npc extends ($.$mol_page) {
+		new_name_text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_name(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_npc_New_name_hint")));
+			(obj.value) = (next) => ((this.new_name_text(next)));
+			return obj;
+		}
+		new_descr_text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		New_descr(){
+			const obj = new this.$.$mol_textarea();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$my_dnd_notes_npc_New_descr_hint")));
+			(obj.value) = (next) => ((this.new_descr_text(next)));
+			return obj;
+		}
+		add_npc(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add_button(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_notes_npc_Add_button_title")));
+			(obj.click) = (next) => ((this.add_npc(next)));
+			return obj;
+		}
+		Add_form(){
+			const obj = new this.$.$mol_form();
+			(obj.sub) = () => ([
+				(this.New_name()), 
+				(this.New_descr()), 
+				(this.Add_button())
+			]);
+			return obj;
+		}
+		npc_name(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Npc_name_text(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.npc_name(id, next)));
+			(obj.enabled) = () => (true);
+			return obj;
+		}
+		delete_npc(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		icondelete(id){
+			const obj = new this.$.$mol_icon_delete();
+			return obj;
+		}
+		Delete_button(id){
+			const obj = new this.$.$mol_button_open();
+			(obj.click) = (next) => ((this.delete_npc(id, next)));
+			(obj.sub) = () => ([(this.icondelete(id))]);
+			return obj;
+		}
+		Npc_header(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Npc_name_text(id)), (this.Delete_button(id))]);
+			return obj;
+		}
+		npc_descr(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Npc_descr_text(id){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.npc_descr(id, next)));
+			(obj.enabled) = () => (true);
+			return obj;
+		}
+		Npc_row(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Npc_header(id)), (this.Npc_descr_text(id))]);
+			return obj;
+		}
+		Npc_rows(){
+			return [(this.Npc_row(id))];
+		}
+		Npc_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.Npc_rows()));
+			return obj;
+		}
+		List_section(){
+			const obj = new this.$.$mol_section();
+			(obj.sub) = () => ([(this.Npc_list())]);
+			return obj;
+		}
+		body(){
+			return [(this.Add_form()), (this.List_section())];
+		}
+	};
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "new_name_text"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "New_name"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "new_descr_text"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "New_descr"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "add_npc"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "Add_button"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "Add_form"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "npc_name"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "Npc_name_text"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "delete_npc"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "icondelete"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "Delete_button"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "Npc_header"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "npc_descr"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "Npc_descr_text"));
+	($mol_mem_key(($.$my_dnd_notes_npc.prototype), "Npc_row"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "Npc_list"));
+	($mol_mem(($.$my_dnd_notes_npc.prototype), "List_section"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $my_dnd_notes_npc extends $.$my_dnd_notes_npc {
+            state_key() {
+                return 'my_dnd_npc_default';
+            }
+            npc_list(next) {
+                if (next !== undefined) {
+                    const data_to_store = JSON.stringify(next);
+                    $mol_state_local.value(this.state_key(), data_to_store);
+                    return next;
+                }
+                const stored_data = $mol_state_local.value(this.state_key());
+                if (stored_data) {
+                    let items = JSON.parse(stored_data);
+                    const needs_migration = items.some((item) => item.id === undefined || typeof item.id !== 'number');
+                    if (needs_migration) {
+                        items = items.map((item, index) => {
+                            if (item.id === undefined || typeof item.id !== 'number') {
+                                return { ...item, id: Date.now() + index };
+                            }
+                            return item;
+                        });
+                    }
+                    return items;
+                }
+                return [];
+            }
+            new_name_text(next) {
+                return next ?? '';
+            }
+            new_descr_text(next) {
+                return next ?? '';
+            }
+            add_npc() {
+                const name = this.new_name_text();
+                const description = this.new_descr_text();
+                if (!name && !description)
+                    return;
+                const current_list = this.npc_list();
+                const all_ids = current_list.map((item) => item.id)
+                    .filter((id) => typeof id === 'number' && !isNaN(id));
+                const max_id = all_ids.length > 0 ? Math.max(...all_ids) : 0;
+                const new_id = max_id + 1;
+                const new_npc = {
+                    id: new_id,
+                    name: name || 'Без имени',
+                    description: description
+                };
+                this.npc_list([new_npc, ...current_list]);
+                this.new_name_text('');
+                this.new_descr_text('');
+            }
+            Npc_rows() {
+                return this.npc_list().map((item) => this.Npc_row(item.id));
+            }
+            npc_name(id, next) {
+                const list = this.npc_list();
+                const index = list.findIndex(i => i.id === id);
+                if (index === -1)
+                    return '';
+                const item = list[index];
+                if (next === undefined)
+                    return item.name;
+                if (item.name === next)
+                    return next;
+                const new_item = { ...item, name: next };
+                const new_list = [...list.slice(0, index), new_item, ...list.slice(index + 1)];
+                this.npc_list(new_list);
+                return next;
+            }
+            npc_descr(id, next) {
+                const list = this.npc_list();
+                const index = list.findIndex(i => i.id === id);
+                if (index === -1)
+                    return '';
+                const item = list[index];
+                if (next === undefined)
+                    return item.description;
+                if (item.description === next)
+                    return next;
+                const new_item = { ...item, description: next };
+                const new_list = [...list.slice(0, index), new_item, ...list.slice(index + 1)];
+                this.npc_list(new_list);
+                return next;
+            }
+            delete_npc(id) {
+                const list = this.npc_list();
+                const new_list = list.filter((item) => item.id !== id);
+                this.npc_list(new_list);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_npc.prototype, "npc_list", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_npc.prototype, "new_name_text", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_npc.prototype, "new_descr_text", null);
+        __decorate([
+            $mol_action
+        ], $my_dnd_notes_npc.prototype, "add_npc", null);
+        __decorate([
+            $mol_mem
+        ], $my_dnd_notes_npc.prototype, "Npc_rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_npc.prototype, "npc_name", null);
+        __decorate([
+            $mol_mem_key
+        ], $my_dnd_notes_npc.prototype, "npc_descr", null);
+        __decorate([
+            $mol_action
+        ], $my_dnd_notes_npc.prototype, "delete_npc", null);
+        $$.$my_dnd_notes_npc = $my_dnd_notes_npc;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($my_dnd_notes_npc, {
+            flex: {
+                grow: 1,
+                shrink: 1,
+                basis: '20rem',
+            },
+            minWidth: '18rem',
+            display: 'flex',
+            color: 'white',
+            Add_form: {
+                padding: '1rem',
+                backgroundColor: 'rgba(255,255,255, 0.1)',
+                borderRadius: '10px',
+                marginBottom: '0.5rem',
+            },
+            New_name: { color: 'white' },
+            New_descr: {
+                color: 'white',
+                minHeight: '4rem',
+            },
+            List_section: {
+                padding: '0px',
+            },
+            Npc_list: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem',
+            },
+            Npc_row: {
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '0.75rem',
+                backgroundColor: 'rgba(255,255,255, 0.05)',
+                borderRadius: '8px',
+                gap: '0.5rem',
+            },
+            Npc_header: {
+                flexWrap: 'nowrap',
+                alignItems: 'center',
+                gap: '0.5rem',
+            },
+            Delete_button: {
+                justifyContent: 'center',
+                padding: '0.25rem',
+                minWidth: '2rem',
+                minHeight: '2rem',
+                flex: { grow: 0, shrink: 0 },
+                backgroundColor: 'rgba(255,255,255, 0.1)',
+                color: 'white',
+                ':hover': {
+                    backgroundColor: 'rgba(255,255,255, 0.2)',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
+		pages_deep(){
+			return [];
+		}
+		pages(){
+			return (this.pages_deep());
+		}
+		Placeholder(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		placeholders(){
+			return [(this.Placeholder())];
+		}
+		menu_title(){
+			return "";
+		}
+		sub(){
+			return [...(this.pages()), ...(this.placeholders())];
+		}
+		minimal_width(){
+			return 0;
+		}
+		Gap(id){
+			const obj = new this.$.$mol_view();
+			(obj.title) = () => ("");
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_book2.prototype), "Placeholder"));
+	($mol_mem_key(($.$mol_book2.prototype), "Gap"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_book2 extends $.$mol_book2 {
+            pages_deep() {
+                let result = [];
+                for (const subpage of this.pages()) {
+                    if (subpage instanceof $mol_book2)
+                        result = [...result, ...subpage.pages_deep()];
+                    else
+                        result.push(subpage);
+                }
+                return result;
+            }
+            title() {
+                return this.pages_deep().map(page => {
+                    try {
+                        return page?.title();
+                    }
+                    catch (error) {
+                        $mol_fail_log(error);
+                    }
+                }).reverse().filter(Boolean).join(' | ');
+            }
+            menu_title() {
+                return this.pages_deep()[0]?.title() || this.title();
+            }
+            sub() {
+                const placeholders = this.placeholders();
+                const next = this.pages_deep().filter(Boolean);
+                const prev = $mol_mem_cached(() => this.sub())?.filter(page => !placeholders.includes(page)) ?? [];
+                for (let i = 1; i; ++i) {
+                    const p = prev[prev.length - i];
+                    const n = next[next.length - i];
+                    if (!n)
+                        break;
+                    if (p === n)
+                        continue;
+                    new this.$.$mol_after_tick(() => {
+                        const b = this.dom_node();
+                        const p = n.dom_node();
+                        b.scroll({
+                            left: p.offsetLeft + p.offsetWidth - b.offsetWidth,
+                            behavior: 'smooth',
+                        });
+                    });
+                    break;
+                }
+                return [...next, ...placeholders];
+            }
+            bring() {
+                const pages = this.pages_deep();
+                if (pages.length)
+                    pages[pages.length - 1].bring();
+                else
+                    super.bring();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_book2.prototype, "pages_deep", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2.prototype, "sub", null);
+        $$.$mol_book2 = $mol_book2;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/book2/book2.view.css", "[mol_book2] {\n\tdisplay: flex;\n\tflex-flow: row nowrap;\n\talign-items: stretch;\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tmargin: 0;\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_line); */\n\t/* transform: translateZ(0); */\n\ttransition: none;\n\tscroll-snap-type: x mandatory;\n\t/* padding: 0 1px;\n\tscroll-padding: 0 1px;\n\tgap: 1px; */\n}\n\n[mol_book2] > * {\n/* \tflex: none; */\n\tscroll-snap-stop: always;\n\tscroll-snap-align: end;\n\tposition: relative;\n\tmin-height: 100%;\n\tmax-height: 100%;\n\tmax-width: 100%;\n\tflex-shrink: 0;\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_field);\n}\n\n[mol_book2] > *:not(:first-of-type):before,\n[mol_book2] > *:not(:last-of-type)::after {\n\tcontent: '';\n\tposition: absolute;\n\ttop: 1.5rem;\n\twidth: 3px;\n\theight: 1rem;\n\tbackground: linear-gradient(\n\t\tto bottom,\n\t\tvar(--mol_theme_special) 0%,\n\t\tvar(--mol_theme_special) 14%,\n\t\ttransparent 15%,\n\t\ttransparent 42%,\n\t\tvar(--mol_theme_special) 43%,\n\t\tvar(--mol_theme_special) 57%,\n\t\ttransparent 58%,\n\t\ttransparent 85%,\n\t\tvar(--mol_theme_special) 86%,\n\t\tvar(--mol_theme_special) 100%\n\t);\n\topacity: .5;\n\tz-index: var(--mol_layer_speck);\n}\n[mol_book2] > *:not(:first-of-type):before {\n\tleft: -3px;\n}\n[mol_book2] > *:not(:last-of-type)::after {\n\tright: -3px;\n}\n\n:where([mol_book2]) > * {\n\tbackground-color: var(--mol_theme_card);\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_back); */\n}\n\n[mol_book2] > [mol_book2] {\n\tdisplay: contents;\n}\n\n[mol_book2] > *:first-child {\n\tscroll-snap-align: start;\n}\n\n[mol_book2] > [mol_view] {\n\ttransform: none; /* prevent content clipping */\n}\n\n[mol_book2_placeholder] {\n\tflex: 1 1 0;\n\tbackground: none;\n}\n\n[mol_book2_gap] {\n\tbackground: none;\n\tflex-grow: 1;\n\tscroll-snap-align: none;\n\tmargin-right: -1px;\n\tbox-shadow: none;\n}\n\n[mol_book2_gap]::before,\n[mol_book2_gap]::after {\n\tdisplay: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -11284,82 +12853,6 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/pop/pop.view.css", "[mol_pop] {\n\tposition: relative;\n\tdisplay: inline-flex;\n}\n\n[mol_pop_bubble] {\n\tbox-shadow: 0 0 1rem hsla(0,0%,0%,.5);\n\tborder-radius: var(--mol_gap_round);\n\tposition: absolute;\n\tz-index: var(--mol_layer_popup);\n\tbackground: var(--mol_theme_back);\n\tmax-width: none;\n\tmax-height: none;\n\t/* overflow: hidden;\n\toverflow-y: scroll;\n\toverflow-y: overlay; */\n\tword-break: normal;\n\twidth: max-content;\n\t/* height: max-content; */\n\tflex-direction: column;\n\tmax-width: 80vw;\n\tmax-height: 80vw;\n\tcontain: paint;\n\ttransition-property: opacity;\n}\n\n:where( [mol_pop_bubble] > * ) {\n\tbackground: var(--mol_theme_card);\n}\n\n[mol_pop_bubble][mol_scroll] {\n\tbackground: var(--mol_theme_back);\n}\n\n[mol_pop_bubble]:focus {\n\toutline: none;\n}\n\n[mol_pop_align=\"suspense_suspense\"] {\n\topacity: 0;\n}\n\n[mol_pop_align=\"left_top\"] {\n\ttransform: translate(-100%);\n\tleft: 0;\n\tbottom: 0;\n}\n\n[mol_pop_align=\"left_center\"] {\n\ttransform: translate(-100%, -50%);\n\tleft: 0;\n\ttop: 50%;\n}\n\n[mol_pop_align=\"left_bottom\"] {\n\ttransform: translate(-100%);\n\tleft: 0;\n\ttop: 0;\n}\n\n[mol_pop_align=\"right_top\"] {\n\ttransform: translate(100%);\n\tright: 0;\n\tbottom: 0;\n}\n\n[mol_pop_align=\"right_center\"] {\n\ttransform: translate(100%, -50%);\n\tright: 0;\n\ttop: 50%;\n}\n\n[mol_pop_align=\"right_bottom\"] {\n\ttransform: translate(100%);\n\tright: 0;\n\ttop: 0;\n}\n\n[mol_pop_align=\"center\"] {\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n}\n\n[mol_pop_align=\"top_left\"] {\n\tright: 0;\n\tbottom: 100%;\n}\n\n[mol_pop_align=\"top_center\"] {\n\ttransform: translate(-50%);\n\tleft: 50%;\n\tbottom: 100%;\n}\n\n[mol_pop_align=\"top_right\"] {\n\tleft: 0;\n\tbottom: 100%;\n}\n\n[mol_pop_align=\"bottom_left\"] {\n\tright: 0;\n\ttop: 100%;\n}\n\n[mol_pop_align=\"bottom_center\"] {\n\ttransform: translate(-50%);\n\tleft: 50%;\n\ttop: 100%;\n}\n\n[mol_pop_align=\"bottom_right\"] {\n\tleft: 0;\n\ttop: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_pick) = class $mol_pick extends ($.$mol_pop) {
-		keydown(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		trigger_enabled(){
-			return true;
-		}
-		clicks(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		trigger_content(){
-			return [(this.title())];
-		}
-		hint(){
-			return "";
-		}
-		Trigger(){
-			const obj = new this.$.$mol_check();
-			(obj.minimal_width) = () => (40);
-			(obj.minimal_height) = () => (40);
-			(obj.enabled) = () => ((this.trigger_enabled()));
-			(obj.checked) = (next) => ((this.showed(next)));
-			(obj.clicks) = (next) => ((this.clicks(next)));
-			(obj.sub) = () => ((this.trigger_content()));
-			(obj.hint) = () => ((this.hint()));
-			return obj;
-		}
-		event(){
-			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
-		}
-		Anchor(){
-			return (this.Trigger());
-		}
-	};
-	($mol_mem(($.$mol_pick.prototype), "keydown"));
-	($mol_mem(($.$mol_pick.prototype), "clicks"));
-	($mol_mem(($.$mol_pick.prototype), "Trigger"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_pick extends $.$mol_pick {
-            keydown(event) {
-                if (!this.trigger_enabled())
-                    return;
-                if (event.defaultPrevented)
-                    return;
-                if (event.keyCode === $mol_keyboard_code.escape) {
-                    if (!this.showed())
-                        return;
-                    event.preventDefault();
-                    this.showed(false);
-                }
-            }
-        }
-        $$.$mol_pick = $mol_pick;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/pick/pick.view.css", "[mol_pick_trigger] {\n\talign-items: center;\n\tflex-grow: 1;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -11786,6 +13279,387 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_book2_catalog) = class $mol_book2_catalog extends ($.$mol_book2) {
+		Menu_title(){
+			return (this.Menu().Title());
+		}
+		menu_title(){
+			return "";
+		}
+		Menu_tools(){
+			return (this.Menu().Tools());
+		}
+		Menu_logo(){
+			return null;
+		}
+		menu_head(){
+			return [(this.Menu_title()), (this.Menu_tools())];
+		}
+		menu_filter(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Menu_filter(){
+			const obj = new this.$.$mol_search();
+			(obj.query) = (next) => ((this.menu_filter(next)));
+			return obj;
+		}
+		Menu_links_empty(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		arg(id){
+			return {};
+		}
+		menu_link_arg(id){
+			return (this.arg(id));
+		}
+		spread_title(id){
+			return "";
+		}
+		Menu_link_title(id){
+			const obj = new this.$.$mol_dimmer();
+			(obj.needle) = () => ((this.menu_filter()));
+			(obj.haystack) = () => ((this.spread_title(id)));
+			return obj;
+		}
+		menu_link_content(id){
+			return [(this.Menu_link_title(id))];
+		}
+		Menu_link(id){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ((this.menu_link_arg(id)));
+			(obj.sub) = () => ((this.menu_link_content(id)));
+			return obj;
+		}
+		menu_item_content(id){
+			return [(this.Menu_link(id))];
+		}
+		Menu_item(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.menu_item_content(id)));
+			return obj;
+		}
+		menu_links(){
+			return [(this.Menu_item("0"))];
+		}
+		Menu_links(){
+			const obj = new this.$.$mol_list();
+			(obj.Empty) = () => ((this.Menu_links_empty()));
+			(obj.rows) = () => ((this.menu_links()));
+			return obj;
+		}
+		menu_body(){
+			return [(this.Menu_filter()), (this.Menu_links())];
+		}
+		menu_foot(){
+			return [];
+		}
+		Menu(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ((this.menu_title()));
+			(obj.Logo) = () => ((this.Menu_logo()));
+			(obj.tools) = () => ([...(this.menu_tools()), ...(this.addon_tools())]);
+			(obj.head) = () => ((this.menu_head()));
+			(obj.body) = () => ((this.menu_body()));
+			(obj.foot) = () => ((this.menu_foot()));
+			return obj;
+		}
+		spread_close_arg(){
+			return {};
+		}
+		Spread_close_icon(){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
+		param(){
+			return "";
+		}
+		spread(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		spreads(){
+			return {};
+		}
+		Spread(id){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		Spread_default(){
+			return null;
+		}
+		spread_ids(){
+			return [];
+		}
+		menu_filter_enabled(){
+			return false;
+		}
+		spread_ids_filtered(){
+			return [];
+		}
+		spread_current(){
+			return null;
+		}
+		menu_tools(){
+			return [];
+		}
+		addon_tools(){
+			return [];
+		}
+		pages(){
+			return [(this.Menu())];
+		}
+		Spread_close(){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ((this.spread_close_arg()));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$mol_book2_catalog_Spread_close_hint")));
+			(obj.sub) = () => ([(this.Spread_close_icon())]);
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_book2_catalog.prototype), "menu_filter"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "Menu_filter"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "Menu_links_empty"));
+	($mol_mem_key(($.$mol_book2_catalog.prototype), "Menu_link_title"));
+	($mol_mem_key(($.$mol_book2_catalog.prototype), "Menu_link"));
+	($mol_mem_key(($.$mol_book2_catalog.prototype), "Menu_item"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "Menu_links"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "Menu"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "Spread_close_icon"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "spread"));
+	($mol_mem_key(($.$mol_book2_catalog.prototype), "Spread"));
+	($mol_mem(($.$mol_book2_catalog.prototype), "Spread_close"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_match_text(query, values) {
+        const tags = query.toLowerCase().trim().split(/\s+/).filter(tag => tag);
+        if (tags.length === 0)
+            return () => true;
+        return (variant) => {
+            const vals = values(variant);
+            return tags.every(tag => vals.some(val => val.toLowerCase().indexOf(tag) >= 0));
+        };
+    }
+    $.$mol_match_text = $mol_match_text;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_book2_catalog extends $.$mol_book2_catalog {
+            spread_current() {
+                return this.spread() === '' ? this.Spread_default() : this.Spread(this.spread());
+            }
+            pages() {
+                const spread = this.spread_current();
+                return [
+                    this.Menu(),
+                    ...spread
+                        ? spread instanceof $mol_book2
+                            ? spread.pages_deep()
+                            : [spread]
+                        : [],
+                ];
+            }
+            auto() {
+                const spread = this.spread_current();
+                if (spread instanceof $mol_book2)
+                    spread.auto();
+            }
+            spread_ids() {
+                return Object.keys(this.spreads());
+            }
+            menu_body() {
+                return [
+                    ...this.menu_filter_enabled() ? [this.Menu_filter()] : [],
+                    this.Menu_links(),
+                ];
+            }
+            menu_filter_enabled() {
+                return this.spread_ids().length >= 10;
+            }
+            menu_links() {
+                return this.spread_ids_filtered()
+                    .map(spread => this.Menu_item(spread));
+            }
+            spread_ids_filtered() {
+                return this.spread_ids()
+                    .filter($mol_match_text(this.menu_filter(), spread => [this.spread_title(spread)]));
+            }
+            Spread(id) {
+                return this.spreads()[id];
+            }
+            Spread_default() {
+                return this.spreads()[''];
+            }
+            spread(next) {
+                return this.$.$mol_state_arg.value(this.param(), next) ?? '';
+            }
+            arg(spread) {
+                return { [this.param()]: spread || null };
+            }
+            spread_close_arg() {
+                return { [this.param()]: null };
+            }
+            spread_title(spread) {
+                const page = this.Spread(spread);
+                return page instanceof $mol_book2
+                    && page.menu_title()
+                    || page.title()
+                    || spread;
+            }
+            spread_current_book() {
+                const spread = this.spread_current();
+                return spread instanceof $mol_book2 ? spread : null;
+            }
+            placeholders() {
+                const spread_placeholders = this.spread_current_book()?.placeholders() ?? [];
+                return spread_placeholders.length ? spread_placeholders : super.placeholders();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "pages", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "spread_ids", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "menu_body", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "menu_links", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "spread_ids_filtered", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "spread", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "placeholders", null);
+        $$.$mol_book2_catalog = $mol_book2_catalog;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($mol_book2_catalog, {
+            Menu_filter: {
+                flex: {
+                    shrink: 0,
+                    grow: 0,
+                },
+                alignSelf: 'stretch',
+            },
+            Menu_item: {
+                align: {
+                    items: 'flex-start',
+                },
+            },
+            Menu_link: {
+                flex: {
+                    grow: 1,
+                    shrink: 1,
+                    wrap: 'wrap',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_pick) = class $mol_pick extends ($.$mol_pop) {
+		keydown(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		trigger_enabled(){
+			return true;
+		}
+		clicks(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		trigger_content(){
+			return [(this.title())];
+		}
+		hint(){
+			return "";
+		}
+		Trigger(){
+			const obj = new this.$.$mol_check();
+			(obj.minimal_width) = () => (40);
+			(obj.minimal_height) = () => (40);
+			(obj.enabled) = () => ((this.trigger_enabled()));
+			(obj.checked) = (next) => ((this.showed(next)));
+			(obj.clicks) = (next) => ((this.clicks(next)));
+			(obj.sub) = () => ((this.trigger_content()));
+			(obj.hint) = () => ((this.hint()));
+			return obj;
+		}
+		event(){
+			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
+		}
+		Anchor(){
+			return (this.Trigger());
+		}
+	};
+	($mol_mem(($.$mol_pick.prototype), "keydown"));
+	($mol_mem(($.$mol_pick.prototype), "clicks"));
+	($mol_mem(($.$mol_pick.prototype), "Trigger"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_pick extends $.$mol_pick {
+            keydown(event) {
+                if (!this.trigger_enabled())
+                    return;
+                if (event.defaultPrevented)
+                    return;
+                if (event.keyCode === $mol_keyboard_code.escape) {
+                    if (!this.showed())
+                        return;
+                    event.preventDefault();
+                    this.showed(false);
+                }
+            }
+        }
+        $$.$mol_pick = $mol_pick;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/pick/pick.view.css", "[mol_pick_trigger] {\n\talign-items: center;\n\tflex-grow: 1;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_icon_dots_vertical) = class $mol_icon_dots_vertical extends ($.$mol_icon) {
 		path(){
 			return "M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z";
@@ -11926,22 +13800,6 @@ var $;
 	($mol_mem(($.$mol_select.prototype), "Filter"));
 	($mol_mem(($.$mol_select.prototype), "Trigger_icon"));
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_match_text(query, values) {
-        const tags = query.toLowerCase().trim().split(/\s+/).filter(tag => tag);
-        if (tags.length === 0)
-            return () => true;
-        return (variant) => {
-            const vals = values(variant);
-            return tags.every(tag => vals.some(val => val.toLowerCase().indexOf(tag) >= 0));
-        };
-    }
-    $.$mol_match_text = $mol_match_text;
-})($ || ($ = {}));
 
 ;
 "use strict";
@@ -12194,451 +14052,63 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
-		pages_deep(){
-			return [];
-		}
-		pages(){
-			return (this.pages_deep());
-		}
-		Placeholder(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		placeholders(){
-			return [(this.Placeholder())];
-		}
-		menu_title(){
-			return "";
-		}
-		sub(){
-			return [...(this.pages()), ...(this.placeholders())];
-		}
-		minimal_width(){
-			return 0;
-		}
-		Gap(id){
-			const obj = new this.$.$mol_view();
-			(obj.title) = () => ("");
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_book2.prototype), "Placeholder"));
-	($mol_mem_key(($.$mol_book2.prototype), "Gap"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_book2 extends $.$mol_book2 {
-            pages_deep() {
-                let result = [];
-                for (const subpage of this.pages()) {
-                    if (subpage instanceof $mol_book2)
-                        result = [...result, ...subpage.pages_deep()];
-                    else
-                        result.push(subpage);
-                }
-                return result;
-            }
-            title() {
-                return this.pages_deep().map(page => {
-                    try {
-                        return page?.title();
-                    }
-                    catch (error) {
-                        $mol_fail_log(error);
-                    }
-                }).reverse().filter(Boolean).join(' | ');
-            }
-            menu_title() {
-                return this.pages_deep()[0]?.title() || this.title();
-            }
-            sub() {
-                const placeholders = this.placeholders();
-                const next = this.pages_deep().filter(Boolean);
-                const prev = $mol_mem_cached(() => this.sub())?.filter(page => !placeholders.includes(page)) ?? [];
-                for (let i = 1; i; ++i) {
-                    const p = prev[prev.length - i];
-                    const n = next[next.length - i];
-                    if (!n)
-                        break;
-                    if (p === n)
-                        continue;
-                    new this.$.$mol_after_tick(() => {
-                        const b = this.dom_node();
-                        const p = n.dom_node();
-                        b.scroll({
-                            left: p.offsetLeft + p.offsetWidth - b.offsetWidth,
-                            behavior: 'smooth',
-                        });
-                    });
-                    break;
-                }
-                return [...next, ...placeholders];
-            }
-            bring() {
-                const pages = this.pages_deep();
-                if (pages.length)
-                    pages[pages.length - 1].bring();
-                else
-                    super.bring();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_book2.prototype, "pages_deep", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2.prototype, "sub", null);
-        $$.$mol_book2 = $mol_book2;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/book2/book2.view.css", "[mol_book2] {\n\tdisplay: flex;\n\tflex-flow: row nowrap;\n\talign-items: stretch;\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tmargin: 0;\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_line); */\n\t/* transform: translateZ(0); */\n\ttransition: none;\n\tscroll-snap-type: x mandatory;\n\t/* padding: 0 1px;\n\tscroll-padding: 0 1px;\n\tgap: 1px; */\n}\n\n[mol_book2] > * {\n/* \tflex: none; */\n\tscroll-snap-stop: always;\n\tscroll-snap-align: end;\n\tposition: relative;\n\tmin-height: 100%;\n\tmax-height: 100%;\n\tmax-width: 100%;\n\tflex-shrink: 0;\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_field);\n}\n\n[mol_book2] > *:not(:first-of-type):before,\n[mol_book2] > *:not(:last-of-type)::after {\n\tcontent: '';\n\tposition: absolute;\n\ttop: 1.5rem;\n\twidth: 3px;\n\theight: 1rem;\n\tbackground: linear-gradient(\n\t\tto bottom,\n\t\tvar(--mol_theme_special) 0%,\n\t\tvar(--mol_theme_special) 14%,\n\t\ttransparent 15%,\n\t\ttransparent 42%,\n\t\tvar(--mol_theme_special) 43%,\n\t\tvar(--mol_theme_special) 57%,\n\t\ttransparent 58%,\n\t\ttransparent 85%,\n\t\tvar(--mol_theme_special) 86%,\n\t\tvar(--mol_theme_special) 100%\n\t);\n\topacity: .5;\n\tz-index: var(--mol_layer_speck);\n}\n[mol_book2] > *:not(:first-of-type):before {\n\tleft: -3px;\n}\n[mol_book2] > *:not(:last-of-type)::after {\n\tright: -3px;\n}\n\n:where([mol_book2]) > * {\n\tbackground-color: var(--mol_theme_card);\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_back); */\n}\n\n[mol_book2] > [mol_book2] {\n\tdisplay: contents;\n}\n\n[mol_book2] > *:first-child {\n\tscroll-snap-align: start;\n}\n\n[mol_book2] > [mol_view] {\n\ttransform: none; /* prevent content clipping */\n}\n\n[mol_book2_placeholder] {\n\tflex: 1 1 0;\n\tbackground: none;\n}\n\n[mol_book2_gap] {\n\tbackground: none;\n\tflex-grow: 1;\n\tscroll-snap-align: none;\n\tmargin-right: -1px;\n\tbox-shadow: none;\n}\n\n[mol_book2_gap]::before,\n[mol_book2_gap]::after {\n\tdisplay: none;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_book2_catalog) = class $mol_book2_catalog extends ($.$mol_book2) {
-		Menu_title(){
-			return (this.Menu().Title());
-		}
-		menu_title(){
-			return "";
-		}
-		Menu_tools(){
-			return (this.Menu().Tools());
-		}
-		Menu_logo(){
-			return null;
-		}
-		menu_head(){
-			return [(this.Menu_title()), (this.Menu_tools())];
-		}
-		menu_filter(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Menu_filter(){
-			const obj = new this.$.$mol_search();
-			(obj.query) = (next) => ((this.menu_filter(next)));
-			return obj;
-		}
-		Menu_links_empty(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		arg(id){
-			return {};
-		}
-		menu_link_arg(id){
-			return (this.arg(id));
-		}
-		spread_title(id){
-			return "";
-		}
-		Menu_link_title(id){
-			const obj = new this.$.$mol_dimmer();
-			(obj.needle) = () => ((this.menu_filter()));
-			(obj.haystack) = () => ((this.spread_title(id)));
-			return obj;
-		}
-		menu_link_content(id){
-			return [(this.Menu_link_title(id))];
-		}
-		Menu_link(id){
-			const obj = new this.$.$mol_link();
-			(obj.arg) = () => ((this.menu_link_arg(id)));
-			(obj.sub) = () => ((this.menu_link_content(id)));
-			return obj;
-		}
-		menu_item_content(id){
-			return [(this.Menu_link(id))];
-		}
-		Menu_item(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.menu_item_content(id)));
-			return obj;
-		}
-		menu_links(){
-			return [(this.Menu_item("0"))];
-		}
-		Menu_links(){
-			const obj = new this.$.$mol_list();
-			(obj.Empty) = () => ((this.Menu_links_empty()));
-			(obj.rows) = () => ((this.menu_links()));
-			return obj;
-		}
-		menu_body(){
-			return [(this.Menu_filter()), (this.Menu_links())];
-		}
-		menu_foot(){
-			return [];
-		}
-		Menu(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.menu_title()));
-			(obj.Logo) = () => ((this.Menu_logo()));
-			(obj.tools) = () => ([...(this.menu_tools()), ...(this.addon_tools())]);
-			(obj.head) = () => ((this.menu_head()));
-			(obj.body) = () => ((this.menu_body()));
-			(obj.foot) = () => ((this.menu_foot()));
-			return obj;
-		}
-		spread_close_arg(){
-			return {};
-		}
-		Spread_close_icon(){
-			const obj = new this.$.$mol_icon_close();
-			return obj;
-		}
-		param(){
-			return "";
-		}
-		spread(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		spreads(){
-			return {};
-		}
-		Spread(id){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		Spread_default(){
-			return null;
-		}
-		spread_ids(){
-			return [];
-		}
-		menu_filter_enabled(){
-			return false;
-		}
-		spread_ids_filtered(){
-			return [];
-		}
-		spread_current(){
-			return null;
-		}
-		menu_tools(){
-			return [];
-		}
-		addon_tools(){
-			return [];
-		}
-		pages(){
-			return [(this.Menu())];
-		}
-		Spread_close(){
-			const obj = new this.$.$mol_link();
-			(obj.arg) = () => ((this.spread_close_arg()));
-			(obj.hint) = () => ((this.$.$mol_locale.text("$mol_book2_catalog_Spread_close_hint")));
-			(obj.sub) = () => ([(this.Spread_close_icon())]);
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_book2_catalog.prototype), "menu_filter"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "Menu_filter"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "Menu_links_empty"));
-	($mol_mem_key(($.$mol_book2_catalog.prototype), "Menu_link_title"));
-	($mol_mem_key(($.$mol_book2_catalog.prototype), "Menu_link"));
-	($mol_mem_key(($.$mol_book2_catalog.prototype), "Menu_item"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "Menu_links"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "Menu"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "Spread_close_icon"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "spread"));
-	($mol_mem_key(($.$mol_book2_catalog.prototype), "Spread"));
-	($mol_mem(($.$mol_book2_catalog.prototype), "Spread_close"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_book2_catalog extends $.$mol_book2_catalog {
-            spread_current() {
-                return this.spread() === '' ? this.Spread_default() : this.Spread(this.spread());
-            }
-            pages() {
-                const spread = this.spread_current();
-                return [
-                    this.Menu(),
-                    ...spread
-                        ? spread instanceof $mol_book2
-                            ? spread.pages_deep()
-                            : [spread]
-                        : [],
-                ];
-            }
-            auto() {
-                const spread = this.spread_current();
-                if (spread instanceof $mol_book2)
-                    spread.auto();
-            }
-            spread_ids() {
-                return Object.keys(this.spreads());
-            }
-            menu_body() {
-                return [
-                    ...this.menu_filter_enabled() ? [this.Menu_filter()] : [],
-                    this.Menu_links(),
-                ];
-            }
-            menu_filter_enabled() {
-                return this.spread_ids().length >= 10;
-            }
-            menu_links() {
-                return this.spread_ids_filtered()
-                    .map(spread => this.Menu_item(spread));
-            }
-            spread_ids_filtered() {
-                return this.spread_ids()
-                    .filter($mol_match_text(this.menu_filter(), spread => [this.spread_title(spread)]));
-            }
-            Spread(id) {
-                return this.spreads()[id];
-            }
-            Spread_default() {
-                return this.spreads()[''];
-            }
-            spread(next) {
-                return this.$.$mol_state_arg.value(this.param(), next) ?? '';
-            }
-            arg(spread) {
-                return { [this.param()]: spread || null };
-            }
-            spread_close_arg() {
-                return { [this.param()]: null };
-            }
-            spread_title(spread) {
-                const page = this.Spread(spread);
-                return page instanceof $mol_book2
-                    && page.menu_title()
-                    || page.title()
-                    || spread;
-            }
-            spread_current_book() {
-                const spread = this.spread_current();
-                return spread instanceof $mol_book2 ? spread : null;
-            }
-            placeholders() {
-                const spread_placeholders = this.spread_current_book()?.placeholders() ?? [];
-                return spread_placeholders.length ? spread_placeholders : super.placeholders();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "pages", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "spread_ids", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "menu_body", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "menu_links", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "spread_ids_filtered", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "spread", null);
-        __decorate([
-            $mol_mem
-        ], $mol_book2_catalog.prototype, "placeholders", null);
-        $$.$mol_book2_catalog = $mol_book2_catalog;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($mol_book2_catalog, {
-            Menu_filter: {
-                flex: {
-                    shrink: 0,
-                    grow: 0,
-                },
-                alignSelf: 'stretch',
-            },
-            Menu_item: {
-                align: {
-                    items: 'flex-start',
-                },
-            },
-            Menu_link: {
-                flex: {
-                    grow: 1,
-                    shrink: 1,
-                    wrap: 'wrap',
-                },
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$my_dnd_app) = class $my_dnd_app extends ($.$mol_view) {
-		Dise_spread_close(){
+		Spread_close(){
 			return (this.Catalog().Spread_close());
 		}
 		Roll_composer(){
-			const obj = new this.$.$my_dnd_roll_composer();
+			const obj = new this.$.$my_dnd_dice_composer();
 			return obj;
 		}
 		Dice_page(){
 			const obj = new this.$.$mol_page();
 			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Dice_page_title")));
-			(obj.tools) = () => ([(this.Dise_spread_close())]);
+			(obj.tools) = () => ([(this.Spread_close())]);
 			(obj.body) = () => ([(this.Roll_composer())]);
 			return obj;
 		}
+		Notes_spread_close(){
+			return (this.Notes_book().Spread_close());
+		}
 		Notes(){
 			const obj = new this.$.$my_dnd_notes();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Notes_title")));
+			(obj.tools) = () => ([(this.Notes_spread_close())]);
+			(obj.state_key) = () => ("my_dnd_notes_general");
+			return obj;
+		}
+		Quests(){
+			const obj = new this.$.$my_dnd_notes();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Quests_title")));
+			(obj.tools) = () => ([(this.Notes_spread_close())]);
+			(obj.state_key) = () => ("my_dnd_notes_quests");
 			return obj;
 		}
 		Weapon(){
-			const obj = new this.$.$my_dnd_notes();
+			const obj = new this.$.$my_dnd_notes_weapon();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Weapon_title")));
+			(obj.tools) = () => ([(this.Notes_spread_close())]);
+			(obj.state_key) = () => ("my_dnd_weapon_items");
 			return obj;
 		}
 		NPC(){
-			const obj = new this.$.$my_dnd_notes();
+			const obj = new this.$.$my_dnd_notes_npc();
+			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_NPC_title")));
+			(obj.tools) = () => ([(this.Notes_spread_close())]);
+			(obj.state_key) = () => ("my_dnd_npc_items");
 			return obj;
 		}
-		Notes_container(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([
-				(this.Notes()), 
-				(this.Weapon()), 
-				(this.NPC())
-			]);
-			return obj;
-		}
-		Notes_page(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Notes_page_title")));
-			(obj.tools) = () => ([(this.Dise_spread_close())]);
-			(obj.body) = () => ([(this.Notes_container())]);
+		Notes_book(){
+			const obj = new this.$.$mol_book2_catalog();
+			(obj.param) = () => ("notes_catalog");
+			(obj.menu_title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Notes_book_menu_title")));
+			(obj.menu_tools) = () => ([(this.Spread_close())]);
+			(obj.spreads) = () => ({
+				"notes": (this.Notes()), 
+				"quests": (this.Quests()), 
+				"weapon": (this.Weapon()), 
+				"npc": (this.NPC())
+			});
 			return obj;
 		}
 		Generator(){
@@ -12648,22 +14118,19 @@ var $;
 		Generator_page(){
 			const obj = new this.$.$mol_page();
 			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Generator_page_title")));
-			(obj.tools) = () => ([(this.Dise_spread_close())]);
+			(obj.tools) = () => ([(this.Spread_close())]);
 			(obj.body) = () => ([(this.Generator())]);
 			return obj;
-		}
-		spreads_map(){
-			return {
-				"dice": (this.Dice_page()), 
-				"notes": (this.Notes_page()), 
-				"generator": (this.Generator_page())
-			};
 		}
 		Catalog(){
 			const obj = new this.$.$mol_book2_catalog();
 			(obj.param) = () => ("page");
 			(obj.menu_title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Catalog_menu_title")));
-			(obj.spreads) = () => ((this.spreads_map()));
+			(obj.spreads) = () => ({
+				"dice": (this.Dice_page()), 
+				"notes_book": (this.Notes_book()), 
+				"generator": (this.Generator_page())
+			});
 			return obj;
 		}
 		sub(){
@@ -12673,10 +14140,10 @@ var $;
 	($mol_mem(($.$my_dnd_app.prototype), "Roll_composer"));
 	($mol_mem(($.$my_dnd_app.prototype), "Dice_page"));
 	($mol_mem(($.$my_dnd_app.prototype), "Notes"));
+	($mol_mem(($.$my_dnd_app.prototype), "Quests"));
 	($mol_mem(($.$my_dnd_app.prototype), "Weapon"));
 	($mol_mem(($.$my_dnd_app.prototype), "NPC"));
-	($mol_mem(($.$my_dnd_app.prototype), "Notes_container"));
-	($mol_mem(($.$my_dnd_app.prototype), "Notes_page"));
+	($mol_mem(($.$my_dnd_app.prototype), "Notes_book"));
 	($mol_mem(($.$my_dnd_app.prototype), "Generator"));
 	($mol_mem(($.$my_dnd_app.prototype), "Generator_page"));
 	($mol_mem(($.$my_dnd_app.prototype), "Catalog"));
@@ -12697,17 +14164,6 @@ var $;
             padding: '0rem',
             fontFamily: 'system-ui, sans-serif',
             height: 'auto',
-            Notes_container: {
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                width: '100%',
-                padding: {
-                    top: '0px',
-                    bottom: '0px',
-                    left: '1 rem',
-                    right: '1 rem',
-                },
-            },
             Catalog: {
                 width: '100%',
             },

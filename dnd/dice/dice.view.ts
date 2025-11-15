@@ -6,7 +6,7 @@ namespace $.$$ {
 			return next ?? 20
 		}
 
-		// (НОВОЕ) Количество кубиков
+		// Количество кубиков
 		@ $mol_mem
 		count(next?: number): number {
 			return next ?? 1
@@ -23,7 +23,7 @@ namespace $.$$ {
 			return next ?? 0
 		}
 
-		// Текст для отображения типа кости (обновлено)
+		// Текст для отображения типа кости
 		dice_type(): string {
 			const count = this.count()
 			const sides = this.sides()

@@ -47,14 +47,14 @@
 			if(next !== undefined) return next;
 			return null;
 		}
-		icondelete(){
+		icondelete(id){
 			const obj = new this.$.$mol_icon_delete();
 			return obj;
 		}
 		Delete_button(id){
 			const obj = new this.$.$mol_button_open();
 			(obj.click) = (next) => ((this.delete_note(id, next)));
-			(obj.sub) = () => ([(this.icondelete())]);
+			(obj.sub) = () => ([(this.icondelete(id))]);
 			return obj;
 		}
 		Note_row(id){
@@ -64,6 +64,7 @@
 				(this.Note_text(id)), 
 				(this.Delete_button(id))
 			]);
+			(obj.attr) = () => ({"data-checked": (this.note_checked(id))});
 			return obj;
 		}
 		Note_rows(){
@@ -93,7 +94,7 @@
 	($mol_mem_key(($.$my_dnd_notes.prototype), "note_text"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_text"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "delete_note"));
-	($mol_mem(($.$my_dnd_notes.prototype), "icondelete"));
+	($mol_mem_key(($.$my_dnd_notes.prototype), "icondelete"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Delete_button"));
 	($mol_mem_key(($.$my_dnd_notes.prototype), "Note_row"));
 	($mol_mem(($.$my_dnd_notes.prototype), "Note_list"));
