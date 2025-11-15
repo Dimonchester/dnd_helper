@@ -17,7 +17,7 @@ $my_dnd_app $mol_view
 					Spread_close => Notes_spread_close
 					spreads *
 						notes <= Notes $my_dnd_notes
-							title @ \Notes
+							title \Notes
 							tools / <= Notes_spread_close
 							state_key \my_dnd_notes_general
 						quests <= Quests $my_dnd_notes
