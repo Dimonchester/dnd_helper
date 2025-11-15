@@ -14065,7 +14065,7 @@ var $;
 		}
 		Notes(){
 			const obj = new this.$.$my_dnd_notes();
-			(obj.title) = () => ((this.$.$mol_locale.text("$my_dnd_app_Notes_title")));
+			(obj.title) = () => ("Notes");
 			(obj.tools) = () => ([(this.Notes_spread_close())]);
 			(obj.state_key) = () => ("my_dnd_notes_general");
 			return obj;
