@@ -17,7 +17,7 @@ namespace $.$$ {
 			flexDirection: 'column',
 			gap: '0.5rem',
 		},
-		
+
 		New_quantity_field: {
 			alignItems: 'center',
 		},
@@ -57,7 +57,18 @@ namespace $.$$ {
 		Weapon_cost_field: { color: 'white', flex: { grow: 1, basis: '5rem' } },
 		Weapon_weight_field: { color: 'white', flex: { grow: 1, basis: '5rem' } },
 		Weapon_quantity_field: { color: 'white', flex: { grow: 1, basis: '5rem' } },
-
+		Weapon_properties:{
+			color: 'white',
+			flex: {
+				grow: 1,
+				shrink: 1,
+				basis: 'auto',
+			},
+			background: {
+				color: 'transparent',
+			},
+			boxShadow: 'none',
+		},
 		Weapon_bool_row: {
 			gap: '1rem',
 		},
