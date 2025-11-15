@@ -1,9 +1,0 @@
-
-[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {
-	fill: transparent;
-}
-
-[mol_check]:not([disabled]) > [mol_check_box_icon] {
-	background: var(--mol_theme_field);
-	color: var(--mol_theme_text);
-}
